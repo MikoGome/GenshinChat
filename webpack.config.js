@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve('dev', 'public', 'index.jsx'),
+  entry: path.resolve('dev', 'src', 'index.tsx'),
   output: {
     filename: 'bundle.js'
   },
@@ -9,38 +9,30 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.[tj]sx?$/,
         exclude: path.resolve('node_modules'),
         use: [{
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
           }
         }]
       },
       {
         test: /\.s[ac]ss$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.tsx?$/,
-        use: [{
-          loader: 'ts-loader'
-          options: {
-            presets: ['@babel/preset-typescript']
-          }
-        }]
       }
     ]
   },
   devServer: {
-    static: path.resolve('dev', 'public'),
+    static: path.resolve('dist'),
     port: 8080,
     proxy: {
       '/api': 'http://localhost:3000'
-    }
+    },
+    historyApiFallback: true
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.jsx', '.js']
+    extensions: ['.tsx', '.ts', '.js']
   }
 }

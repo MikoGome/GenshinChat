@@ -1,7 +1,7 @@
 import React from "react";
 
 function NotFound():JSX.Element {
-  return(
+  return (
     <h1>Not Found</h1>
   );
 }
