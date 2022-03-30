@@ -4,7 +4,7 @@
   "description": "Genshinfied chat app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest __tests__/ --verbose",
     "start": "nodemon server/index.js",
     "build": "webpack --mode=production",
     "dev": "concurrently \"npm start\" \"webpack serve --mode=development --open\""
@@ -16,12 +16,14 @@
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@types/jest": "^27.4.1",
     "@types/webpack-env": "^1.16.3",
     "babel-loader": "^8.2.4",
     "concurrently": "^7.0.0",
     "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
