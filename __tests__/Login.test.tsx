@@ -3,48 +3,49 @@ import '@testing-library/jest-dom/';
 import 'whatwg-fetch';
 import React from 'react';
 
-import Login from '../dev/src/containers/Login.tsx';
+import Login from '../client/containers/Login.tsx';
 
-describe('login', () => {
+describe('Login', ():void => {
   
-  beforeEach(() => {
+  beforeEach(():void => {
     render(<Login />);
   })
 
-  it('should display Login as the heading', () => {
-    const headingElement = screen.getByRole('heading', {name: 'Login', level: 1});
+  it('should display Login as the heading', ():void => {
+    const headingElement:HTMLElement = screen.getByRole('heading', {name: /Login/i, level: 1});
     expect(headingElement).toBeInTheDocument();
   });
   
-  it('button to sign up should be present', () => {
-    const signUpElement = screen.getByRole('button', {name: 'Sign Up'});
+  it('button to sign up should be present', ():void => {
+    const signUpElement:HTMLElement = screen.getByRole('button', {name: /Sign Up/i});
     expect(signUpElement).toBeInTheDocument();
   });
 
-  it('should switch to Sign Up when user is registering', () => {
-    const signUpElement = screen.getByRole('button', {name: 'Sign Up'});
+  it('should switch to Sign Up when user is registering', ():void => {
+    const signUpElement:HTMLElement = screen.getByRole('button', {name: /Sign Up/i});
     fireEvent.click(signUpElement);
-    const headingElement = screen.getByRole('heading', {name: 'Sign Up', level: 1});
+    const headingElement:HTMLElement = screen.getByRole('heading', {name: /Sign Up/i, level: 1});
     expect(headingElement).toBeInTheDocument();
   });
 
-  it('username and password fields and submit button should be present', () => {
-    const submitElement = screen.getByRole('button', {name: 'Login'});
-    const usernameInputElement = screen.getByTestId('username-input');
-    const passwordInputElement = screen.getByTestId('password-input');
+  it('username and password fields and submit button should be present', ():void => {
+    const submitElement:HTMLElement = screen.getByRole('button', {name: /Login/i});
+    const usernameInputElement:HTMLElement = screen.getByTestId(/username-input/i);
+    const passwordInputElement:HTMLElement = screen.getByTestId(/password-input/i);
+    expect(submitElement).toBeInTheDocument();
     expect(usernameInputElement).toBeInTheDocument();
     expect(passwordInputElement).toBeInTheDocument();
   });
 
-  it('character image should be present', () => {
-    const imageElement = screen.getByAltText(/random genshin character/i);
+  it('character image should be present', ():void => {
+    const imageElement:HTMLElement = screen.getByAltText(/random genshin character/i);
     expect(imageElement).toBeInTheDocument();
   });
 
-  it('gender should be present when signing up', () => {
-    expect(screen.queryByLabelText(/gender/i)).toBeNull();
-    const signUpElement = screen.getByRole('button', {name: 'Sign Up'});
+  it('gender should be present when signing up', ():void => {
+    expect(screen.queryByLabelText(/male or female\?/i)).toBeNull();
+    const signUpElement:HTMLElement = screen.getByRole('button', {name: /Sign Up/i});
     fireEvent.click(signUpElement);
-    expect(screen.queryByLabelText(/gender/i)).not.toBeNull();
+    expect(screen.queryByLabelText(/male or female\?/i)).not.toBeNull();
   })
 });

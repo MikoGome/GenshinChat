@@ -2,7 +2,7 @@ import React from "react";
 
 function LoginForm({login, changeLogin, submit}) {
 
-  const gender = (
+  const gender:JSX.Element = (
     <label>Male or Female?
       <p>
         <button onClick={(e):void => e.preventDefault()}>Male</button>
@@ -29,7 +29,7 @@ function LoginForm({login, changeLogin, submit}) {
         <p>
           {login ? 'Not a member?' : 'Already a member?'}
         </p>
-        <button onClick={() => changeLogin(!login)}>{login ? 'Sign Up' : 'Login'}</button>
+        <button onClick={():void => changeLogin(!login)}>{login ? 'Sign Up' : 'Login'}</button>
       </div>
     </div>
   )

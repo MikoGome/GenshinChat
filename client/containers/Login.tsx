@@ -5,17 +5,19 @@ import LoginCharacter from '../components/LoginCharacter.tsx';
 import './stylesheets/Login.scss';
 
 function Login(): JSX.Element {
-  const [login, changeLogin] = useState(true);
+  const [login, changeLogin] = useState<boolean>(true);
 
   document.title = 'Genshin Chat | ' + (login ? 'Login' : 'Sign Up');
   
-  function submit(e) {
+  function submit(e):void {
     e.preventDefault();
-    const endPoint = '/api/' + (login ? 'login' : 'signup');
+    
+    const endPoint:string = '/api/' + (login ? 'login' : 'signup');
 
-    type validation = {
-      username: String,
-      password: String
+    interface validation {
+      readonly username: string,
+      readonly password: string,
+      readonly gender?: string
     }
 
     const accountInfo: validation = {

@@ -2,15 +2,16 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve('dev', 'src', 'index.tsx'),
+  entry: path.resolve('client', 'index.tsx'),
   output: {
+    path: path.resolve('build'),
     filename: 'bundle.js'
   },
   devtool: 'inline-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.resolve('dev', 'src', 'index.html')
+      template: path.resolve('client', 'index.html')
     })
   ],
   module: {
@@ -32,7 +33,7 @@ module.exports = {
     ]
   },
   devServer: {
-    static: path.resolve('dist'),
+    static: path.resolve('build'),
     port: 8080,
     proxy: {
       '/api': 'http://localhost:3000'

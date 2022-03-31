@@ -41,7 +41,7 @@ $backgroundUrl: 'https://www.rpgfan.com/wp-content/uploads/2020/10/Genshin-Impac
   }
 
   .character-image {
-    // width: 50vw;
+    opacity: 0;
     height: 100vh;
   }
 
@@ -56,6 +56,7 @@ $backgroundUrl: 'https://www.rpgfan.com/wp-content/uploads/2020/10/Genshin-Impac
   .appearBottom {
     position:relative;
     animation: animatebottom 0.4s ease-out;
+    animation-fill-mode: forwards;
   
     @keyframes animatebottom{
       from{bottom:-600px;opacity:0}
@@ -65,7 +66,8 @@ $backgroundUrl: 'https://www.rpgfan.com/wp-content/uploads/2020/10/Genshin-Impac
   
   .appearRight {
     position:relative;
-    animation: animateRight 0.4s ease-out;
+    animation: animateRight 0.7s ease-out;
+    animation-fill-mode: forwards;
   
     @keyframes animateRight{
       from{right:-300px;opacity:0}
