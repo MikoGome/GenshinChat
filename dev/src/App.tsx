@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from './Home.tsx';
-import Login from './Login.tsx';
-import NotFound from './NotFound.tsx';
+import Home from './containers/Home.tsx';
+import Login from './containers/Login.tsx';
+import NotFound from './containers/NotFound.tsx';
 
-function App(): JSX.Element {
+function App():JSX.Element {
   return(
     <BrowserRouter>
       <Routes>

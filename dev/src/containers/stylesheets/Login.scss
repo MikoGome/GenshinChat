@@ -1,0 +1,78 @@
+$formcolor: rgb(236, 224, 163);
+$backgroundUrl: 'https://www.rpgfan.com/wp-content/uploads/2020/10/Genshin-Impact-003.jpg';
+
+.Login {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  overflow: hidden;
+  align-items: flex-start;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-image: url($backgroundUrl);
+
+  .genshin-logo {
+    display: block;
+    margin: 10px auto;
+    width: 20vw;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: $formcolor;
+    width: 40vw;
+    height: 70vh;
+    margin: 10px auto;
+
+    h1 {
+      text-align: center;
+    }
+  
+    input {
+      display: inline-block;
+    }
+
+    p {
+      display: block;
+    }
+  }
+
+  .character-image {
+    // width: 50vw;
+    height: 100vh;
+  }
+
+  .switch-caption {
+    text-align: center;
+
+    p {
+      display: inline-block;
+    }
+  }
+  
+  .appearBottom {
+    position:relative;
+    animation: animatebottom 0.4s ease-out;
+  
+    @keyframes animatebottom{
+      from{bottom:-600px;opacity:0}
+      to{bottom:0;opacity:1}
+    }
+  }
+  
+  .appearRight {
+    position:relative;
+    animation: animateRight 0.4s ease-out;
+  
+    @keyframes animateRight{
+      from{right:-300px;opacity:0}
+      to{right:0;opacity:1}
+    }
+  }
+}
+
+
+
