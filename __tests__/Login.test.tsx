@@ -48,5 +48,13 @@ describe('Login', ():void => {
     fireEvent.click(signUpElement);
     expect(screen.queryByText(/male or female\?/i)).not.toBeNull();
   });
+
+  it('should check on gender clicked', ():void => {
+    const signUpElement:HTMLElement = screen.getByRole('button', {name: /Sign Up/i});
+    fireEvent.click(signUpElement);
+    const femaleGenderElement:HTMLElement = screen.getByTestId(/femaleLabel/i);
+    fireEvent.click(femaleGenderElement);
+    expect(screen.getByTestId('female')).toBeChecked();
+  });
   
 });

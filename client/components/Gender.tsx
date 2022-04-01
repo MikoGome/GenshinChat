@@ -13,30 +13,34 @@ function Gender():JSX.Element {
   return (
     <div className="gender-box">
       <label>Male or Female?</label><br/>
-      <label className='male gender' ref={male}>
+      <label className='male gender' data-testid="maleLabel" ref={male}>
         <MaleIcon style={{color:'blue'}}/>
         <input 
+          data-testid="male"
           onChange={(e):void => {
+            female.current.classList.remove('female-select')
             male.current.classList.add('male-select');
             changeGender(e.target.value);
           }} 
-          onBlur={(e):void => male.current.classList.remove('male-select')} 
           type="radio" 
           name="gender" 
           value="male"
+          required
         />
       </label>
-      <label className='female gender' ref={female}>
+      <label className='female gender' data-testid="femaleLabel" ref={female}>
         <FemaleIcon style={{color:'palevioletred'}}/>
         <input 
+          data-testid="female"
           onChange={(e):void => {
+            male.current.classList.remove('male-select')
             female.current.classList.add('female-select');
             changeGender(e.target.value);
           }} 
-          onBlur={(e):void => female.current.classList.remove('female-select')}
           type="radio" 
           name="gender" 
           value="female"
+          required
         />
       </label>
     </div>

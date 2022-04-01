@@ -1,12 +1,14 @@
 import React, { createContext, useState } from "react";
 import LoginForm from '../components/LoginForm.tsx';
 import LoginCharacter from '../components/LoginCharacter.tsx';
+import { validation } from '../utils/helperFunctions.ts';
 
 import './stylesheets/Login.scss';
 
 export const GenderContext = createContext(null);
 
 function Login(): JSX.Element {
+  
   const [login, changeLogin] = useState<boolean>(true);
   const [gender, changeGender] = useState<string>(null);
 
