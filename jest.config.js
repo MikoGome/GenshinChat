@@ -1,6 +1,6 @@
 module.exports = {
   testEnvironment: "jsdom",
   moduleNameMapper: {
-    "^.+\\.(css|less|scss)$": "babel-jest"
+    "^.+\\.(css|less|scss|png)$": "babel-jest"
   }
 }

@@ -12,11 +12,11 @@ app.use(express.urlencoded({extended:true}));
 app.use('/api', apiRouter);
 
 app.get('/bundle.js', (req, res) => {
-  return res.sendFile(path.join(__dirname, '../dist', 'bundle.js'));
+  return res.sendFile(path.join(__dirname, '../build', 'bundle.js'));
 });
 
 app.get('*', (req, res) => {
-  return res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+  return res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
 app.listen(PORT, () => {

@@ -5,15 +5,15 @@ const characterControllers = require('../controllers/characterControllers.js');
 
 router.post('/login', (req, res) => {
   const {username, password} = req.body;
-  console.log(username, password)
   return res.json({username, password});
 });
 
 router.post('/signup', (req, res) => {
-  console.log('signup');
+  const {username, password, gender} = req.body;
+  return res.json({username, password, gender});
 });
 
-router.get('/character', characterControllers.characters, (req, res) => {
+router.get('/character/:method', characterControllers.characters, (req, res) => {
   return res.json(res.locals.character);
 });
 

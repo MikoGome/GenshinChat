@@ -1,19 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
+import GenshinLogo from '../assets/genshin-logo.png';
+
+import Gender from './Gender.tsx';
+import {GenderContext} from '../containers/Login.tsx';
 
 function LoginForm({login, changeLogin, submit}) {
-
-  const gender:JSX.Element = (
-    <label>Male or Female?
-      <p>
-        <button onClick={(e):void => e.preventDefault()}>Male</button>
-        <button onClick={(e):void => e.preventDefault()}>Female</button>
-      </p>
-    </label>
-  )
+  const {changeGender} = useContext(GenderContext);
 
   return(
     <div className="LoginForm appearBottom">
-      <img className="genshin-logo" src="https://cdn.steamgriddb.com/logo_thumb/944eefd22dfe99fe7631b8ecc732c7cf.png" />
+      <img className="genshin-logo" src={GenshinLogo} />
       <form onSubmit={submit}>
       <h1>{login ? 'Login' : 'Sign Up'}</h1>
       <label>Username:
@@ -22,14 +18,19 @@ function LoginForm({login, changeLogin, submit}) {
       <label>Password:
         <input data-testid="password-input" required type="password" name="password"/>
       </label>
-      {login || gender}
-      <button type='submit'>Login</button>
+      {login || <Gender />}
+      <button type='submit'>{login ? 'Login' : 'Sign Up'}</button>
       </form>
-        <div className="switch-caption">
+      <div className="switch-caption">
         <p>
           {login ? 'Not a member?' : 'Already a member?'}
         </p>
-        <button onClick={():void => changeLogin(!login)}>{login ? 'Sign Up' : 'Login'}</button>
+        <button onClick={():void => {
+          changeLogin(!login)
+          if(login === false) {
+            changeGender(null);
+          }
+        }}>{login ? 'Sign Up' : 'Login'}</button>
       </div>
     </div>
   )

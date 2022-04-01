@@ -9,7 +9,7 @@ describe('Login', ():void => {
   
   beforeEach(():void => {
     render(<Login />);
-  })
+  });
 
   it('should display Login as the heading', ():void => {
     const headingElement:HTMLElement = screen.getByRole('heading', {name: /Login/i, level: 1});
@@ -43,9 +43,10 @@ describe('Login', ():void => {
   });
 
   it('gender should be present when signing up', ():void => {
-    expect(screen.queryByLabelText(/male or female\?/i)).toBeNull();
+    expect(screen.queryByText(/male or female\?/i)).toBeNull();
     const signUpElement:HTMLElement = screen.getByRole('button', {name: /Sign Up/i});
     fireEvent.click(signUpElement);
-    expect(screen.queryByLabelText(/male or female\?/i)).not.toBeNull();
-  })
+    expect(screen.queryByText(/male or female\?/i)).not.toBeNull();
+  });
+  
 });

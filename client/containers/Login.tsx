@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import LoginForm from '../components/LoginForm.tsx';
 import LoginCharacter from '../components/LoginCharacter.tsx';
 
 import './stylesheets/Login.scss';
 
+export const GenderContext = createContext(null);
+
 function Login(): JSX.Element {
   const [login, changeLogin] = useState<boolean>(true);
+  const [gender, changeGender] = useState<string>(null);
 
   document.title = 'Genshin Chat | ' + (login ? 'Login' : 'Sign Up');
   
@@ -17,12 +20,16 @@ function Login(): JSX.Element {
     interface validation {
       readonly username: string,
       readonly password: string,
-      readonly gender?: string
+      gender?: string
     }
 
     const accountInfo: validation = {
       username: e.target.username.value,
-      password: e.target.password.value
+      password: e.target.password.value,
+    }
+
+    if(e.target.gender) {
+      accountInfo.gender = e.target.gender.value;
     }
 
     fetch(endPoint, {
@@ -35,10 +42,13 @@ function Login(): JSX.Element {
   }
 
   return (
-    <div className='Login'>
-      <LoginForm login={login} changeLogin={changeLogin} submit={submit} />
-      <LoginCharacter />
-    </div>
+    <GenderContext.Provider value={{gender, changeGender}}>
+      <div className='Login'>
+        <LoginForm login={login} changeLogin={changeLogin} submit={submit} />
+        <LoginCharacter login={login}/>
+      </div>
+    </GenderContext.Provider>
+    
   );
 }
 

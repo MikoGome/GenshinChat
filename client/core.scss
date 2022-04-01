@@ -12,6 +12,10 @@ button {
   cursor: pointer;
 }
 
+input[type='radio'] {
+  cursor: pointer;
+}
+
 img {
   user-select: none;
   -webkit-user-drag: none;
