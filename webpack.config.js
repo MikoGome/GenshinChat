@@ -5,7 +5,7 @@ module.exports = {
   entry: path.resolve('client', 'index.tsx'),
   output: {
     path: path.resolve('build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -31,9 +31,9 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.png$/,
-        type: 'asset/resource'
-      }
+        test: /\.(pn|jpe?)g$/,
+        type: 'asset/inline'
+      },
     ]
   },
   devServer: {

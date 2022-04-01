@@ -9,6 +9,8 @@ const apiRouter = require('./routes/apiRouter.js');
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.use(express.static(__dirname + '/'));
+
 app.use('/api', apiRouter);
 
 app.get('/bundle.js', (req, res) => {
