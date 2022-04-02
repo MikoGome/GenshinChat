@@ -5,18 +5,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Vazirmatn', sans-serif;
+  cursor: url('./assets/genshin_cursor.cur'), auto;
 }
 
 body {
   background-color: lightgray;
-}
-
-button {
-  cursor: pointer;
-}
-
-input[type='radio'] {
-  cursor: pointer;
 }
 
 img {

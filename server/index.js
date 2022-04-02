@@ -6,8 +6,6 @@ const path = require('path');
 
 const apiRouter = require('./routes/apiRouter.js');
 
-const pg = require('./models/Users.js');
-
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 

@@ -31,7 +31,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(pn|jpe?)g$/,
+        test: /\.(png|jpe?g|cur)$/,
         type: 'asset/inline'
       },
     ]
