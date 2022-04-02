@@ -116,7 +116,7 @@
         display: inline-block;
   
         &[type='radio'] {
-          opacity: 0;
+          display: none;
           user-select: none;
         }
       }
