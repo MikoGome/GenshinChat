@@ -11,7 +11,12 @@ function LoginForm({login, changeLogin, submit}) {
     <div className="LoginForm appearBottom">
       <img className="genshin-logo" src={GenshinLogo} />
       <form onSubmit={submit}>
-      <h1>{login ? 'Login' : 'Sign Up'}</h1>
+      <div>
+        <h1>
+          {login ? 'Login' : 'Sign Up'}
+        </h1>
+        <aside>{(login ? 'Continue' : 'Start') + ' your adventure in the continent of Teyvat'}</aside>
+      </div>
       <label>Username:
         <input data-testid="username-input" required name="username"/>
       </label>
@@ -19,7 +24,7 @@ function LoginForm({login, changeLogin, submit}) {
         <input data-testid="password-input" required type="password" name="password"/>
       </label>
       {login || <Gender />}
-      <button type='submit'>{login ? 'Login' : 'Sign Up'}</button>
+      <button type='submit'>{login ? 'LOGIN' : 'SIGN UP'}</button>
       </form>
       <div className="switch-caption">
         <p>

@@ -1,7 +1,7 @@
+import React from 'react';
 import {screen, render, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom/';
 import 'whatwg-fetch';
-import React from 'react';
 
 import Login from '../client/containers/Login.tsx';
 
@@ -56,5 +56,10 @@ describe('Login', ():void => {
     fireEvent.click(femaleGenderElement);
     expect(screen.getByTestId('female')).toBeChecked();
   });
-  
+
+  it('textbox value should change when typed in', ():void => {
+    const textbox = screen.getByRole('textbox');
+    fireEvent.change(textbox, {target: {value: 'Mochi'}});
+    expect(textbox).toHaveValue('Mochi');
+  });
 });

@@ -4,6 +4,7 @@ const genshinCharacterUrl = 'https://api.genshin.dev/characters';
 
 const characterCache = [];
 const travelerCache = [];
+
 axios.get(genshinCharacterUrl)
   .then(res => {
     res.data.forEach((el) => {
