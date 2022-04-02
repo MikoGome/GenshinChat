@@ -12,8 +12,8 @@ const pool = new pg_1.default.Pool({
 pool.connect()
     .then(() => console.log('PostgreSQL database connected'))
     .catch(() => console.log('PostgreSQL database failed to connect'));
-exports.default = {
-    query: function (text, params, callback) {
-        return pool.query(text, params, callback);
-    }
-};
+function default_1(text, params, callback) {
+    return pool.query(text, params, callback);
+}
+exports.default = default_1;
+;

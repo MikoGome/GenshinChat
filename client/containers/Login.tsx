@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 import LoginForm from '../components/LoginForm.tsx';
 import LoginCharacter from '../components/LoginCharacter.tsx';
-import { validation } from '../utils/helperFunctions.ts';
+import { validate } from '../utils/helperFunctions.ts';
 
 import './stylesheets/Login.scss';
 
@@ -16,16 +16,16 @@ function Login(): JSX.Element {
   
   function submit(e):void {
     e.preventDefault();
-    
+   
     const endPoint:string = '/api/' + (login ? 'login' : 'signup');
 
-    interface validation {
+    interface accountStructure {
       readonly username: string,
       readonly password: string,
       gender?: string
     }
 
-    const accountInfo: validation = {
+    const accountInfo: accountStructure = {
       username: e.target.username.value,
       password: e.target.password.value,
     }
@@ -33,6 +33,9 @@ function Login(): JSX.Element {
     if(e.target.gender) {
       accountInfo.gender = e.target.gender.value;
     }
+
+    if(!validate(accountInfo)) return console.log('invalid');
+
 
     fetch(endPoint, {
       method: 'POST',

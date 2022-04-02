@@ -18,6 +18,9 @@ app.get('/bundle.js', (req, res) => {
 app.get('*', (req, res) => {
     return res.sendFile(path_1.default.join(__dirname, '../build', 'index.html'));
 });
+app.use((err, req, res, next) => {
+    console.log(err);
+});
 app.listen(PORT, () => {
     console.log('server is listening to port ' + PORT);
 });

@@ -21,16 +21,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require('express');
 const router = express.Router();
-const characterControllers = __importStar(require("../controllers/characterControllers.js"));
-router.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    return res.json({ username, password });
+const characterController = __importStar(require("../controllers/characterController.js"));
+const authController = __importStar(require("../controllers/authController.js"));
+router.post('/login', authController.login, (req, res) => {
+    return res.json(res.locals.authenticated ? 'success' : 'failed');
 });
-router.post('/signup', (req, res) => {
+router.post('/signup', authController.signup, (req, res) => {
     const { username, password, gender } = req.body;
     return res.json({ username, password, gender });
 });
-router.get('/character/:method', characterControllers.characters, (req, res) => {
+router.get('/character/:method', characterController.characters, (req, res) => {
     return res.json(res.locals.character);
 });
-module.exports = router;
+exports.default = router;

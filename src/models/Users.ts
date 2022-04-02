@@ -7,12 +7,10 @@ const pool = new pg.Pool({
 });
 
 pool.connect()
-  .then(() => console.log('PostgreSQL database connected'))
-  .catch(() => console.log('PostgreSQL database failed to connect'));
+  .then(():void => console.log('PostgreSQL database connected'))
+  .catch(():void => console.log('PostgreSQL database failed to connect'));
 
-export default {
-  query: function (text:string, params:string[], callback:()=>{}) {
+export default function (text:string, params?:(any[]|undefined), callback?:()=>{}):any {
     return pool.query(text, params, callback);
-  }
 };
 

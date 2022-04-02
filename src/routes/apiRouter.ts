@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
-import * as characterControllers from '../controllers/characterControllers.js';
+import * as characterController from '../controllers/characterController.js';
+import * as authController from '../controllers/authController.js';
 
-router.post('/login', (req, res) => {
-  const {username, password} = req.body;
-  return res.json({username, password});
+router.post('/login', authController.login, (req, res) => {
+  return res.json(res.locals.authenticated ? 'success' : 'failed');
 });
 
-router.post('/signup', (req, res) => {
+router.post('/signup', authController.signup, (req, res) => {
   const {username, password, gender} = req.body;
   return res.json({username, password, gender});
 });
 
-router.get('/character/:method', characterControllers.characters, (req, res) => {
+router.get('/character/:method', characterController.characters, (req, res) => {
   return res.json(res.locals.character);
 });
 
-module.exports = router;
+export default router;
