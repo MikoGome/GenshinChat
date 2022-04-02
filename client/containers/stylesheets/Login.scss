@@ -136,15 +136,26 @@
     text-align: center;
 
     p {
+      text-shadow: 
+        -1px 1px 0 $textColor,
+        1px 1px 0 $textColor,
+        1px -1px 0 $textColor,
+        -1px -1px 0 $textColor;
+      color: white;
       display: inline-block;
     }
 
     button {
       color: white;
-      border: 1px solid white;
+      border-radius: 5px;
+      border: 1px solid $textColor;
       padding: 0.5rem 1rem;
       margin: 0 0.5rem;
       background-color: #ce9858;
+
+      &:hover {
+        background-color: #dca562;
+      }
     }
   }
   

@@ -28,7 +28,7 @@ function LoginForm({login, changeLogin, submit}) {
       </form>
       <div className="switch-caption">
         <p>
-          {login ? 'Not a member?' : 'Already a member?'}
+          {(login ? 'Not' : 'Already') + ' an adventurer?'}
         </p>
         <button onClick={():void => {
           changeLogin(!login)
