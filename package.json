@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest __tests__/",
     "start": "node server/index.js",
-    "build": "webpack --mode=production",
+    "build": "tsc & webpack --mode=production",
     "dev": "concurrently \"nodemon server/index.js\" \"webpack serve --mode=development --open\""
   },
   "author": "",
