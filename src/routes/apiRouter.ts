@@ -9,8 +9,7 @@ router.post('/login', authController.login, (req, res) => {
 });
 
 router.post('/signup', authController.signup, (req, res) => {
-  const {username, password, gender} = req.body;
-  return res.json({username, password, gender});
+  return res.json(res.locals.authenticated ? 'success' : 'failed');
 });
 
 router.get('/character/:method', characterController.characters, (req, res) => {

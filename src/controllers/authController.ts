@@ -23,11 +23,14 @@ export const signup = async (req, res, next) => {
     INSERT INTO users(username, password, gender, posession, chat_history)
     VALUES($1, $2, $3, $4, $5)
   `
+  let authenticated = false;
   try {
     await query(queryEntry, [username, password, gender, possession.id, chat.id]);
+    authenticated = true;
   } catch(e) {
     await Promise.all([Possession.findByIdAndDelete(possession.id), Chat.findByIdAndDelete(chat.id)]);
   }
+  res.locals.authenticated = authenticated;
   return next();
 }
 

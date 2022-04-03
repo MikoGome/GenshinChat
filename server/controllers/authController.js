@@ -36,12 +36,15 @@ const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
     INSERT INTO users(username, password, gender, posession, chat_history)
     VALUES($1, $2, $3, $4, $5)
   `;
+    let authenticated = false;
     try {
         yield (0, Users_js_1.default)(queryEntry, [username, password, gender, possession.id, chat.id]);
+        authenticated = true;
     }
     catch (e) {
         yield Promise.all([AccountAssets_js_1.Possession.findByIdAndDelete(possession.id), AccountAssets_js_1.Chat.findByIdAndDelete(chat.id)]);
     }
+    res.locals.authenticated = authenticated;
     return next();
 });
 exports.signup = signup;

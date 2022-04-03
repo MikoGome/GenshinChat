@@ -34,7 +34,7 @@ function Login(): JSX.Element {
       accountInfo.gender = e.target.gender.value;
     }
 
-    if(!validate(accountInfo)) return console.log('invalid');
+    if(!validate(login, accountInfo)) return console.log('invalid');
 
 
     fetch(endPoint, {

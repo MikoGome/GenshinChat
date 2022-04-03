@@ -25,7 +25,6 @@ function Gender():JSX.Element {
           type="radio" 
           name="gender" 
           value="male"
-          required
         />
       </label>
       <label className='female gender' data-testid="femaleLabel" ref={female}>
@@ -40,7 +39,6 @@ function Gender():JSX.Element {
           type="radio" 
           name="gender" 
           value="female"
-          required
         />
       </label>
     </div>
