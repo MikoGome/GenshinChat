@@ -2,7 +2,7 @@ import React, {useRef, useContext} from "react";
 import MaleIcon from '@mui/icons-material/Male';
 import FemaleIcon from '@mui/icons-material/Female';
 
-import {GenderContext} from '../containers/Login.tsx';
+import {GenderContext} from '../containers/Login';
 
 function Gender():JSX.Element {
   const male = useRef<any>(null);

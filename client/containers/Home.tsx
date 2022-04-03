@@ -8,11 +8,12 @@ function Home():JSX.Element {
   useEffect(() => {
     fetch('/api/authenticate')
     .then(res => res.json())
-    .then(authenticated => {
-      if(!authenticated) {
+    .then(data => {
+      if(!data.authenticated) {
         navigate('/login');
       } else {
         socket = io();
+        socket.emit('signIn', data.account);
       }
     });
   }, [])

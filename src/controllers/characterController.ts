@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import {Request, Response, NextFunction} from 'express';
 const genshinCharacterUrl:string = 'https://api.genshin.dev/characters';
 
 const characterCache:string[] = [];
@@ -17,7 +17,7 @@ axios.get(genshinCharacterUrl)
   });
 
 
-export const characters = (req, res, next) => {
+export const characters = (req:Request, res:Response, next:NextFunction) => {
     const characters = req.params.method === 'login' ? characterCache : travelerCache;
     const randomIndex = Math.floor(Math.random() * characters.length);
     res.locals.character = characters[randomIndex];

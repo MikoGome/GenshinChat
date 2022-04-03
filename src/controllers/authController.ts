@@ -1,13 +1,15 @@
-import query from '../models/Users.js';
-import {Possession, Chat}from '../models/AccountAssets.js';
+import query from '../models/Users';
+import {Possession, Chat}from '../models/AccountAssets';
 import bcrypt from 'bcrypt';
+
+import {Request, Response, NextFunction} from 'express';
 
 function hash(pass:string):Promise<string> {
   const workFactor = 10;
   return bcrypt.hash(pass, workFactor);
 }
 
-export const signup = async (req, res, next) => {
+export const signup = async (req:Request, res:Response, next:NextFunction) => {
   const {username, gender} = req.body;
   const password = await hash(req.body.password);
   const starterChar:string = gender === 'male'? 'aether' : 'lumine';
@@ -23,7 +25,7 @@ export const signup = async (req, res, next) => {
     INSERT INTO users(username, password, gender, posession, chat_history)
     VALUES($1, $2, $3, $4, $5)
   `
-  let authenticated = false;
+  let authenticated:boolean = false;
   try {
     await query(queryEntry, [username, password, gender, possession.id, chat.id]);
     authenticated = true;
@@ -34,7 +36,7 @@ export const signup = async (req, res, next) => {
   return next();
 }
 
-export const login = async (req, res, next) => {
+export const login = async (req:Request, res:Response, next:NextFunction) => {
   const {username, password} = req.body;
   const queryEntry:string = `
     SELECT * FROM users
@@ -42,7 +44,8 @@ export const login = async (req, res, next) => {
   `
 
   try {
-    const account = (await query(queryEntry, [username])).rows[0];
+    const record:any = await query(queryEntry, [username]);
+    const account = record.rows[0];
     let authenticated = false;
     if(account) {
       authenticated = await bcrypt.compare(password, account.password);

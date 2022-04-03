@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
-import LoginForm from '../components/LoginForm.tsx';
-import LoginCharacter from '../components/LoginCharacter.tsx';
-import { validate } from '../utils/helperFunctions.ts';
+import LoginForm from '../components/LoginForm';
+import LoginCharacter from '../components/LoginCharacter';
+import { validate } from '../utils/helperFunctions';
 import { useNavigate } from "react-router-dom";
 
 import './stylesheets/Login.scss';

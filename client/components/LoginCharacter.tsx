@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 
-import {GenderContext} from '../containers/Login.tsx';
+import {GenderContext} from '../containers/Login';
 
 function LoginCharacter({login}):JSX.Element {
   const [characterUrl, setCharacterUrl] = useState<string>('');
