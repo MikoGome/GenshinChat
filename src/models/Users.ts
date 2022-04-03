@@ -10,7 +10,7 @@ pool.connect()
   .then(():void => console.log('PostgreSQL database connected'))
   .catch(():void => console.log('PostgreSQL database failed to connect'));
 
-export default function (text:string, params?:(any[]|undefined), callback?:()=>{}):any {
+export default function (text:string, params?:any[], callback?:()=>{}):any {
     return pool.query(text, params, callback);
 };
 

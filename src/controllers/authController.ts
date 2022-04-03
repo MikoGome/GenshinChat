@@ -46,6 +46,10 @@ export const login = async (req, res, next) => {
     let authenticated = false;
     if(account) {
       authenticated = await bcrypt.compare(password, account.password);
+      if(authenticated) {
+        res.locals.user_id = account.id;
+        res.locals.username = account.username;
+      }
     }
     res.locals.authenticated = authenticated;
     return next();

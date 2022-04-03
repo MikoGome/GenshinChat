@@ -1,35 +1,20 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require('express');
 const router = express.Router();
-const characterController = __importStar(require("../controllers/characterController.js"));
-const authController = __importStar(require("../controllers/authController.js"));
-router.post('/login', authController.login, (req, res) => {
-    return res.json(res.locals.authenticated ? 'success' : 'failed');
+const characterController_js_1 = require("../controllers/characterController.js");
+const authController_js_1 = require("../controllers/authController.js");
+const sessionController_1 = require("../controllers/sessionController");
+router.post('/login', authController_js_1.login, sessionController_1.genSession, (req, res) => {
+    return res.json(res.locals.authenticated);
 });
-router.post('/signup', authController.signup, (req, res) => {
-    return res.json(res.locals.authenticated ? 'success' : 'failed');
+router.post('/signup', authController_js_1.signup, (req, res) => {
+    return res.json(res.locals.authenticated);
 });
-router.get('/character/:method', characterController.characters, (req, res) => {
+router.get('/character/:method', characterController_js_1.characters, (req, res) => {
     return res.json(res.locals.character);
+});
+router.get('/authenticate', sessionController_1.verifySession, (req, res) => {
+    return res.json(res.locals.authenticated);
 });
 exports.default = router;

@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import './core.scss';
+import './styles.scss';
 
+ReactDOM.render(<App />, document.getElementById('root'));
 if(module.hot) {
   module.hot.accept();
 }
-
-ReactDOM.render(<App />, document.getElementById('root'));

@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import Aether from '../assets/aether.png';
-import Lumine from '../assets/lumine.png';
 
 import {GenderContext} from '../containers/Login.tsx';
 
@@ -12,20 +10,16 @@ function LoginCharacter({login}):JSX.Element {
   const {gender} = useContext(GenderContext);
   
   useEffect(() => {
-    if(!login && gender === 'male') {
-      setCharacterUrl(Aether);
-    } else if(!login && gender === 'female') {
-      setCharacterUrl(Lumine);
-    } else {
-      const characterEndpoint:string = '/api/character/' + (login ? 'login' : 'signup');
+    const characterEndpoint:string = '/api/character/' + (login ? 'login' : 'signup');
 
-      fetch(characterEndpoint)
-        .then(res => res.json())
-        .then(data => {
-          const url:string = `https://api.genshin.dev/characters/${data}/portrait`;
-          setCharacterUrl(url);
-        });
-    }
+    fetch(characterEndpoint)
+      .then(res => res.json())
+      .then(data => {
+        let url:string = `https://api.genshin.dev/characters/${data}/portrait`;
+        if(!login && gender === 'male') url += 'm';
+        else if(!login && gender === 'female') url += 'f';
+        setCharacterUrl(url);
+      });
   }, [login, gender]);
 
   useEffect(() => {

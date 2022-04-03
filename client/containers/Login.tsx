@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 import LoginForm from '../components/LoginForm.tsx';
 import LoginCharacter from '../components/LoginCharacter.tsx';
 import { validate } from '../utils/helperFunctions.ts';
+import { useNavigate } from "react-router-dom";
 
 import './stylesheets/Login.scss';
 
@@ -13,6 +14,8 @@ function Login(): JSX.Element {
   const [gender, changeGender] = useState<string>(null);
 
   document.title = 'Genshin Chat | ' + (login ? 'Login' : 'Sign Up');
+
+  const navigate = useNavigate();
   
   function submit(e):void {
     e.preventDefault();
@@ -43,7 +46,11 @@ function Login(): JSX.Element {
       body: JSON.stringify(accountInfo)
     })
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => {
+        if(data) {
+          navigate('/');
+        }
+      });
   }
 
   return (

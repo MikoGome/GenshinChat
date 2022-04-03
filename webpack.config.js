@@ -40,7 +40,7 @@ module.exports = {
     static: path.resolve('build'),
     port: 8080,
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/': 'http://localhost:3000'
     },
     historyApiFallback: true
   },

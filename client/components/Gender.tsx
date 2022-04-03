@@ -9,7 +9,7 @@ function Gender():JSX.Element {
   const female = useRef<any>(null);
 
   const {changeGender} = useContext(GenderContext);
-
+  
   return (
     <div className="gender-box">
       <label>Male or Female?</label><br/>

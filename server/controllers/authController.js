@@ -59,6 +59,10 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
         let authenticated = false;
         if (account) {
             authenticated = yield bcrypt_1.default.compare(password, account.password);
+            if (authenticated) {
+                res.locals.user_id = account.id;
+                res.locals.username = account.username;
+            }
         }
         res.locals.authenticated = authenticated;
         return next();
