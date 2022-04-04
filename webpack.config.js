@@ -12,7 +12,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve('client', 'index.html')
-    })
+    }),
+    '@babel/plugin-transform-runtime'
   ],
   module: {
     rules: [

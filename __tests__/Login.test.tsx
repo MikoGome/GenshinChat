@@ -2,13 +2,22 @@ import React from 'react';
 import {screen, render, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom/';
 import 'whatwg-fetch';
+import { BrowserRouter } from 'react-router-dom';
 
-import Login from '../client/containers/Login.tsx';
+import Login from '../client/containers/Login';
+
+function MockLogin(): JSX.Element {
+  return (
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  )
+}
 
 describe('Login', ():void => {
   
   beforeEach(():void => {
-    render(<Login />);
+    render(<MockLogin />);
   });
 
   it('should display Login as the heading', ():void => {

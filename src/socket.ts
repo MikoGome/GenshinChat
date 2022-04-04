@@ -8,6 +8,8 @@ function socket(server:any) {
   const io = new Server(server);
   
   io.on('connection', (socket:any) => {
+    console.log('socket connected');
+
     socket.on('signIn', (account:{id:number, name:string}) => {
       const {id, name} = account;
       socket.id = id;
@@ -17,6 +19,7 @@ function socket(server:any) {
 
     socket.on('disconnect', () => {
       delete onlineUsers[socket.id];
+      console.log('socket disconnected');
     });
   });
 
