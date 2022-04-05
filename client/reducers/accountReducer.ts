@@ -14,6 +14,9 @@ function accountReducer(state = initialState, action:actionObject) {
 
     case actionTypes.INITIALIZE:
       return {...state, ...action.payload};
+    
+    case actionTypes.LOG_OUT:
+      return {...initialState};
 
     default:
       return state;

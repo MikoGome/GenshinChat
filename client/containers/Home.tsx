@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import { connect } from "react-redux";
 import NavBar from '../components/NavBar';
 import Chat from '../components/chat/Chat';
+import Avatar from '../components/Avatar';
 
 import * as actions from '../actions/actions';
 
@@ -12,7 +13,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  initialize: (payload) => dispatch(actions.initialize(payload)),
+  initialize: (payload) => dispatch(actions.initialize(payload))
 });
 
 function Home(props): JSX.Element {
@@ -37,8 +38,9 @@ function Home(props): JSX.Element {
 
   return (
     <>
-      <NavBar socket={socket}/>
+      <NavBar socket={socket} />
       <Chat />
+      <Avatar />
     </>
   );
 }

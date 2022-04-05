@@ -1,14 +1,20 @@
 import React from "react";
+import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logOut } from "../actions/actions";
 
-function NavBar({socket}) {
+const mapDispatchToProps = dispatch => ({
+  logOut: dispatch(logOut())
+});
+
+function NavBar({socket, logOut}) {
   const navigate = useNavigate();
 
-  function logOut() {
-    console.log('hi');
+  function signOut() {
     fetch('/api/logout')
       .then(() => {
-        socket.disconnect()
+        socket.disconnect();
+        logOut();
         navigate('/login');
       })
   }
@@ -20,10 +26,10 @@ function NavBar({socket}) {
         <li>Friends</li>
         <li>Talks</li>
         <li>Profile</li>
-        <li onClick={logOut}>Logout</li>
+        <li onClick={signOut}>Logout</li>
       </ul>
     </nav>
   )
 }
 
-export default NavBar;
+export default connect(null, mapDispatchToProps)(NavBar);

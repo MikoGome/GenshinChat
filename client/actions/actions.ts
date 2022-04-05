@@ -6,6 +6,9 @@ export const initialize = (payload) => ({
   payload: payload
 })
 
+export const logOut = () => ({
+  type: actionTypes.LOG_OUT
+})
 
 
 

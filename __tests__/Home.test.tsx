@@ -1,8 +1,8 @@
 import {render, screen, fireEvent} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import 'whatwg-fetch';
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import Home from '../client/containers/Home';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';

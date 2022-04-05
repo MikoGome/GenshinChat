@@ -14,11 +14,13 @@ function socket(server:any) {
       socket.id = id;
       socket.name = name;
       onlineUsers[name] = Date.now();
+      console.log('onlineUsers', onlineUsers);
     });
 
     socket.on('disconnect', () => {
       delete onlineUsers[socket.id];
       console.log('socket disconnected');
+      console.log('onlineUsers', onlineUsers);
     });
   });
 
