@@ -1,24 +1,26 @@
 import React from "react";
-import Tab from './Tab';
 import { useNavigate } from "react-router-dom";
 
 function NavBar({socket}) {
   const navigate = useNavigate();
-  const navBarTabs = ['Shop', 'Friends', 'Talks', 'Profile', 'Logout'];
-
-  const tabs = navBarTabs.map((el) => {
-    return <Tab key={'Tab_' + el} section={el} />
-  });
 
   function logOut() {
-    socket.disconnect();
-    navigate('/login');
+    console.log('hi');
+    fetch('/api/logout')
+      .then(() => {
+        socket.disconnect()
+        navigate('/login');
+      })
   }
 
   return (
     <nav>
       <ul>
-        {tabs}
+        <li>Shop</li>
+        <li>Friends</li>
+        <li>Talks</li>
+        <li>Profile</li>
+        <li onClick={logOut}>Logout</li>
       </ul>
     </nav>
   )

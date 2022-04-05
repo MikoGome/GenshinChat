@@ -1,10 +1,9 @@
 import { Server } from "socket.io";
 
-const onlineUsers:{[id:string]: string} = {}
+const onlineUsers:{[name:string]: number} = {}
 
 function socket(server:any) {
-
-
+  
   const io = new Server(server);
   
   io.on('connection', (socket:any) => {
@@ -14,7 +13,7 @@ function socket(server:any) {
       const {id, name} = account;
       socket.id = id;
       socket.name = name;
-      onlineUsers[id] = name;
+      onlineUsers[name] = Date.now();
     });
 
     socket.on('disconnect', () => {

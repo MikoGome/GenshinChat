@@ -22,7 +22,7 @@ export const signup = async (req:Request, res:Response, next:NextFunction) => {
     history: [],
   });
   const queryEntry:string = `
-    INSERT INTO users(username, password, gender, posession, chat_history)
+    INSERT INTO users(username, password, gender, possession, chat_history)
     VALUES($1, $2, $3, $4, $5)
   `
   let authenticated:boolean = false;
@@ -52,6 +52,8 @@ export const login = async (req:Request, res:Response, next:NextFunction) => {
       if(authenticated) {
         res.locals.user_id = account.id;
         res.locals.username = account.username;
+        res.locals.gender = account.gender;
+        res.locals.possession = account.possession;
       }
     }
     res.locals.authenticated = authenticated;
@@ -59,5 +61,10 @@ export const login = async (req:Request, res:Response, next:NextFunction) => {
   } catch(e) {
     return next(e);
   }
+}
+
+export const logout = (req: Request, res: Response, next: NextFunction) => {
+  res.cookie('GCToken', '', {maxAge: 0});
+  return next();
 }
   

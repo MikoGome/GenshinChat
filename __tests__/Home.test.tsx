@@ -1,18 +1,24 @@
-import {render,screen} from '@testing-library/react';
+import {render, screen, fireEvent} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+import 'whatwg-fetch';
 import React from 'react';
 import Home from '../client/containers/Home';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../client/store';
 
 function MockHome():JSX.Element {
   return (
-    <BrowserRouter>
-      <Home />
-    </BrowserRouter>
+    <Provider store={store} >
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>
+    </Provider>
   )
 }
 
-describe('Home', () => {
+describe('Elements present', () => {
   beforeEach(() => {
     render(<MockHome />);
   });
@@ -40,5 +46,55 @@ describe('Home', () => {
   it('should have a logout tab in the navbar', () => {
     const logoutElement = screen.getByText(/logout/i);
     expect(logoutElement).toBeInTheDocument();
+  });
+
+  it('should have list items', () => {
+    const listElement = screen.getAllByRole('listitem');
+    expect(listElement.length).toBe(5);
+  });
+
+  it('should have a message textbox', () => {
+    const textBoxElement = screen.getByRole('textbox');
+    expect(textBoxElement).toBeInTheDocument();
+  });
+
+  it('it should have a list to hold all all the messages', () => {
+    const chatDisplayElement = screen.getByTestId(/chat-display/i);
+    console.log(chatDisplayElement);
+    expect(chatDisplayElement).toBeInTheDocument();
+  });
+});
+
+describe('Functionality', () => {
+  beforeEach(() => {
+    render(<MockHome />);
+  });
+
+  it('textbox should be empty initially', () => {
+    const textBoxElement = screen.getByRole('textbox') as HTMLInputElement;
+    expect(textBoxElement.value).toBe('');
+  });
+
+  it('typing will change the textbox value', () => {
+    const textBoxElement = screen.getByRole('textbox') as HTMLInputElement;
+    fireEvent.change(textBoxElement, {target: {value: 'hello'}})
+    expect(textBoxElement.value).toBe('hello');
+  });
+
+  it('click on send button should send the message to chat display', () => {
+    const textBoxElement = screen.getByRole('textbox');
+    const sendButton = screen.getByRole('button');
+    expect(screen.queryByText(/hello/i)).toBe(null);
+    fireEvent.change(textBoxElement, {target: {value: 'hello'}})
+    fireEvent.click(sendButton);
+    expect(screen.getByText(/hello/i)).toBeInTheDocument();
+  });
+
+  it('after clicking send, the value of message box should be empty', () => {
+    const textBoxElement = screen.getByRole('textbox') as HTMLInputElement;
+    const sendButton = screen.getByRole('button');
+    fireEvent.change(textBoxElement, {target: {value: 'hello'}})
+    fireEvent.click(sendButton);
+    expect(textBoxElement.value).toBe('');
   });
 });

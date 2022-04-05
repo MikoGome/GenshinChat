@@ -11,11 +11,16 @@ app.use(cookieParser());
 
 app.use('/api', apiRouter);
 
+console.log('NODE_ENV', process.env.NODE_ENV);
+
 app.get('/bundle.js', (req, res) => {
   return res.sendFile(path.join(__dirname, '../build', 'bundle.js'));
 });
 
 app.get('*', (req, res) => {
+  if(process.env.NODE_ENV === 'development') {
+    return res.sendFile(path.join(__dirname, '../client', 'index.html'));
+  }
   return res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 

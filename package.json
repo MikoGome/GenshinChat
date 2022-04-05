@@ -4,10 +4,10 @@
   "description": "Genshinfied chat app",
   "main": "index.js",
   "scripts": {
-    "test": "jest __tests__/",
+    "test": "jest --verbose __tests__/",
     "start": "node server/index.js",
     "build": "tsc & webpack --mode=production",
-    "dev": "concurrently \"nodemon --exec npx ts-node src/index.ts\" \"webpack serve --mode=development --open\""
+    "dev": "concurrently \"cross-env NODE_ENV=development nodemon --exec npx ts-node src/index.ts\" \"webpack serve --mode=development --open\""
   },
   "author": "",
   "license": "ISC",
@@ -31,6 +31,7 @@
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.4",
     "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.5.1",

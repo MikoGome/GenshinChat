@@ -23,7 +23,8 @@ const possessionSchema = new mongoose.Schema({
   },
   main: {
     type: String,
-    default: 'traveler-anemo'
+    default: 'traveler-anemo',
+    _id: false
   },
   characters_owned: [{
     name: {

@@ -2,8 +2,12 @@ import  express, {Request, Response} from 'express';
 const router = express.Router();
 
 import {characters} from '../controllers/characterController';
-import {login, signup} from '../controllers/authController';
+import {login, signup, logout} from '../controllers/authController';
 import {genSession, verifySession} from '../controllers/sessionController';
+
+import accountRouter from './accountRouter';
+
+router.use('/account', accountRouter);
 
 router.post('/login', login, genSession, (req:Request, res:Response) => {
   return res.json(res.locals.authenticated);
@@ -11,6 +15,10 @@ router.post('/login', login, genSession, (req:Request, res:Response) => {
 
 router.post('/signup', signup, (req:Request, res:Response) => {
   return res.json(res.locals.authenticated);
+});
+
+router.get('/logout', logout, (req, res) => {
+  return res.json(true);
 });
 
 router.get('/character/:method', characters, (req:Request, res:Response) => {

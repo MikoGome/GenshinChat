@@ -7,7 +7,14 @@ dotenv.config();
 const JWT_SECRET:string = <string>process.env.JWT_SECRET;
 
 export const genSession = (req:Request, res:Response, next:NextFunction) => {
-  res.cookie('GCToken', jwt.sign({id: res.locals.user_id, name: res.locals.username}, JWT_SECRET), {httpOnly: true});
+  const payload = {
+    id: res.locals.user_id, 
+    name: res.locals.username, 
+    gender: res.locals.gender,
+    possession: res.locals.possession
+  };
+  const expireTime = 6 * 60 * 60 * 1000; // 6 hours
+  res.cookie('GCToken', jwt.sign(payload, JWT_SECRET, {expiresIn: '6h'}), {httpOnly: true, maxAge: expireTime});
   return next();
 }
 
