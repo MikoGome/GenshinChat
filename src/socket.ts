@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 
-const onlineUsers:{[name:string]: number} = {}
+const onlineUsers:{[name:number]: string} = {}
 
 function socket(server:any) {
   
@@ -9,11 +9,9 @@ function socket(server:any) {
   io.on('connection', (socket:any) => {
     console.log('socket connected');
 
-    socket.on('signIn', (account:{id:number, name:string}) => {
-      const {id, name} = account;
-      socket.id = id;
+    socket.on('signIn', (name:string) => {
       socket.name = name;
-      onlineUsers[name] = Date.now();
+      onlineUsers[socket.id] = name;
       console.log('onlineUsers', onlineUsers);
     });
 

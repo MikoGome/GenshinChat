@@ -37,7 +37,7 @@ const possessionSchema = new mongoose.Schema({
 export const Possession = mongoose.model('possession', possessionSchema);
 
 const chatSchema = new mongoose.Schema({
-  history: [{
+  chats: {
     room: {
       participants: [{
         user_id: {
@@ -56,7 +56,7 @@ const chatSchema = new mongoose.Schema({
       main: String,
       message: String
     }]
-  }]
+  }
 });
 
 export const Chat = mongoose.model('chat', chatSchema);

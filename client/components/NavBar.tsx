@@ -1,23 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logOut } from "../actions/actions";
+import { useNavigate, Link } from "react-router-dom";
+import { clearSession } from "../actions/asyncActions";
 
-const mapDispatchToProps = dispatch => ({
-  logOut: dispatch(logOut())
+const mapStateToProps = state => ({
+  account: state.account
 });
 
-function NavBar({socket, logOut}) {
+const mapDispatchToProps = dispatch => ({
+  signOut: () => dispatch(clearSession())
+});
+
+function NavBar({signOut}) {
   const navigate = useNavigate();
 
-  function signOut() {
-    fetch('/api/logout')
-      .then(() => {
-        socket.disconnect();
-        logOut();
-        navigate('/login');
-      })
-  }
+  // function signOut() {
+  //   fetch('/api/logout')
+  //   .then(() => {
+  //     account.socket.disconnect();
+  //     logOut();
+  //     navigate('/login');
+  //   });
+  // }
 
   return (
     <nav>
@@ -26,10 +30,10 @@ function NavBar({socket, logOut}) {
         <li>Friends</li>
         <li>Talks</li>
         <li>Profile</li>
-        <li onClick={signOut}>Logout</li>
+        <li onClick={signOut}><Link to='/login'>Logout</Link></li>
       </ul>
     </nav>
   )
 }
 
-export default connect(null, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
