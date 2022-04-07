@@ -8,7 +8,7 @@ function LoginForm({login, changeLogin, submit}) {
   const {changeGender} = useContext(GenderContext);
 
   return(
-    <div className="LoginForm appearBottom">
+    <div className="login-form appearBottom">
       <img className="genshin-logo" src={GenshinLogo} />
       <form onSubmit={submit}>
       <div>

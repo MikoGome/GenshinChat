@@ -3,14 +3,17 @@ import {screen, render, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom/';
 import 'whatwg-fetch';
 import { BrowserRouter } from 'react-router-dom';
-
+import { Provider } from 'react-redux';
 import Login from '../client/containers/Login';
+import store from '../client/store';
 
 function MockLogin(): JSX.Element {
   return (
-    <BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
       <Login />
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   )
 }
 

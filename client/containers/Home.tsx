@@ -2,36 +2,38 @@ import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import NavBar from '../components/NavBar';
+import OnlineBar from '../components/OnlineBar';
 import Chat from '../components/chat/Chat';
 import Avatar from '../components/Avatar';
 import { authenticate } from "../actions/asyncActions";
 
 const mapStateToProps = (state) => ({
-  account: state.account
+  account: state.account,
+  page: state.page
 });
 
 const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate())
 });
 
-function Home(props): JSX.Element {
+function Home({account, page, authenticate, getUsers}): JSX.Element {
   const navigate = useNavigate();
   
-  console.log(props.account);
-   
+  console.log(page);
   useEffect(() => {
-    props.authenticate();
+    authenticate();
   }, []);
 
   useEffect(() => {
-    if(props.account.authenticated === false) {
+    if(account.authenticated === false) {
       navigate('/login');
     }
-  }, [props.account.authenticated]);
+  }, [account.authenticated]);
 
   return (
     <>
       <NavBar />
+      <OnlineBar users={page.users}/>
       <Chat />
       <Avatar />
     </>

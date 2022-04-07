@@ -18,3 +18,8 @@ export const sendMessage = (payload) => ({
   type: actionTypes.SEND_MESSAGE,
   payload: payload
 })
+
+export const updateOnlineUsers = (payload) => ({
+  type: actionTypes.UPDATE_ONLINE_USERS,
+  payload: payload
+})

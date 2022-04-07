@@ -3,11 +3,9 @@ import React, { useRef } from "react";
 function InputBox({sendMessage, name}) {
   const message:React.MutableRefObject<HTMLInputElement> = useRef();
   
-  async function send() {
+  function send() {
     sendMessage(name, message.current);
     message.current.value = '';
-    const test = await 'hello';
-    console.log(test);
   }
 
   return (

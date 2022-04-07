@@ -7,6 +7,7 @@ import Home from '../client/containers/Home';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from '../client/store';
+import 'regenerator-runtime';
 
 function MockHome():JSX.Element {
   return (
@@ -60,7 +61,6 @@ describe('Elements present', () => {
 
   it('it should have a list to hold all all the messages', () => {
     const chatDisplayElement = screen.getByTestId(/chat-display/i);
-    console.log(chatDisplayElement);
     expect(chatDisplayElement).toBeInTheDocument();
   });
 });

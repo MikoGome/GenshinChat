@@ -4,6 +4,4 @@ export const LOG_OUT = 'LOG_OUT';
 
 //Page
 export const SEND_MESSAGE = 'SEND_MESSAGE';
-
-//Request
-export const AUTHENTICATE = 'AUTHENTICATE';
+export const UPDATE_ONLINE_USERS = 'UPDATE_ONLINE_USERS';

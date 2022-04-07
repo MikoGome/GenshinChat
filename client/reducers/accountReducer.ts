@@ -9,7 +9,8 @@ const initialState:account = {
   characters_owned: null,
   wishes: null,
   socket: null,
-  authenticated: null
+  authenticated: null,
+  initialized: false
 };
 
 function accountReducer(state = initialState, action:actionObject) {
@@ -19,10 +20,7 @@ function accountReducer(state = initialState, action:actionObject) {
       return {...state, ...action.payload};
     
     case actionTypes.LOG_OUT:
-      return {...initialState};
-
-    case actionTypes.AUTHENTICATE:
-      return {...state, ...action.payload}
+      return {...initialState, authenticated: false};
 
     default:
       return state;
@@ -37,7 +35,8 @@ interface account {
   characters_owned: {name:string}[] | null,
   wishes: {amount: number, progress: number} | null,
   socket: Socket,
-  authenticated: boolean | null
+  authenticated: boolean | null,
+  initialized: boolean
 }
 
 interface actionObject {

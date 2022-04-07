@@ -1,14 +1,24 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import LoginForm from '../components/registration/LoginForm';
 import LoginCharacter from '../components/registration/LoginCharacter';
 import { validate } from '../utils/helperFunctions';
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import { logIn } from '../actions/asyncActions';
 
 import './stylesheets/Login.scss';
 
 export const GenderContext = createContext(null);
 
-function Login(): JSX.Element {
+const mapStateToProps = state => ({
+  account: state.account
+});
+
+const mapDispatchToProps = dispatch => ({
+  logIn: (url, account) => dispatch(logIn(url, account))
+});
+
+function Login({account, logIn}): JSX.Element {
   
   const [login, changeLogin] = useState<boolean>(true);
   const [gender, changeGender] = useState<string>(null);
@@ -16,6 +26,12 @@ function Login(): JSX.Element {
   document.title = 'Genshin Chat | ' + (login ? 'Login' : 'Sign Up');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if(account.authenticated === true) {
+      navigate('/');
+    }
+  }, [account.authenticated]);
   
   function submit(e):void {
     e.preventDefault();
@@ -39,23 +55,12 @@ function Login(): JSX.Element {
 
     if(!validate(login, accountInfo)) return console.log('invalid');
 
-
-    fetch(endPoint, {
-      method: 'POST',
-      headers: {'Content-Type' : 'application/json'},
-      body: JSON.stringify(accountInfo)
-    })
-      .then(res => res.json())
-      .then(data => {
-        if(data) {
-          navigate('/');
-        }
-      });
+    logIn(endPoint, accountInfo);
   }
 
   return (
     <GenderContext.Provider value={{gender, changeGender}}>
-      <div className='Login'>
+      <div className='login'>
         <LoginForm login={login} changeLogin={changeLogin} submit={submit} />
         <LoginCharacter login={login}/>
       </div>
@@ -64,4 +69,4 @@ function Login(): JSX.Element {
   );
 }
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
