@@ -1,14 +1,19 @@
 import React from 'react';
 
-function Message({entry}) {
+function Message({entry}): JSX.Element {
+  const {name, main, gender, message} = entry
+  
+  const append:string = gender === 'male' ? '-aether' : '-lumine';
+  const picture = `https://api.genshin.dev/characters/${main}/icon-big${main.startsWith('traveler') ? append : ''}`
 
   return(
-    <li>
+    <li className="message">
       <div>
-        {entry.message}
+        <img src={picture} alt={main}/>
+        {message}
       </div>
       <aside>
-        {entry.sender}
+        {name}
       </aside>
     </li>
   )

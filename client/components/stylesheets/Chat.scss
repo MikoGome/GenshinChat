@@ -1,0 +1,17 @@
+.chat {
+  background-color: pink;
+
+  ul {
+    height: 600px;
+    overflow-y: auto;
+
+    li {
+      word-wrap: break-word;
+    }
+  }
+  
+  .input-box {
+    background-color: green;
+    width: 100%;
+  }
+}

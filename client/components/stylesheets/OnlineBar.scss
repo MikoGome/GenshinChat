@@ -1,0 +1,16 @@
+.online-bar {
+  background-color: blue;
+  display: inline-block;
+  text-align: center;
+  overflow-y: auto;
+  
+  li {
+    background-color: orange;
+    display: flex;
+    align-items: center;
+
+    img {
+      width: 50px;
+    }
+  }
+}

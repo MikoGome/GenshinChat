@@ -1,0 +1,9 @@
+.home {
+  width: 100vw;
+  height: 100vh;
+
+  main {
+    display: grid;
+    grid-template-columns: 15vw auto 30vw;
+  }
+}

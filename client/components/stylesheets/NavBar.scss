@@ -1,0 +1,15 @@
+.nav-bar {
+  background-color: red;
+  
+  ul {
+    display: flex;
+    justify-content: space-evenly;
+
+    li {
+      list-style-type: none;
+      display: flex;
+      align-items: flex-start;
+      padding: 10px;
+    }
+  }
+}

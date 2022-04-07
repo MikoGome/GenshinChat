@@ -1,30 +1,33 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
 import { clearSession } from "../actions/asyncActions";
+import Home from '@mui/icons-material/HomeRounded';
+import LocalGroceryStore from '@mui/icons-material/LocalGroceryStoreRounded';
+import PeopleAlt from '@mui/icons-material/PeopleAltRounded';
+import Chat from '@mui/icons-material/ChatRounded';
+import AccountBox from '@mui/icons-material/AccountBoxRounded';
+import Logout from '@mui/icons-material/LogoutRounded';
 
-const mapStateToProps = state => ({
-  account: state.account
-});
+import './stylesheets/NavBar.scss';
 
 const mapDispatchToProps = dispatch => ({
   signOut: () => dispatch(clearSession())
 });
 
-function NavBar({account, signOut}) {
-  const navigate = useNavigate();
+function NavBar({signOut}) {
 
   return (
-    <nav>
+    <nav className="nav-bar">
       <ul>
-        <li>Shop</li>
-        <li>Friends</li>
-        <li>Talks</li>
-        <li>Profile</li>
-        <li onClick={signOut}>Logout</li>
+        <li><Home/>Home</li>
+        <li><LocalGroceryStore/>Shop</li>
+        <li><PeopleAlt/>Friends</li>
+        <li><Chat/>Talks</li>
+        <li><AccountBox/>Profile</li>
+        <li onClick={signOut}><Logout/>Log Out</li>
       </ul>
     </nav>
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default connect(null, mapDispatchToProps)(NavBar);

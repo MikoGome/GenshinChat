@@ -6,6 +6,7 @@ import OnlineBar from '../components/OnlineBar';
 import Chat from '../components/chat/Chat';
 import Avatar from '../components/Avatar';
 import { authenticate } from "../actions/asyncActions";
+import './stylesheets/Home.scss';
 
 const mapStateToProps = (state) => ({
   account: state.account,
@@ -16,7 +17,8 @@ const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate())
 });
 
-function Home({account, page, authenticate, getUsers}): JSX.Element {
+function Home({account, page, authenticate}): JSX.Element {
+
   const navigate = useNavigate();
   
   console.log(page);
@@ -31,12 +33,14 @@ function Home({account, page, authenticate, getUsers}): JSX.Element {
   }, [account.authenticated]);
 
   return (
-    <>
+    <div className="home">
       <NavBar />
-      <OnlineBar users={page.users}/>
-      <Chat />
-      <Avatar />
-    </>
+      <main>
+        <OnlineBar users={page.users}/>
+        <Chat />
+        <Avatar />
+      </main>
+    </div>
   );
 }
 

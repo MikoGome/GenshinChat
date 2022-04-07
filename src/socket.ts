@@ -17,6 +17,10 @@ function socket(server:any) {
       delete onlineUsers[socket.id];
       io.emit('updateOnlineUsers', onlineUsers);
     });
+
+    socket.on('sendMessage', (data:{name: string, main:string, gender:string, message: string}) => {
+      io.emit('newMessage', data);
+    });
   });
 
 

@@ -1,6 +1,5 @@
 import React, {useContext} from "react";
 import GenshinLogo from '../../assets/genshin-logo.png';
-
 import Gender from './Gender';
 import {GenderContext} from '../../containers/Login';
 

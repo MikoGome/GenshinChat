@@ -18,7 +18,6 @@ function pageReducer(state = initialState, action) {
     case UPDATE_ONLINE_USERS: {
       const newState = deepCopy(state);
       newState.users = action.payload;
-      console.log(newState);
       return newState;
     }
 
@@ -34,7 +33,9 @@ interface pageStateShape {
 }
 
 interface chatHistoryShape {
-  sender: string,
+  name: string,
+  main: string,
+  gender: string,
   message: string
 }
 

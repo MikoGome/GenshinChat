@@ -9,7 +9,6 @@ const initialState:account = {
   characters_owned: null,
   wishes: null,
   socket: null,
-  authenticated: null,
   initialized: false
 };
 
@@ -35,7 +34,6 @@ interface account {
   characters_owned: {name:string}[] | null,
   wishes: {amount: number, progress: number} | null,
   socket: Socket,
-  authenticated: boolean | null,
   initialized: boolean
 }
 

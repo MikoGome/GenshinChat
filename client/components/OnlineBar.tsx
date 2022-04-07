@@ -1,6 +1,8 @@
 import React from "react";
 import OnlineUser from "./OnlineUser";
 
+import './stylesheets/OnlineBar.scss'
+
 function OnlineBar({users}):JSX.Element {
 
   const onlineUsers = users.map((el,index) => {

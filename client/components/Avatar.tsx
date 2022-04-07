@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import './stylesheets/Avatar.scss';
 
 const mapStateToProps = state => ({
   account: state.account
@@ -16,7 +17,9 @@ function Avatar({account}) {
   }
 
   return(
-    <img src={account.main && avatarPortrait}/>
+    <div className="avatar">
+       <img src={account.main && avatarPortrait}/>
+    </div>
   )
 }
 
