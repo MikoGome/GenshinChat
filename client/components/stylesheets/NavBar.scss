@@ -7,11 +7,16 @@
   background-color: $darken-color;
   
   ul {
-    color: rgb(160, 160, 160);
+    color: $darken-text-color;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+
+    .current {
+      color: white;
+      filter: drop-shadow(0px 0px 10px white);
+    }
 
     li {
       font-size: 1rem;
@@ -20,12 +25,21 @@
       align-items: flex-start;
       transition: all 0.25s ease-in;
 
-      img {
+      .logo {
         height: $nav-bar-height;
         width: 9rem;
         object-fit: cover;
       }
 
+      .nav-icon {
+        margin: 0 1rem;
+        img {
+          height: $nav-bar-height;
+        }
+      }
+    }
+
+    .clickable {
       &:hover {
         color: white;
         filter: drop-shadow(0px 0px 10px white);

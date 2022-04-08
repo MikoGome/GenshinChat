@@ -9,10 +9,25 @@
 }
 
 body {
-  background-color: lightgray;
+  overflow: hidden;
+}
+
+#root {
+  background-image: url('./assets/home-background.jpg');
+  background-size: cover;
 }
 
 img {
   user-select: none;
   -webkit-user-drag: none;
+}
+
+.floating {
+  animation: floating 5s ease-in-out infinite normal;
+}
+
+@keyframes floating {
+  0% { transform: translate(0,  0px); }
+  50%  { transform: translate(0, 15px); }
+  100%   { transform: translate(0, -0px); }   
 }

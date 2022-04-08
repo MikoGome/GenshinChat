@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import NavBar from '../components/NavBar';
@@ -33,7 +33,7 @@ function Home({account, page, authenticate}): JSX.Element {
 
   return (
     <div className="home">
-      <NavBar />
+      <NavBar current="home"/>
       <main>
         <OnlineBar users={page.users}/>
         <Chat />

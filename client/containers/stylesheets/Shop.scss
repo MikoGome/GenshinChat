@@ -1,0 +1,57 @@
+.shop {
+  height: 100vh;
+  width: 100vw;
+
+  main {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 70% 30%;
+
+    .selection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+
+      .shop-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        width: 100%;
+        max-width: 50%;
+        padding: 1rem;
+        border-radius: 10px;
+        border: none;
+
+        img {
+          height: 5rem;
+        }
+
+        &:hover {
+          filter: brightness(1.1);
+        }
+      }
+
+      #gacha-button {
+        background-color: lightgreen;
+        box-shadow: 0 0 0 10px green;
+
+      }
+
+      #mora-button {
+        background-color: rgb(255, 255, 159);
+        box-shadow: 0 0 0 10px rgba(250, 250, 0, 0.836);
+      }
+    }
+
+    .shop-keeper {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -54,7 +54,7 @@ describe('Elements present', () => {
   });
 
   it('should have a logout tab in the navbar', () => {
-    const logoutElement = screen.getByText(/logout/i);
+    const logoutElement = screen.getByText(/log out/i);
     expect(logoutElement).toBeInTheDocument();
   });
 

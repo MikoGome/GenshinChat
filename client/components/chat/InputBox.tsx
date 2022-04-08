@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
+import SendIcon from '@mui/icons-material/Send';
 
-function InputBox({name, gender, main, socket}) {
+function InputBox({name, gender, main, socket}): JSX.Element {
   const message:React.MutableRefObject<HTMLInputElement> = useRef();
 
   function send(name, main, gender, messageElement) {
@@ -12,7 +13,7 @@ function InputBox({name, gender, main, socket}) {
 
   useEffect(() => {
     message.current.focus();
-  });
+  }, []);
 
   return (
     <div className='input-box'>
@@ -22,7 +23,7 @@ function InputBox({name, gender, main, socket}) {
         onKeyDown={(e) => {if(e.key === 'Enter') send(name, main, gender, message.current)}}
       />
       <button onClick={() => send(name, main, gender, message.current)}>
-        Send
+        <SendIcon />
       </button>
     </div>
   )

@@ -2,23 +2,12 @@
 
 .avatar {
   max-height: $max-height;
-  overflow: hidden;
-  position: absolute;
-  right: 0;
+  position: relative;
+  right: 50%;
 
   img {
-    height: 125%;
-    width: 125%;
+    position: absolute;
+    width: 100vh;
     object-fit: cover;
-  }
-
-  .floating {
-    animation: floating 5s ease-in-out infinite normal;
-  }
-
-  @keyframes floating {
-    0% { transform: translate(0,  0px); }
-    50%  { transform: translate(0, 15px); }
-    100%   { transform: translate(0, -0px); }   
   }
 }

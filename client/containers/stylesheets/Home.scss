@@ -2,16 +2,15 @@
 @import '../../components/stylesheets/variables';
 
 .home {
-  background-image: url('../../assets/home-background.jpg');
-  background-size: cover;
   display: grid;
-  grid-template-rows: $nav-bar-height $max-height;
+  height: 100vh;
+  grid-template-rows: $nav-bar-height auto;
   gap: $gap;
 
   main {
     height: 100%;
     display: grid;
-    grid-template-columns: 15vw auto 30vw;
+    grid-template-columns: 15vw auto 25vw;
     gap: 2rem;
     margin: 0 2rem;
   }

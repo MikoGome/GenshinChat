@@ -2,7 +2,7 @@
 
 .chat {
   display: grid;
-  grid-template-rows: 75% 5% 5%;
+  grid-template-rows: 85% 5% 10%;
   max-height: $max-height;
   z-index: 1;
 
@@ -37,10 +37,11 @@
         .bubble {
           overflow-wrap: break-word;
           border: 2px solid black;
-          border-radius: 1rem;
-          padding: 0.5rem 1rem;
-          font-size: 1rem;
+          border-radius: 1.25rem;
+          padding: 0.5rem 0.75rem;
+          font-size: 1.15rem;
           background-color: white;
+          font-size: 1.25rem;
           filter: drop-shadow(5px 5px 10px rgba(51, 51, 51, 0.5));
         }
 
@@ -63,6 +64,13 @@
     input {
       padding: 0.25rem 0.5rem;
       outline: none;
+      font-size: 1.25rem;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

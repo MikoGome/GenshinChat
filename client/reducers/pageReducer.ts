@@ -12,7 +12,6 @@ function pageReducer(state = initialState, action) {
     case actionTypes.SEND_MESSAGE: {
       const newState = deepCopy(state);
       newState.chatHistory.push(action.payload);
-      console.log('deepCopy?', state !== newState);
       return newState;
     }
 
