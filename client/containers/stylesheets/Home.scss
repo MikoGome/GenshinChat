@@ -2,7 +2,7 @@
 @import '../../components/stylesheets/variables';
 
 .home {
-  background-image: url('../../assets/background.png');
+  background-image: url('../../assets/home-background.jpg');
   background-size: cover;
   display: grid;
   grid-template-rows: $nav-bar-height $max-height;

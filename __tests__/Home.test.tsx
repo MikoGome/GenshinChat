@@ -60,7 +60,7 @@ describe('Elements present', () => {
 
   it('should have list items', () => {
     const listElement = screen.getAllByRole('listitem');
-    expect(listElement.length).toBe(5);
+    expect(listElement.length).toBe(8);
   });
 
   it('should have a message textbox', () => {

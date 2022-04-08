@@ -2,12 +2,14 @@
 
 .avatar {
   max-height: $max-height;
-  overflow-y: hidden;
-  border: 1px solid black;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
 
   img {
-    bottom: 0;
-    right: 0;
+    height: 125%;
+    width: 125%;
+    object-fit: cover;
   }
 
   .floating {

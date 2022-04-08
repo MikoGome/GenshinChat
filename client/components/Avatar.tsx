@@ -7,12 +7,12 @@ const mapStateToProps = state => ({
 });
 
 function Avatar({account}) {
-  let avatarPortrait = account.main;
+  let avatarPortrait = `https://api.genshin.dev/characters/${account.main}/portrait`;
   if(account.main?.startsWith('traveler')) {
     if(account.gender === 'male') {
-      avatarPortrait = `https://api.genshin.dev/characters/${account.main}/portraitm`;
+      avatarPortrait += 'm';
     } else if(account.gender === 'female') {
-      avatarPortrait = `https://api.genshin.dev/characters/${account.main}/portraitf`;
+      avatarPortrait += 'f';
     }
   }
 

@@ -1,4 +1,4 @@
-import {SEND_MESSAGE, UPDATE_ONLINE_USERS} from '../constants/actionTypes';
+import * as actionTypes from '../constants/actionTypes';
 import {deepCopy} from '../utils/helperFunctions';
 
 const initialState:pageStateShape = {
@@ -9,15 +9,21 @@ const initialState:pageStateShape = {
 function pageReducer(state = initialState, action) {
   switch(action.type) {
 
-    case SEND_MESSAGE: {
+    case actionTypes.SEND_MESSAGE: {
       const newState = deepCopy(state);
       newState.chatHistory.push(action.payload);
+      console.log('deepCopy?', state !== newState);
       return newState;
     }
 
-    case UPDATE_ONLINE_USERS: {
+    case actionTypes.UPDATE_ONLINE_USERS: {
       const newState = deepCopy(state);
       newState.users = action.payload;
+      return newState;
+    }
+
+    case actionTypes.LOG_OUT: {
+      const newState = deepCopy(initialState);
       return newState;
     }
 
