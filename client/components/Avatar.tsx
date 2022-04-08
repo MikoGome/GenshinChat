@@ -18,7 +18,7 @@ function Avatar({account}) {
 
   return(
     <div className="avatar">
-       <img src={account.main && avatarPortrait}/>
+       <img className="floating" src={account.main && avatarPortrait}/>
     </div>
   )
 }

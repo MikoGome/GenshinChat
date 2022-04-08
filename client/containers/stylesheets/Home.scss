@@ -1,9 +1,18 @@
+@import './variables';
+@import '../../components/stylesheets/variables';
+
 .home {
-  width: 100vw;
-  height: 100vh;
+  background-image: url('../../assets/background.png');
+  background-size: cover;
+  display: grid;
+  grid-template-rows: $nav-bar-height $max-height;
+  gap: $gap;
 
   main {
+    height: 100%;
     display: grid;
     grid-template-columns: 15vw auto 30vw;
+    gap: 2rem;
+    margin: 0 2rem;
   }
 }

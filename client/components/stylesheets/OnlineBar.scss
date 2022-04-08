@@ -1,11 +1,12 @@
+@import './variables';
+
 .online-bar {
-  background-color: blue;
   display: inline-block;
   text-align: center;
-  overflow-y: auto;
+  max-height: $max-height;
   
   li {
-    background-color: orange;
+    background-color: white;
     display: flex;
     align-items: center;
 

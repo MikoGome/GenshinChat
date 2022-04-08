@@ -1,7 +1,22 @@
+@import './variables';
+
 .avatar {
-  width: 100%;
-  background-color: black;
+  max-height: $max-height;
+  overflow-y: hidden;
+  border: 1px solid black;
+
   img {
-    width: 100%;
+    bottom: 0;
+    right: 0;
+  }
+
+  .floating {
+    animation: floating 5s ease-in-out infinite normal;
+  }
+
+  @keyframes floating {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }   
   }
 }

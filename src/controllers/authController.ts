@@ -47,7 +47,6 @@ export const login = async (req:Request, res:Response, next:NextFunction) => {
     const record:any = await query(queryEntry, [username]);
     const account = record.rows[0];
     let authenticated = false;
-    console.log('account', account);
     if(account) {
       authenticated = await bcrypt.compare(password, account.password);
       if(authenticated) {

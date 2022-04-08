@@ -21,7 +21,6 @@ function Home({account, page, authenticate}): JSX.Element {
 
   const navigate = useNavigate();
   
-  console.log(page);
   useEffect(() => {
     authenticate();
   }, []);

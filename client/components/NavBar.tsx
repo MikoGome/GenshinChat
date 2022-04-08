@@ -8,6 +8,8 @@ import Chat from '@mui/icons-material/ChatRounded';
 import AccountBox from '@mui/icons-material/AccountBoxRounded';
 import Logout from '@mui/icons-material/LogoutRounded';
 
+import GenshinLogo from '../assets/genshin-home-logo.png';
+
 import './stylesheets/NavBar.scss';
 
 const mapDispatchToProps = dispatch => ({
@@ -19,6 +21,7 @@ function NavBar({signOut}) {
   return (
     <nav className="nav-bar">
       <ul>
+        <li><img src={GenshinLogo}/></li>
         <li><Home/>Home</li>
         <li><LocalGroceryStore/>Shop</li>
         <li><PeopleAlt/>Friends</li>
