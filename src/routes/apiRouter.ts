@@ -1,7 +1,7 @@
 import  express, {Request, Response} from 'express';
 const router = express.Router();
 
-import {characters} from '../controllers/characterController';
+import {characters, wish, wishCheck, updateCharPool} from '../controllers/characterController';
 import {login, signup, logout} from '../controllers/authController';
 import {genSession, verifySession} from '../controllers/sessionController';
 
@@ -27,6 +27,10 @@ router.get('/character/:method', characters, (req:Request, res:Response) => {
 
 router.get('/authenticate', verifySession, (req:Request, res:Response) => {
   return res.json(res.locals);
+});
+
+router.post('/wish', wishCheck, wish, updateCharPool, (req: Request, res: Response) => {
+  return res.json(res.locals.updatedPossession);
 });
 
 export default router;

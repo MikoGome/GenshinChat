@@ -55,9 +55,11 @@
           width: 100%;
           top: 0;
           overflow: hidden;
+          transition: all 0.5s;
         }
         #wish-progress {
           filter: grayscale(100%);
+          filter: contrast(0);
         }
       }
     }
@@ -76,7 +78,7 @@
       width: 0;
       background-color: #69e0ff;
       filter: $focus-shadow;
-      transition: none;
+      transition: all 0.25s;
     }
   }
 }

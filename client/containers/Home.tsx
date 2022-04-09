@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 function Home({account, page, authenticate}): JSX.Element {
-  
+
   const navigate = useNavigate();
   
   useEffect(() => {

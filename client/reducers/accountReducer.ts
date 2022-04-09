@@ -6,7 +6,7 @@ const initialState:account = {
   gender: null,
   main: null,
   mora: 0,
-  characters_owned: null,
+  characters_owned: [],
   wishes: {amount: 0, progress: 0},
   socket: null,
   initialized: false
@@ -17,10 +17,16 @@ function accountReducer(state = initialState, action:actionObject) {
 
     case actionTypes.INITIALIZE:
       return {...state, ...action.payload};
+
+    case actionTypes.UPDATE_CHAR_POOL:
+      return {...state, characters_owned: action.payload};
     
+    case actionTypes.UPDATE_WISH:
+      return {...state, wishes: action.payload};
+      
     case actionTypes.LOG_OUT:
       return {...initialState, authenticated: false};
-
+    
     default:
       return state;
   }
@@ -31,7 +37,7 @@ interface account {
   gender: string | null,
   main: string | null,
   mora: 0 | null,
-  characters_owned: {name:string}[] | null,
+  characters_owned: {name:string}[],
   wishes: {amount: number, progress: number},
   socket: Socket,
   initialized: boolean

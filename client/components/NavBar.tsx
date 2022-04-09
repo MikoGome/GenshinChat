@@ -33,33 +33,14 @@ function NavBar({account, current, signOut}) {
     const currPage = document.getElementById(current);
     const {x, width} = currPage.getBoundingClientRect();
     if(focusLine.current) {
-      focusLine.current.style.transition = 'none';
       focusLine.current.style.left = x + 'px';
       focusLine.current.style.width = width + 'px';
     }
     currPage.classList.add('current');
     const navTabs = document.getElementsByClassName('clickable');
     for(let i = 0; i < navTabs.length; i++) {
-      navTabs[i].addEventListener('mouseenter', (e:any) => {
-        focusLine.current.style.transition = 'all 0.25s';
-        const {x, width} = e.currentTarget.getBoundingClientRect();
-        if(focusLine.current) {
-          focusLine.current.style.left = x + 'px';
-          focusLine.current.style.width = width + 'px';
-        }
-      });
-
       if(navTabs[i].id === current) continue;
       navTabs[i].classList.add('transition');
-    }
-    if(navBar.current) {
-      navBar.current.addEventListener('mouseleave', (e:any) => {
-        const {x, width} = currPage.getBoundingClientRect();
-        if(focusLine.current) {
-          focusLine.current.style.left = x + 'px';
-          focusLine.current.style.width = width + 'px';
-        }
-      });
     }
 
   }, []);
@@ -71,20 +52,37 @@ function NavBar({account, current, signOut}) {
     navigate('/' + route);
   }
 
+  function returnFocus(elCurrent:string):void {
+    const currEl = document.getElementById(elCurrent);
+    const {x, width} = currEl.getBoundingClientRect();
+    if(focusLine.current) {
+      focusLine.current.style.left = x + 'px';
+      focusLine.current.style.width = width + 'px';
+    }
+  }
+  
+  function tempFocus(e:any):void {
+    const {x, width} = e.currentTarget.getBoundingClientRect();
+    if(focusLine.current) {
+      focusLine.current.style.left = x + 'px';
+      focusLine.current.style.width = width + 'px';
+    }
+  }
+
   return (
     <nav className="nav-bar">
-      <ul ref={navBar}>
-        <li><img className="logo" src={GenshinLogo}/></li>
-        <li id="home" className="clickable" onClick={redirect}><Home/>Home</li>
-        <li id="shop" className="clickable" onClick={redirect}><LocalGroceryStore/>Shop</li>
-        <li id="friends" className="clickable" onClick={redirect}><PeopleAlt/>Friends</li>
-        <li id="talks" className="clickable" onClick={redirect}><Chat/>Talks</li>
-        <li id="profile" className="clickable" onClick={redirect}><AccountBox/>Profile</li>
-        <li id="logout" className="clickable" onClick={signOut}><Logout/>Log Out</li>
-        <li id="currency">
+      <ul onMouseLeave={() => returnFocus(current)} ref={navBar}>
+        <li onMouseEnter={() => returnFocus(current)}><img className="logo" src={GenshinLogo}/></li>
+        <li id="home" className="clickable"  onMouseEnter={tempFocus} onClick={redirect}><Home/>Home</li>
+        <li id="shop" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><LocalGroceryStore/>Shop</li>
+        <li id="friends" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><PeopleAlt/>Friends</li>
+        <li id="talks" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><Chat/>Talks</li>
+        <li id="profile" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><AccountBox/>Profile</li>
+        <li id="logout" className="clickable" onMouseEnter={tempFocus} onClick={signOut}><Logout/>Log Out</li>
+        <span id="focus-line" ref={focusLine}></span>
+        <li id="currency" onMouseEnter={() => returnFocus(current)}>
           <Currency account={account} />
         </li>
-        <span id="focus-line" ref={focusLine}></span>
       </ul>
     </nav>
   )
