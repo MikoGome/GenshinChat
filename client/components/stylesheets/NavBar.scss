@@ -18,12 +18,15 @@
       filter: drop-shadow(0px 0px 10px white);
     }
 
+    .transition {
+      transition: all 0.25s ease-in;
+    }
+
     li {
       font-size: 1rem;
       list-style-type: none;
       display: flex;
       align-items: flex-start;
-      transition: all 0.25s ease-in;
 
       .logo {
         height: $nav-bar-height;

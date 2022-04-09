@@ -31,3 +31,36 @@ img {
   50%  { transform: translate(0, 15px); }
   100%   { transform: translate(0, -0px); }   
 }
+
+.appearBottom {
+  position:relative;
+  animation: animatebottom 0.4s ease-out;
+  animation-fill-mode: forwards;
+
+  @keyframes animatebottom{
+    from{bottom:-600px;opacity:0}
+    to{bottom:0;opacity:1}
+  }
+}
+
+.appearRight {
+  position:relative;
+  animation: animateRight 0.7s ease-out;
+  animation-fill-mode: forwards;
+
+  @keyframes animateRight{
+    from{right:-300px;opacity:0}
+    to{right:0;opacity:1}
+  }
+}
+
+.appearLeft {
+  position:relative;
+  animation: animateLeft 0.7s ease-out;
+  animation-fill-mode: forwards;
+
+  @keyframes animateLeft{
+    from{left:-300px;opacity:0}
+    to{left:0;opacity:1}
+  }
+}

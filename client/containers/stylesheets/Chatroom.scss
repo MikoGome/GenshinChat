@@ -1,7 +1,7 @@
 @import './variables';
 @import '../../components/stylesheets/variables';
 
-.home {
+.chatroom {
   display: grid;
   height: 100vh;
   grid-template-rows: $nav-bar-height auto;

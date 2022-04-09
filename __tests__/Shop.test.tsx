@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from '../client/store';
 import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
+import 'regenerator-runtime';
 
 function MockShop() {
   return (

@@ -1,6 +1,10 @@
+@import './variables';
+@import '../../components/stylesheets/variables';
+
 .shop {
+  display: grid;
   height: 100vh;
-  width: 100vw;
+  grid-template-rows: $nav-bar-height auto;
 
   main {
     height: 100%;
@@ -21,7 +25,7 @@
         width: 100%;
         max-width: 50%;
         padding: 1rem;
-        border-radius: 10px;
+        border-radius: 2px;
         border: none;
 
         img {
@@ -48,9 +52,11 @@
     .shop-keeper {
       display: flex;
       align-items: center;
-
+      position: relative;
+      right: 50%;
+      
       img {
-        width: 100%;
+        width: 75%;
       }
     }
   }

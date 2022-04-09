@@ -1,7 +1,7 @@
 @import './variables';
 @import '../../components/stylesheets/variables';
 
-.home {
+.talks {
   display: grid;
   height: 100vh;
   grid-template-rows: $nav-bar-height auto;
