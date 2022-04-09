@@ -48,7 +48,7 @@ function Shop({account, authenticate}):JSX.Element {
           </button>
         </div>
         <div className="shop-keeper">
-          <img className="floating" src={Paimon}/>
+          <img onLoad={(e:any) => e.target.classList.add('shop-keeper-appear')} src={Paimon}/>
         </div>
       </main>
     </div>

@@ -22,14 +22,19 @@ img {
   -webkit-user-drag: none;
 }
 
+.avatar-appear {
+  animation: animateLeft 0.7s ease-out, floating 5s ease-in-out infinite normal;
+}
+
 .floating {
   animation: floating 5s ease-in-out infinite normal;
 }
 
+//animation stuff
 @keyframes floating {
-  0% { transform: translate(0,  0px); }
+  0% { transform: translate(0,  0px); opacity: 1}
   50%  { transform: translate(0, 15px); }
-  100%   { transform: translate(0, -0px); }   
+  100%   { transform: translate(0, -0px); opacity: 1}   
 }
 
 .appearBottom {
@@ -64,3 +69,4 @@ img {
     to{left:0;opacity:1}
   }
 }
+

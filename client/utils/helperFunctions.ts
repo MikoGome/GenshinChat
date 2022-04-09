@@ -33,7 +33,3 @@ export const deepCopy = (input: any) => {
     return input;
   }
 }
-
-export const animateLeft = (e):void => {
-  e.target.classList.add('appearLeft');
-}

@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './stylesheets/Avatar.scss';
-import { animateLeft } from '../utils/helperFunctions';
 
 const mapStateToProps = state => ({
   account: state.account
@@ -19,7 +18,10 @@ function Avatar({account}) {
 
   return(
     <div className="avatar">
-       <img className="floating" src={account.main && avatarPortrait} onLoad={e => animateLeft(e)}/>
+      <img
+         src={account.main && avatarPortrait} 
+         onLoad={(e:any) => e.target.classList.add('avatar-appear')}
+      />
     </div>
   )
 }
