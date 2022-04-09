@@ -23,7 +23,7 @@ img {
 }
 
 .avatar-appear {
-  animation: animateLeft 0.7s ease-out, floating 5s ease-in-out infinite normal;
+  animation: animateLeft 0.7s ease-out, floating 5s ease-in-out 0.7s infinite normal;
 }
 
 .floating {
@@ -33,7 +33,7 @@ img {
 //animation stuff
 @keyframes floating {
   0% { transform: translate(0,  0px); opacity: 1}
-  50%  { transform: translate(0, 15px); }
+  50%  { transform: translate(0, 15px); opacity: 1}
   100%   { transform: translate(0, -0px); opacity: 1}   
 }
 
@@ -65,8 +65,8 @@ img {
   animation-fill-mode: forwards;
 
   @keyframes animateLeft{
-    from{left:-300px;opacity:0}
-    to{left:0;opacity:1}
+    from{left:-300px; opacity:0}
+    to{left:0; opacity:1}
   }
 }
 
