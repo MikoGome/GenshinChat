@@ -7,14 +7,37 @@
   z-index: 1;
 
   ul {
+    padding: 1rem;
     overflow-y: auto;
     background-color: $chat-color;
 
     .me {
       flex-direction: row-reverse;
+      text-align: right;
       
-      aside {
-        text-align: right;
+      .message {
+
+        .bubble {
+
+          &::before {
+            content: none;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+            border-left-color: #ffffff;
+            border-right: 0;
+            border-bottom: 0;
+            margin-top: -6px;
+            margin-right: -12px;
+          }
+        } 
       }
     }
 
@@ -32,22 +55,39 @@
       }
 
       .message {
-        max-width: 70%;
+        width: 80%;
 
         .bubble {
+          max-width: 80%;
+          display: inline-block;
           overflow-wrap: break-word;
-          border: 2px solid black;
-          border-radius: 1.25rem;
+          border-radius: 1rem;
           padding: 0.3rem 0.75rem;
           background-color: white;
           font-size: 1.25rem;
           filter: drop-shadow(5px 5px 10px rgba(51, 51, 51, 0.5));
+
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+            border-right-color: #ffffff;
+            border-left: 0;
+            border-bottom: 0;
+            margin-top: -6px;
+            margin-left: -12px;
+          }
         }
 
         aside {
           font-style: italic;
-          margin: 0 1rem;
           color: white;
+          margin: 0.25rem 0;
           opacity: 0.5;
           font-size: 0.75rem;
         }
@@ -67,9 +107,18 @@
     }
 
     button {
+      background-color: #e5e2dc;
+      color: #4a5366;
+
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
+
+      &:hover {
+        background-color: rgb(166 135 94);
+        color: white;
+      }
     }
   }
 }

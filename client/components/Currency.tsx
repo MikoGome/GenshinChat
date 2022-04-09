@@ -8,11 +8,18 @@ function Currency({account}): JSX.Element {
     <>
       <div className="nav-icon">
         <img src={Mora} />
-        {account.mora}
+        <span className="amount">
+          {account.mora}
+        </span>
       </div>
       <div className="nav-icon">
         <img src={Wish} />
-        {account.wishes && account.wishes.amount}
+        <div id="progress-hold">
+          <img src={Wish} id="wish-progress"/>
+        </div>
+        <span className="amount">
+          {account.wishes && account.wishes.amount}
+        </span>
       </div>
     </>
   )
