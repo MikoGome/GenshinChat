@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
 import NavBar from '../components/NavBar';
-
+import Avatar from '../components/Avatar';
+import CharactersBox from '../components/profile/CharactersBox';
 import './stylesheets/Profile.scss';
 
 const mapStateToProps = (state) => ({
@@ -32,6 +33,13 @@ function Profile({account, authenticate}): JSX.Element {
   return (
     <div className="profile">
       <NavBar current="profile"/>
+      <main>
+        <div className="avatar-hold">
+          <h1>{account.name}</h1>
+          <Avatar />
+        </div>
+        <CharactersBox account={account}/>
+      </main>
     </div>
   )
 }

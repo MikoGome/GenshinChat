@@ -1,5 +1,6 @@
 import { Socket } from 'socket.io-client';
 import * as actionTypes from '../constants/actionTypes';
+import { deepCopy } from '../utils/helperFunctions';
 
 const initialState:account = {
   name: null,
@@ -13,16 +14,23 @@ const initialState:account = {
 };
 
 function accountReducer(state = initialState, action:actionObject) {
+
   switch(action.type) {
 
     case actionTypes.INITIALIZE:
       return {...state, ...action.payload};
 
     case actionTypes.UPDATE_CHAR_POOL:
-      return {...state, characters_owned: action.payload};
+      return {...state, ...action.payload};
     
     case actionTypes.UPDATE_WISH:
       return {...state, wishes: action.payload};
+
+    case actionTypes.UPDATE_MAIN:
+      if(action.payload.main === 'aether' || action.payload.main === 'lumine') {
+        action.payload.main = 'traveler-anemo';
+      }
+      return {...state, ...action.payload};
       
     case actionTypes.LOG_OUT:
       return {...initialState, authenticated: false};

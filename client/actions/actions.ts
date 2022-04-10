@@ -20,6 +20,11 @@ export const updateWish = (payload) => ({
   payload: payload
 });
 
+export const updateMain = (payload) => ({
+  type: actionTypes.UPDATE_MAIN,
+  payload: {main: payload}
+});
+
 
 
 //page

@@ -41,14 +41,14 @@ export const wish = (req: Request, res:Response, next:NextFunction) => {
 
 export const updateCharPool = async (req: Request, res: Response, next: NextFunction) => {
   const {possession} = req.body;
-  const {characters_owned: updatedPool, wishes} = 
+  const {characters_owned, wishes} = 
     await Possession.findByIdAndUpdate(
       possession, 
       {characters_owned: res.locals.charPool, 
       wishes: {amount: res.locals.updatedWishAmount}}, 
       {new: true}
     );
-  res.locals.updatedPossession = {updatedPool, wishes};
+  res.locals.updatedPossession = {characters_owned, wishes};
   return next();
 }
 
