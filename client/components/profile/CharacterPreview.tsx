@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CharacterPreview({character, gender, spotlight}):JSX.Element {
+function CharacterPreview({character, spotlight}):JSX.Element {
 
   let image = `https://api.genshin.dev/characters/${character}/portrait`
 

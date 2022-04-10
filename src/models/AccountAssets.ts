@@ -24,12 +24,12 @@ const possessionSchema = new mongoose.Schema({
   main: {
     type: String,
     default: 'traveler-anemo',
-    _id: false
   },
   characters_owned: [{
     name: {
       type: String,
-      required: true
+      required: true,
+      _id: false
     }
   }]
 });

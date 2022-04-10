@@ -30,7 +30,6 @@ router.get('/authenticate', verifySession, (req:Request, res:Response) => {
 });
 
 router.post('/wish', wishCheck, wish, updateCharPool, (req: Request, res: Response) => {
-  console.log(res.locals.updatedPossession);
   return res.json(res.locals.updatedPossession);
 });
 
