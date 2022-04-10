@@ -1,11 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
 import NavBar from '../components/NavBar';
-import Avatar from '../components/Avatar';
 import CharactersBox from '../components/profile/CharactersBox';
 import './stylesheets/Profile.scss';
+import CharactersPreview from '../components/profile/CharactersPreview';
+import { titleCase } from '../utils/helperFunctions';
 
 const mapStateToProps = (state) => ({
   account: state.account,
@@ -17,6 +18,16 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 function Profile({account, authenticate}): JSX.Element {
+  let characterInit = account.main;
+  if(account.main === 'traveler-anemo') {
+    if(account.gender === 'male') {
+      characterInit = 'aether';
+    } else if(account.gender === 'female') {
+      characterInit = 'lumine';
+    }
+  }
+
+  const [characterPreview, setCharacterPreview] = useState<string>(characterInit);
 
   const navigate = useNavigate();
 
@@ -35,10 +46,12 @@ function Profile({account, authenticate}): JSX.Element {
       <NavBar current="profile"/>
       <main>
         <div className="avatar-hold">
-          <h1>{account.name}</h1>
-          <Avatar />
+          <CharactersPreview spotlight={characterPreview} characters_owned={account.characters_owned} />
         </div>
-        <CharactersBox account={account}/>
+        <div className="character-box-hold">
+          <h1>{titleCase(characterPreview)}</h1>
+          <CharactersBox account={account} change={setCharacterPreview}/>
+        </div>
       </main>
     </div>
   )

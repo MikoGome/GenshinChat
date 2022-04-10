@@ -5,47 +5,68 @@
   display: grid;
   height: 100vh;
   grid-template-rows: $nav-bar-height auto;
-  gap: $gap;
 
   main {
     display: grid;
-    grid-template-columns: 15vw auto;
+    grid-template-columns: 35vw auto;
     gap: 2rem;
     margin: 0 2rem;
-    
-    .avatar-hold {
 
-      .avatar {
-        width: 100%;
+    .avatar-hold {
+      position: relative;
+
+      .character-preview {
+        position: absolute;
+        height: calc(100vh - $nav-bar-height);
+        right: 600px;
+        transition: all 0.5s ease-in-out;
+        filter: opacity(0);
+
         img {
-          display: block;
+          object-fit: contain;
+          height: 100%;
+          // width: 100%;
+          transition: all 0.5 ease-in-out;
+          transform: translateX(50%);
         }
+      }
+
+      .spotlight {
+        right: 50%;
+        filter: opacity(1);
       }
     }
 
-    .characters-box {
+    .character-box-hold {
       display: grid;
-      width: 100%;
-      background-color: rgba(150, 0, 0, 0.562);
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-      overflow-y: auto;
-      height: 50vh;
-      z-index: 1;
+      grid-template-rows: 35vh auto;
 
-      .character {
-        
-        figure {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+      .characters-box {
+        position: relative;
+        display: grid;
+        width: 100%;
+        background-color: $chat-color;
+        color: white;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        overflow-y: auto;
+        height: 50vh;
+        z-index: 1;
+  
+        .character {
           
-          img {
-            width: 60%;
-            object-fit: contain;
-          }
-          
-          figcaption {
-          
+          figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            img {
+              width: 60%;
+              object-fit: contain;
+            }
+            
+            figcaption {
+            
+            }
           }
         }
       }

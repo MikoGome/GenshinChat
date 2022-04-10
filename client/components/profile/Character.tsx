@@ -1,21 +1,12 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateMain } from '../../actions/actions';
+import {titleCase} from '../../utils/helperFunctions';
 
-function character({name, picture}):JSX.Element {
-  const dispatch = useDispatch();
-
-  function titleCase(str) {
-    return str
-      .split('-')
-      .map((el:string) => el[0].toUpperCase() + el.slice(1))
-      .join(' ');
-  }
+function character({name, picture, change}):JSX.Element {
 
   return(
     <div className="character" onClick={() => {
-      dispatch(updateMain(name));
-      console.log('hi');
+        change(name);
       }}>
       <figure>
         <img src={picture}/>

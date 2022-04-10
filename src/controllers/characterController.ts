@@ -35,7 +35,7 @@ export const wish = (req: Request, res:Response, next:NextFunction) => {
     if(ownedChars.some((el:{name:string}) => el.name === prize)) fresh = false;
     else ownedChars.push({name: prize});
   }
-  res.locals.charPool = ownedChars;
+  res.locals.charPool = ownedChars.sort();
   return next();
 }
 

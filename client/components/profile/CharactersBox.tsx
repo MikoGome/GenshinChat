@@ -1,7 +1,7 @@
 import React from 'react';
 import Character from './Character';
 
-function CharactersBox({account}): JSX.Element {
+function CharactersBox({account, change}): JSX.Element {
   console.log('account', account);
 
   const characters = account.characters_owned.map((el:{name: string}, index) => {
@@ -9,7 +9,7 @@ function CharactersBox({account}): JSX.Element {
     if(el.name === 'aether' || el.name ==='lumine') {
       image = 'https://api.genshin.dev/characters/traveler-anemo/icon-big-' + el.name;
     }
-    return <Character key={'el.name_'+index} name={el.name} picture={image}/>
+    return <Character key={'el.name_'+index} name={el.name} picture={image} change={change}/>
   });
 
   return (

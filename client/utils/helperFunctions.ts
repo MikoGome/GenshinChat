@@ -33,3 +33,10 @@ export const deepCopy = (input: any) => {
     return input;
   }
 }
+
+export const titleCase = (str) => {
+  return str
+    .split('-')
+    .map((el:string) => el[0].toUpperCase() + el.slice(1))
+    .join(' ');
+}
