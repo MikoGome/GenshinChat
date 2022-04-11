@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate()),
 });
 
-function Profile({account, authenticate, characters}): JSX.Element {
+function Profile({account, authenticate}): JSX.Element {
   let characterInit = account.main;
   if(account.main?.startsWith('traveler')) {
     if(account.gender === 'male') {

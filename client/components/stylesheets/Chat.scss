@@ -18,7 +18,8 @@
       .message {
 
         .bubble {
-
+          text-align: left;
+          
           &::before {
             content: none;
           }

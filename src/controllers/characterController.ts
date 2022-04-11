@@ -44,15 +44,11 @@ export const wish = (req: Request, res:Response, next:NextFunction) => {
   }
   res.locals.charPool = ownedChars
     .sort((a:{name:string},b:{name: string}) => { //alphabetized
-      if(a.name.startsWith('traveler')) {
-        return -1;
-      } else if(a.name < b.name) {
-        return -1;
-      } else if(b.name < a.name) {
-        return 1;
-      } else {
-        return 0;
-      }
+      if(a.name.startsWith('traveler')) return -1;
+      else if(b.name.startsWith('traveler')) return 1;
+      else if(a.name < b.name) return -1;
+      else if(b.name < a.name) return 1;
+      else return 0;
     });
   return next();
 }
@@ -63,7 +59,7 @@ export const updateCharPool = async (req: Request, res: Response, next: NextFunc
     await Possession.findByIdAndUpdate(
       possession, 
       {characters_owned: res.locals.charPool, 
-      wishes: {amount: res.locals.updatedWishAmount}}, 
+      wishes: {amount: res.locals.updatedWishAmount, progress: res.locals.progress}}, 
       {new: true}
     );
   res.locals.updatedPossession = {characters_owned, wishes};
@@ -74,6 +70,7 @@ export const wishCheck = (req: Request, res: Response, next: NextFunction) => {
   const {wishes} = req.body;
   if(wishes.amount - 1 >= 0) {
     res.locals.updatedWishAmount = wishes.amount - 1;
+    res.locals.progress = wishes.progress;
     return next();
   }
   return res.json('Not Enough Mora');
