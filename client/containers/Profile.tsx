@@ -6,20 +6,20 @@ import NavBar from '../components/NavBar';
 import CharactersBox from '../components/profile/CharactersBox';
 import './stylesheets/Profile.scss';
 import CharactersPreview from '../components/profile/CharactersPreview';
-import { titleCase } from '../utils/helperFunctions';
+import CharacterDescription from '../components/profile/CharacterDescription';
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  page: state.page
+  page: state.page,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  authenticate: () => dispatch(authenticate())
+  authenticate: () => dispatch(authenticate()),
 });
 
-function Profile({account, authenticate}): JSX.Element {
+function Profile({account, authenticate, characters}): JSX.Element {
   let characterInit = account.main;
-  if(account.main === 'traveler-anemo') {
+  if(account.main?.startsWith('traveler')) {
     if(account.gender === 'male') {
       characterInit = 'aether';
     } else if(account.gender === 'female') {
@@ -30,7 +30,7 @@ function Profile({account, authenticate}): JSX.Element {
   const [characterPreview, setCharacterPreview] = useState<string>(characterInit);
 
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     authenticate();
   }, []);
@@ -40,17 +40,17 @@ function Profile({account, authenticate}): JSX.Element {
       navigate('/login');
     }
   }, [account.authenticated]);
-  
+
   return (
     <div className="profile">
       <NavBar current="profile"/>
       <main>
         <div className="avatar-hold">
-          <CharactersPreview spotlight={characterPreview} characters_owned={account.characters_owned} />
+          <CharactersPreview spotlight={characterPreview} characters_owned={account.characters_owned} gender={account.gender}/>
         </div>
         <div className="character-box-hold">
-          <h1>{titleCase(characterPreview)}</h1>
-          <CharactersBox account={account} change={setCharacterPreview}/>
+          <CharacterDescription name={characterPreview}/>
+          <CharactersBox account={account} change={setCharacterPreview} gender={account.gender}/>
         </div>
       </main>
     </div>

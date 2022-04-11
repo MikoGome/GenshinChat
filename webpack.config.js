@@ -32,9 +32,9 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(png|jpe?g|cur)$/,
+        test: /\.(png|jpe?g)$/,
         type: 'asset/inline'
-      },
+      }
     ]
   },
   devServer: {

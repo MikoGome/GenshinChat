@@ -18,7 +18,7 @@ export const initialize = async (req:Request, res:Response, next:NextFunction) =
       res.locals.possession = possession;
     }
   } catch (e){
-
+    console.log(e);
   }
   return next();
 }

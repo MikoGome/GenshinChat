@@ -38,3 +38,10 @@ export const updateOnlineUsers = (payload) => ({
   type: actionTypes.UPDATE_ONLINE_USERS,
   payload: payload
 });
+
+//characters
+
+export const updateInfo = (payload) => ({
+  type: actionTypes.GET_INFO,
+  payload: payload
+})

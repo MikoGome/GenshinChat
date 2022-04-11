@@ -5,6 +5,7 @@ const genshinCharacterUrl:string = 'https://api.genshin.dev/characters';
 
 const characterCache:string[] = [];
 const travelerCache:string[] = [];
+export const characterInfoCache:any = {};
 
 axios.get(genshinCharacterUrl)
   .then(res => {
@@ -15,7 +16,13 @@ axios.get(genshinCharacterUrl)
         characterCache.push(el);
       }
     });
-  });
+  })
+  .then(() => {
+    [...travelerCache, ...characterCache].forEach(el => {
+      axios.get(genshinCharacterUrl + '/' + el)
+        .then(res => characterInfoCache[el] = res.data);
+    });
+  })
 
 
 export const characters = (req:Request, res:Response, next:NextFunction) => {
@@ -37,7 +44,9 @@ export const wish = (req: Request, res:Response, next:NextFunction) => {
   }
   res.locals.charPool = ownedChars
     .sort((a:{name:string},b:{name: string}) => { //alphabetized
-      if(a.name < b.name) {
+      if(a.name.startsWith('traveler')) {
+        return -1;
+      } else if(a.name < b.name) {
         return -1;
       } else if(b.name < a.name) {
         return 1;
@@ -68,4 +77,9 @@ export const wishCheck = (req: Request, res: Response, next: NextFunction) => {
     return next();
   }
   return res.json('Not Enough Mora');
+}
+
+export const characterInfo = (req: Request, res: Response, next: NextFunction) => {
+  res.locals.characterInfo = characterInfoCache;
+  return next();
 }

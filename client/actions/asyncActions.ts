@@ -1,4 +1,4 @@
-import { initialize, logOut, updateCharPool, updateWish } from './actions';
+import { initialize, logOut, updateCharPool, updateWish, updateInfo } from './actions';
 import io from 'socket.io-client';
 import axios from 'axios';
 import socketAttachListeners from '../socket/socketListeners';
@@ -36,6 +36,7 @@ export const getAccount = ({account}) => async (dispatch) => {
     const {name, gender, authenticated} = account;
     const {main} = possession;
     socket.emit('signIn', {name, gender, main});
+    dispatch(getInfo());
     wishInterval = setInterval(() => {
       dispatch(wishing(account));
     }, 60000);
@@ -78,6 +79,15 @@ export const wishing = (account) => async(dispatch, getState) => {
   try {
     const {data: newWishes} = await axios.post('/api/account/wishing', account);
     dispatch(updateWish(newWishes))
+  } catch(e) {
+    console.log(e);
+  }
+}
+
+export const getInfo = () => async (dispatch) => {
+  try {
+    const {data} = await axios.get('/api/character/info');
+    dispatch(updateInfo(data));
   } catch(e) {
     console.log(e);
   }

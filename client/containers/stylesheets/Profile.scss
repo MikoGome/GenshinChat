@@ -18,8 +18,9 @@
       .character-preview {
         position: absolute;
         height: calc(100vh - $nav-bar-height);
-        right: 600px;
+        right: 100%;
         transition: all 0.5s ease-in-out;
+        visibility: hidden;
         filter: opacity(0);
 
         img {
@@ -34,17 +35,18 @@
       .spotlight {
         right: 50%;
         filter: opacity(1);
+        visibility: visible;
       }
     }
 
     .character-box-hold {
       display: grid;
       grid-template-rows: 35vh auto;
+      gap: 1rem;
 
       .characters-box {
         position: relative;
         display: grid;
-        width: 100%;
         background-color: $chat-color;
         color: white;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -53,7 +55,9 @@
         z-index: 1;
   
         .character {
-          
+          // display: flex;
+          // align-items: flex-end;
+
           figure {
             display: flex;
             flex-direction: column;
@@ -61,7 +65,6 @@
             
             img {
               width: 60%;
-              object-fit: contain;
             }
             
             figcaption {

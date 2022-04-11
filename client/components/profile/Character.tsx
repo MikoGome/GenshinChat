@@ -3,7 +3,7 @@ import { updateMain } from '../../actions/actions';
 import {titleCase} from '../../utils/helperFunctions';
 
 function character({name, picture, change}):JSX.Element {
-
+  
   return(
     <div className="character" onClick={() => {
         change(name);

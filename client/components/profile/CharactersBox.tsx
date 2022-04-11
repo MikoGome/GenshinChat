@@ -1,14 +1,16 @@
 import React from 'react';
 import Character from './Character';
 
-function CharactersBox({account, change}): JSX.Element {
+function CharactersBox({account, change, gender}): JSX.Element {
   
   const characters = account.characters_owned.map((el:{name: string}, index) => {
     let image = `https://api.genshin.dev/characters/${el.name}/icon-big`;
-    if(el.name === 'aether' || el.name ==='lumine') {
-      image = 'https://api.genshin.dev/characters/traveler-anemo/icon-big-' + el.name;
+    let name = el.name;
+    if(el.name.startsWith('traveler')) {
+      name = gender === 'male' ? 'aether' : 'lumine';
+      image = 'https://api.genshin.dev/characters/traveler-anemo/icon-big-' + name;
     }
-    return <Character key={'el.name_'+index} name={el.name} picture={image} change={change}/>
+    return <Character key={'el.name_'+index} name={name} picture={image} change={change}/>
   });
 
   return (

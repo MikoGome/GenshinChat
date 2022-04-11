@@ -1,0 +1,9 @@
+@import './variables';
+
+.character-description {
+  color: rgb(233, 233, 233);
+  background-color: $chat-color;
+  margin: 1rem 0rem;
+  padding: 1rem;
+  overflow-y: auto;
+}
