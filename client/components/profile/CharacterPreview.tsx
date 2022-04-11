@@ -1,7 +1,7 @@
 import React from 'react';
 
 function CharacterPreview({character, spotlight, gender}):JSX.Element {
-
+  
   let image = `https://api.genshin.dev/characters/${character}/portrait`;
   
   if(character.startsWith('traveler')) {
@@ -12,7 +12,7 @@ function CharacterPreview({character, spotlight, gender}):JSX.Element {
 
   return(
     <div className={'character-preview floating' + (character === spotlight ? ' spotlight' : '')}>
-      <img src={image}/>
+      <img src={image} />
     </div>
   )
 }

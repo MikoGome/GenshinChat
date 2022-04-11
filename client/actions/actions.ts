@@ -28,7 +28,6 @@ export const updateMain = (payload) => ({
 
 
 //page
-
 export const sendMessage = (payload) => ({
   type: actionTypes.SEND_MESSAGE,
   payload: payload
@@ -39,8 +38,8 @@ export const updateOnlineUsers = (payload) => ({
   payload: payload
 });
 
-//characters
 
+//characters
 export const updateInfo = (payload) => ({
   type: actionTypes.GET_INFO,
   payload: payload

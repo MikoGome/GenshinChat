@@ -5,6 +5,11 @@ function Message({account, entry}): JSX.Element {
   
   const append:string = gender === 'male' ? '-aether' : '-lumine';
   const picture = `https://api.genshin.dev/characters/${main}/icon-big${main.startsWith('traveler') ? append : ''}`
+  // let picture = `https://api.genshin.dev/characters/${main}/icon`;
+  // if(main.startsWith('traveler')) {
+  //   if(gender === 'male') picture = 'https://api.genshin.dev/characters/${main}/icon-big-aether';
+  //   else if(gender === 'female') picture = 'https://api.genshin.dev/characters/${main}/icon-big-lumine';
+  // }
   
   return(
     <li className={account.name === name ? 'me': ''}>

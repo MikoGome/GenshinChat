@@ -40,3 +40,14 @@ export const wishIncrement = async (req: Request, res: Response, next: NextFunct
     console.log(e);
   }
 }
+
+export const updateMain = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const {main, possession} = req.body;
+    const data = await Possession.findByIdAndUpdate(possession, {main}, {new: true});
+    res.locals.main = data.main;
+    return next();
+  } catch(e) {
+    console.log(e);
+  }
+}

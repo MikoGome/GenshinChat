@@ -18,7 +18,6 @@
       .message {
 
         .bubble {
-          text-align: left;
           
           &::before {
             content: none;
@@ -59,6 +58,7 @@
         width: 80%;
 
         .bubble {
+          text-align: left;
           max-width: 80%;
           display: inline-block;
           overflow-wrap: break-word;

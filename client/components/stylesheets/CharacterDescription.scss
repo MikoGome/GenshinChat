@@ -6,4 +6,12 @@
   margin: 1rem 0rem;
   padding: 1rem;
   overflow-y: auto;
+  position: relative;
+  z-index: 1;
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
