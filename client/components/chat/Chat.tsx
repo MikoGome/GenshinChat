@@ -19,8 +19,8 @@ function Chat({page, account}): JSX.Element {
   const chatBox:React.MutableRefObject<HTMLUListElement> = useRef();
 
   useEffect(() => {
-    const latest = page.chatHistory[page.chatHistory.length - 1];
-    if (latest?.name !== account.name) return;
+    // const latest = page.chatHistory[page.chatHistory.length - 1];
+    // if (latest?.name !== account.name) return;
     chatBox.current.scrollTo(0, chatBox.current.scrollHeight);
   }, [page.chatHistory.length]);
 
