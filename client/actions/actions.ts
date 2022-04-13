@@ -25,8 +25,6 @@ export const updateMain = (payload) => ({
   payload: {main: payload}
 });
 
-
-
 //page
 export const sendMessage = (payload) => ({
   type: actionTypes.SEND_MESSAGE,
@@ -37,6 +35,11 @@ export const updateOnlineUsers = (payload) => ({
   type: actionTypes.UPDATE_ONLINE_USERS,
   payload: payload
 });
+
+export const receivedFriendRequest = (payload) => ({
+  type: actionTypes.RECEIVED_FRIEND_REQUEST,
+  payload: payload
+})
 
 
 //characters

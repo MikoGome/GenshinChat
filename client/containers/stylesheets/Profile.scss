@@ -50,6 +50,7 @@
         background-color: $chat-color;
         color: white;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: repeat(auto-fit, 45%);
         overflow-y: auto;
         height: 50vh;
         z-index: 1;

@@ -21,6 +21,10 @@ function socket(server:any) {
     socket.on('sendMessage', (data:{name: string, main:string, gender:string, message: string}) => {
       io.emit('newMessage', data);
     });
+
+    socket.on('addFriend', (data:any) => {
+      socket.to(data.sendee).emit('friendRequest', data);
+    })
   });
 
 

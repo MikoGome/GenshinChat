@@ -3,15 +3,17 @@ import OnlineUser from "./OnlineUser";
 
 import './stylesheets/OnlineBar.scss'
 
-function OnlineBar({users}):JSX.Element {
+function OnlineBar({users, socket}):JSX.Element {
   
-  const onlineUsers = users.map((el,index) => {
+  const onlineUsers = users.map(([id, el],index) => {
     return (
       <OnlineUser 
         key={'onlineUsers_'+el.name+index} 
+        socketId={id}
         name={el.name}
         gender={el.gender}
         main={el.main}
+        socket={socket}
       />
     )
   });

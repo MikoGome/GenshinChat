@@ -8,6 +8,9 @@ import Friends from './containers/Friends';
 import Talks from './containers/Talks';
 import Profile from './containers/Profile';
 import NotFound from './containers/NotFound';
+
+import FriendRequest
+ from "./components/FriendRequest";
 import './assets/preload';
 
 function App():JSX.Element {
@@ -23,6 +26,7 @@ function App():JSX.Element {
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
+      <FriendRequest />
     </BrowserRouter>
   )
 }

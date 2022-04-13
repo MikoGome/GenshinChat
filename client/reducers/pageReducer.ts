@@ -3,7 +3,8 @@ import {deepCopy} from '../utils/helperFunctions';
 
 const initialState:pageStateShape = {
   chatHistory: [],
-  users: []
+  users: [],
+  friendRequest: null,
 };
 
 function pageReducer(state = initialState, action) {
@@ -17,7 +18,13 @@ function pageReducer(state = initialState, action) {
 
     case actionTypes.UPDATE_ONLINE_USERS: {
       const newState = deepCopy(state);
-      newState.users = deepCopy(action.payload);
+      newState.users = action.payload;
+      return newState;
+    }
+    
+    case actionTypes.RECEIVED_FRIEND_REQUEST: {
+      const newState = deepCopy(state);
+      newState.friendRequest = action.payload;
       return newState;
     }
 
@@ -26,6 +33,7 @@ function pageReducer(state = initialState, action) {
       return newState;
     }
 
+
     default:
       return state;
   }
@@ -33,7 +41,8 @@ function pageReducer(state = initialState, action) {
 
 interface pageStateShape {
   chatHistory:chatHistoryShape[],
-  users: []
+  users: [],
+  friendRequest: (any | null)
 
 }
 

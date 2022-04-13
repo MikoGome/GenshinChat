@@ -1,14 +1,18 @@
-import {updateOnlineUsers, sendMessage} from '../actions/actions';
+import {updateOnlineUsers, sendMessage, receivedFriendRequest} from '../actions/actions';
 
 function socketListeners(socket, dispatch) {
 
   socket.on('updateOnlineUsers', (data) => {
-    const onlineUsers = Object.values(data);
+    const onlineUsers = Object.entries(data);
     dispatch(updateOnlineUsers(onlineUsers));
   });
 
   socket.on('newMessage', (data) => {
     dispatch(sendMessage(data));
+  });
+
+  socket.on('friendRequest', (data) => {
+    dispatch(receivedFriendRequest(data));
   });
 }
 
