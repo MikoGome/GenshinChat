@@ -12,7 +12,7 @@ function Message({account, entry}): JSX.Element {
         <img src={picture} alt={main} />
       </div>
       <div className={"message"}>
-        <div className="bubble">
+        <div className="bubble bubbling">
           {message}
         </div>
         <aside>

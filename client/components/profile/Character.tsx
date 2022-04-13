@@ -1,16 +1,27 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import {titleCase} from '../../utils/helperFunctions';
 import {useDispatch} from 'react-redux';
 import {updateSpotlight} from '../../actions/actions';
 
-function Character({name, el, picture, backupPicture}):JSX.Element {
+function Character({name, el, index, picture, backupPicture}):JSX.Element {
   const dispatch = useDispatch();
+
+  const char:React.MutableRefObject<HTMLImageElement> = useRef();
+  useEffect(() => {
+    setTimeout(() => char.current.classList.add('bubbling'), 25 * index);
+  }, [])
   return(
-    <div className="character" onClick={() => {
+    <div 
+      className="character" 
+      onClick={() => {
         dispatch(updateSpotlight(el));
-      }}>
-      <figure>
-        <img src={picture} onError={e => e.target.src=backupPicture}/>
+      }}
+    >
+      <figure  ref={char} style={{opacity: 0}}>
+        <img 
+          src={picture} 
+          onError={e => e.target.src=backupPicture}
+        />
         <figcaption>{titleCase(name)}</figcaption>
       </figure>
     </div>

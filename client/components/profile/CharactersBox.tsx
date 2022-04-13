@@ -14,6 +14,7 @@ function CharactersBox({account, gender}): JSX.Element {
     return <Character 
       key={'el.name_'+index} 
       name={name} 
+      index={index}
       el={el}
       picture={image} 
       backupPicture={backupImage} 

@@ -15,11 +15,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  authenticate: () => dispatch(authenticate()),
-  updateSpotlight: (payload) => dispatch(updateSpotlight(payload))
+  authenticate: () => dispatch(authenticate())
 });
 
-function Profile({account, authenticate, updateSpotlight}): JSX.Element {
+function Profile({account, authenticate}): JSX.Element {
 
   const navigate = useNavigate();
   
@@ -35,9 +34,9 @@ function Profile({account, authenticate, updateSpotlight}): JSX.Element {
 
   useEffect(() => {
     return () => {
-      account.main && updateSpotlight(account.main);
+      updateSpotlight(account.main);
     }
-  }, [account.main]);
+  }, [account.main])
 
   return (
     <div className="profile">

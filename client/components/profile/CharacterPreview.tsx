@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 
 function CharacterPreview({character, spotlight, gender}):JSX.Element {
   
@@ -10,8 +10,18 @@ function CharacterPreview({character, spotlight, gender}):JSX.Element {
     character = gender === 'male' ? 'aether' : 'lumine';
   }
 
+  const char:React.MutableRefObject<HTMLDivElement> = useRef();
+
+  useEffect(() => {
+    if(character === spotlight) {
+      char.current.classList.add('spotlight');
+    } else {
+      char.current.classList.remove('spotlight');
+    }
+  }, [spotlight])
+
   return(
-    <div className={'character-preview floating' + (character === spotlight ? ' spotlight' : '')}>
+    <div className="character-preview floating" ref={char}>
       <img src={image} />
     </div>
   )
