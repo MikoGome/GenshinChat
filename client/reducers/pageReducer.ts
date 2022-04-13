@@ -17,7 +17,7 @@ function pageReducer(state = initialState, action) {
 
     case actionTypes.UPDATE_ONLINE_USERS: {
       const newState = deepCopy(state);
-      newState.users = action.payload;
+      newState.users = deepCopy(action.payload);
       return newState;
     }
 

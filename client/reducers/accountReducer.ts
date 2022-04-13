@@ -1,11 +1,10 @@
 import { Socket } from 'socket.io-client';
 import * as actionTypes from '../constants/actionTypes';
-import { deepCopy } from '../utils/helperFunctions';
 
 const initialState:account = {
-  name: null,
-  gender: null,
-  main: null,
+  name: '',
+  gender: '',
+  main: '',
   mora: 0,
   characters_owned: [],
   wishes: {amount: 0, progress: 0},

@@ -12,7 +12,7 @@ function hash(pass:string):Promise<string> {
 export const signup = async (req:Request, res:Response, next:NextFunction) => {
   const {username, gender} = req.body;
   const password = await hash(req.body.password);
-  const starterChar:string = gender === 'male'? 'aether' : 'lumine';
+  const starterChar:string = 'traveler-anemo';
   const possession = await Possession.create({
     characters_owned: [{
       name: starterChar

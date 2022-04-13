@@ -71,7 +71,7 @@ export const clearSession = () => async (dispatch, getState) => {
   }
 }
 
-export const wish = (account) => async (dispatch, getState) => {
+export const wish = (account) => async (dispatch) => {
   try {
     const {data} = await axios.patch('/api/wish', account);
     dispatch(updateCharPool(data));
@@ -81,7 +81,7 @@ export const wish = (account) => async (dispatch, getState) => {
   }
 }
 
-export const wishing = (account) => async(dispatch, getState) => {
+export const wishing = (account) => async(dispatch) => {
   try {
     const {data: newWishes} = await axios.patch('/api/account/wishing', account);
     dispatch(updateWish(newWishes))
