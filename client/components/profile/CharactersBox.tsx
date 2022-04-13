@@ -3,11 +3,11 @@ import Character from './Character';
 
 function CharactersBox({account, change, gender}): JSX.Element {
   
-  const characters = account.characters_owned.map((el:{name: string}, index) => {
-    let image = `https://api.genshin.dev/characters/${el.name}/icon-big`;
-    let backupImage = `https://api.genshin.dev/characters/${el.name}/icon`
-    let name = el.name;
-    if(el.name.startsWith('traveler')) {
+  const characters = account.characters_owned.map((el:string, index) => {
+    let image = `https://api.genshin.dev/characters/${el}/icon-big`;
+    let backupImage = `https://api.genshin.dev/characters/${el}/icon`
+    let name = el;
+    if(el.startsWith('traveler')) {
       name = gender === 'male' ? 'aether' : 'lumine';
       image = 'https://api.genshin.dev/characters/traveler-anemo/icon-big-' + name;
     }

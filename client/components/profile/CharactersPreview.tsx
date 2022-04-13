@@ -6,7 +6,7 @@ function CharactersPreview({spotlight, characters_owned, gender}): JSX.Element {
   const characters = characters_owned.map((el, index) => {
     return <CharacterPreview 
       key={el+'_'+index} 
-      character={el.name} 
+      character={el} 
       spotlight={spotlight}
       gender = {gender}
       />

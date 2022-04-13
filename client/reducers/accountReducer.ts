@@ -44,7 +44,7 @@ interface account {
   gender: string | null,
   main: string | null,
   mora: 0 | null,
-  characters_owned: {name:string}[],
+  characters_owned: string[],
   wishes: {amount: number, progress: number},
   socket: Socket,
   initialized: boolean

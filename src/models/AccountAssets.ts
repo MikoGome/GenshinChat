@@ -25,13 +25,7 @@ const possessionSchema = new mongoose.Schema({
     type: String,
     default: 'traveler-anemo',
   },
-  characters_owned: [{
-    name: {
-      type: String,
-      required: true,
-      _id: false
-    }
-  }]
+  characters_owned: [String]
 });
 
 export const Possession = mongoose.model('possession', possessionSchema);

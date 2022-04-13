@@ -39,15 +39,15 @@ export const wish = (req: Request, res:Response, next:NextFunction) => {
     fresh = true;
     const randomIndex = Math.floor(Math.random() * characterCache.length);
     const prize = characterCache[randomIndex];
-    if(ownedChars.some((el:{name:string}) => el.name === prize)) fresh = false;
-    else ownedChars.push({name: prize});
+    if(ownedChars.some((el:string) => el === prize)) fresh = false;
+    else ownedChars.push(prize);
   }
   res.locals.charPool = ownedChars
-    .sort((a:{name:string},b:{name: string}) => { //alphabetized
-      if(a.name.startsWith('traveler')) return -1;
-      else if(b.name.startsWith('traveler')) return 1;
-      else if(a.name < b.name) return -1;
-      else if(b.name < a.name) return 1;
+    .sort((a:string,b:string) => { //alphabetized
+      if(a.startsWith('traveler')) return -1;
+      else if(b.startsWith('traveler')) return 1;
+      else if(a < b) return -1;
+      else if(b < a) return 1;
       else return 0;
     });
   return next();

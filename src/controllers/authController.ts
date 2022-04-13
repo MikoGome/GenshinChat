@@ -14,9 +14,7 @@ export const signup = async (req:Request, res:Response, next:NextFunction) => {
   const password = await hash(req.body.password);
   const starterChar:string = 'traveler-anemo';
   const possession = await Possession.create({
-    characters_owned: [{
-      name: starterChar
-    }]
+    characters_owned: [starterChar]
   });
   const chat = await Chat.create({
     history: [],
