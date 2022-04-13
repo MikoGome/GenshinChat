@@ -18,10 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
 function CharacterDescription({spotlight, changeMain, currentMain, gender, info, possession}):JSX.Element {
 
-  console.log('spotlight', spotlight);
-
   let name:string = spotlight;
-  console.log('name', name);
   if(spotlight.startsWith('traveler')) {
     if(gender === 'male') name = 'aether';
     else if(gender === 'female') name = 'lumine'

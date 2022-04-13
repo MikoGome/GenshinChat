@@ -7,6 +7,7 @@ import CharactersBox from '../components/profile/CharactersBox';
 import './stylesheets/Profile.scss';
 import CharactersPreview from '../components/profile/CharactersPreview';
 import CharacterDescription from '../components/profile/CharacterDescription';
+import { updateSpotlight } from '../actions/actions';
 
 const mapStateToProps = (state) => ({
   account: state.account,
@@ -15,9 +16,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate()),
+  updateSpotlight: (payload) => dispatch(updateSpotlight(payload))
 });
 
-function Profile({account, authenticate, spotlight}): JSX.Element {
+function Profile({account, authenticate, updateSpotlight}): JSX.Element {
 
   const navigate = useNavigate();
   
@@ -31,7 +33,11 @@ function Profile({account, authenticate, spotlight}): JSX.Element {
     }
   }, [account.authenticated]);
 
-  console.log('profile render');
+  useEffect(() => {
+    return () => {
+      account.main && updateSpotlight(account.main);
+    }
+  }, [account.main]);
 
   return (
     <div className="profile">

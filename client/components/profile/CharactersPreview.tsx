@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CharacterPreview from './CharacterPreview';
 import {connect} from 'react-redux';
 

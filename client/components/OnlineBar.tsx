@@ -4,7 +4,7 @@ import OnlineUser from "./OnlineUser";
 import './stylesheets/OnlineBar.scss'
 
 function OnlineBar({users}):JSX.Element {
-  console.log('users', users);
+  
   const onlineUsers = users.map((el,index) => {
     return (
       <OnlineUser 
