@@ -1,7 +1,20 @@
 import React from 'react';
 import CharacterPreview from './CharacterPreview';
+import {connect} from 'react-redux';
+
+const mapStateToProps = state => ({
+  spotlight: state.characters.spotlight
+})
 
 function CharactersPreview({spotlight, characters_owned, gender}): JSX.Element {
+
+  if(spotlight.startsWith('traveler')) {
+    if(gender === 'male') {
+      spotlight = 'aether';
+    } else if(gender === 'female') {
+      spotlight = 'lumine';
+    }
+  }
 
   const characters = characters_owned.map((el, index) => {
     return <CharacterPreview 
@@ -15,4 +28,4 @@ function CharactersPreview({spotlight, characters_owned, gender}): JSX.Element {
   return characters
 }
 
-export default CharactersPreview;
+export default connect(mapStateToProps, null)(CharactersPreview);

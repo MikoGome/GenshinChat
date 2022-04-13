@@ -1,11 +1,13 @@
 import React from 'react';
 import {titleCase} from '../../utils/helperFunctions';
+import {useDispatch} from 'react-redux';
+import {updateSpotlight} from '../../actions/actions';
 
-function Character({name, picture, backupPicture, change}):JSX.Element {
-
+function Character({name, el, picture, backupPicture}):JSX.Element {
+  const dispatch = useDispatch();
   return(
     <div className="character" onClick={() => {
-        change(name);
+        dispatch(updateSpotlight(el));
       }}>
       <figure>
         <img src={picture} onError={e => e.target.src=backupPicture}/>

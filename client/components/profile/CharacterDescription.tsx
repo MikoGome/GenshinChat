@@ -8,24 +8,29 @@ import '../stylesheets/CharacterDescription.scss';
 const mapStateToProps = state => ({
   currentMain: state.account.main,
   possession: state.account.possession,
-  characters: state.characters
+  info: state.characters.info,
+  spotlight: state.characters.spotlight
 });
 
 const mapDispatchToProps = dispatch => ({
   changeMain: (payload) => dispatch(changeMain(payload))
 })
 
-function CharacterDescription({name, changeMain, characters, currentMain, possession}):JSX.Element {
+function CharacterDescription({spotlight, changeMain, currentMain, gender, info, possession}):JSX.Element {
 
-  let key:string = name;
-  if(name === 'aether' || name === 'lumine') {
-    key = 'traveler-anemo';
+  console.log('spotlight', spotlight);
+
+  let name:string = spotlight;
+  console.log('name', name);
+  if(spotlight.startsWith('traveler')) {
+    if(gender === 'male') name = 'aether';
+    else if(gender === 'female') name = 'lumine'
   }
 
-  const info = characters[key];
-  let birthday = info.birthday?.split('-').slice(1).join('/');
-  if(key.startsWith('traveler')) {
-    info.vision = 'N/A';
+  const char = info[spotlight] || {};
+  let birthday = char.birthday?.split('-').slice(1).join('/');
+  if(spotlight.startsWith('traveler')) {
+    char.vision = 'N/A';
     birthday = 'XX/XX';
   }
 
@@ -36,13 +41,17 @@ function CharacterDescription({name, changeMain, characters, currentMain, posses
 
   return (
     <div className="character-description">
-      <h1>{titleCase(name)}</h1>
-      <h4>Birthday: {birthday}</h4>
-      <h3>Vision: {info.vision} </h3>
-      <h3>Nation: {info.nation}</h3>
-      <h3>Affiliation: {info.affiliation}</h3> 
-      <h3>Description: {info.description}</h3>
-      <button id='main-button' onClick={() => newMain({main: key, possession})}>Set as Main</button>
+      {spotlight && (
+      <>
+        <h1>{titleCase(name)}</h1>
+        <h4>Birthday: {birthday}</h4>
+        <h3>Vision: {char.vision} </h3>
+        <h3>Nation: {char.nation}</h3>
+        <h3>Affiliation: {char.affiliation}</h3> 
+        <h3>Description: {char.description}</h3>
+        <button id='main-button' onClick={() => newMain({main: spotlight, possession})}>Set as Main</button>
+      </>
+      )}
     </div>
   )
 }

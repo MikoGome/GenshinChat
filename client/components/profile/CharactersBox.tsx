@@ -1,7 +1,7 @@
 import React from 'react';
 import Character from './Character';
 
-function CharactersBox({account, change, gender}): JSX.Element {
+function CharactersBox({account, gender}): JSX.Element {
   
   const characters = account.characters_owned.map((el:string, index) => {
     let image = `https://api.genshin.dev/characters/${el}/icon-big`;
@@ -14,9 +14,9 @@ function CharactersBox({account, change, gender}): JSX.Element {
     return <Character 
       key={'el.name_'+index} 
       name={name} 
+      el={el}
       picture={image} 
       backupPicture={backupImage} 
-      change={change}
     />
   });
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
@@ -17,18 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate()),
 });
 
-function Profile({account, authenticate}): JSX.Element {
-  
-  let characterInit = account.main;
-  if(account.main?.startsWith('traveler')) {
-    if(account.gender === 'male') {
-      characterInit = 'aether';
-    } else if(account.gender === 'female') {
-      characterInit = 'lumine';
-    }
-  }
-
-  const [characterPreview, setCharacterPreview] = useState<string>(characterInit);
+function Profile({account, authenticate, spotlight}): JSX.Element {
 
   const navigate = useNavigate();
   
@@ -42,16 +31,18 @@ function Profile({account, authenticate}): JSX.Element {
     }
   }, [account.authenticated]);
 
+  console.log('profile render');
+
   return (
     <div className="profile">
       <NavBar current="profile"/>
       <main>
         <div className="avatar-hold">
-          <CharactersPreview spotlight={characterPreview} characters_owned={account.characters_owned} gender={account.gender}/>
+          <CharactersPreview characters_owned={account.characters_owned} gender={account.gender}/>
         </div>
         <div className="character-box-hold">
-          <CharacterDescription name={characterPreview}/>
-          <CharactersBox account={account} change={setCharacterPreview} gender={account.gender}/>
+          <CharacterDescription gender={account.gender}/>
+          <CharactersBox account={account} gender={account.gender}/>
         </div>
       </main>
     </div>

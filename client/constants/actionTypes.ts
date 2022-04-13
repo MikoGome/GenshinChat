@@ -10,4 +10,5 @@ export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const UPDATE_ONLINE_USERS = 'UPDATE_ONLINE_USERS';
 
 //Characters
-export const GET_INFO = 'GET_INFO'
+export const GET_INFO = 'GET_INFO';
+export const UPDATE_SPOTLIGHT = 'UPDATE_SPOTLIGHT';

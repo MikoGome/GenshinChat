@@ -44,3 +44,8 @@ export const updateInfo = (payload) => ({
   type: actionTypes.GET_INFO,
   payload: payload
 })
+
+export const updateSpotlight = (payload) => ({
+  type: actionTypes.UPDATE_SPOTLIGHT,
+  payload: payload
+})
