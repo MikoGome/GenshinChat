@@ -5,12 +5,12 @@
   display: grid;
   height: 100vh;
   grid-template-rows: $nav-bar-height auto;
-  gap: $gap;
+  gap: 2rem;
 
   main {
     display: grid;
-    grid-template-columns: 15vw auto 25vw;
-    gap: 2rem;
-    margin: 0 2rem;
+    grid-template-rows: repeat(auto-fit, 7rem);
+    overflow-y: auto;
+    gap: 1rem;
   }
 }

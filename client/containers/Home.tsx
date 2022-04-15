@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
 function Home({account, page, authenticate}): JSX.Element {
 
   console.log(account);
-  console.log(page.friendRequest);
+
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -37,7 +37,7 @@ function Home({account, page, authenticate}): JSX.Element {
     <div className="home">
       <NavBar current="home"/>
       <main>
-        <OnlineBar users={page.users} socket={account.socket}/>
+        <OnlineBar users={page.users} socket={account.socket} friends={page.friends}/>
         <Chat />
         <Avatar />
       </main>

@@ -1,4 +1,4 @@
-import { initialize, logOut, updateCharPool, updateWish, updateInfo, updateMain, updateSpotlight } from './actions';
+import * as actions from './actions';
 import io from 'socket.io-client';
 import axios from 'axios';
 import socketAttachListeners from '../socket/socketListeners';
@@ -13,7 +13,7 @@ let main = null;
 export const logIn = (url, account) => async (dispatch) => {
   try{
     const {data} = await axios.post(url, account);
-    if(data) dispatch(initialize({authenticated: data}));
+    if(data) dispatch(actions.initialize({authenticated: data}));
   } catch(e) {
     console.log(e)
   }
@@ -26,7 +26,7 @@ export const authenticate = () => async (dispatch, getState) => {
       if(getState().account.initialized) return
       else dispatch(getAccount(data));
     } else {
-      dispatch(initialize({authenticated: data.authenticated}));
+      dispatch(actions.initialize({authenticated: data.authenticated}));
     }
   } catch(e) {
     console.log(e)
@@ -43,12 +43,13 @@ export const getAccount = ({account}) => async (dispatch) => {
     main = possession.main;
     socket.emit('signIn', {name, gender, main});
     dispatch(getInfo());
-    dispatch(updateSpotlight(main));
+    dispatch(actions.updateSpotlight(main));
+    dispatch(getFriends(account.id));
     wishInterval = setInterval(() => {
       dispatch(wishing(account));
     }, 60000);
     dispatch(
-      initialize({
+      actions.initialize({
         ...account,
         ...possession, 
         socket,
@@ -66,7 +67,7 @@ export const clearSession = () => async (dispatch, getState) => {
     clearInterval(wishInterval);
     wishInterval = null;
     getState().account.socket.disconnect();
-    dispatch(logOut());
+    dispatch(actions.logOut());
   } catch(e) {
     console.log(e)
   }
@@ -75,7 +76,7 @@ export const clearSession = () => async (dispatch, getState) => {
 export const wish = (account) => async (dispatch) => {
   try {
     const {data} = await axios.patch('/api/wish', account);
-    dispatch(updateCharPool(data));
+    dispatch(actions.updateCharPool(data));
 
   } catch(e) {
     console.log(e)
@@ -85,7 +86,7 @@ export const wish = (account) => async (dispatch) => {
 export const wishing = (account) => async(dispatch) => {
   try {
     const {data: newWishes} = await axios.patch('/api/account/wishing', account);
-    dispatch(updateWish(newWishes))
+    dispatch(actions.updateWish(newWishes))
   } catch(e) {
     console.log(e);
   }
@@ -94,7 +95,7 @@ export const wishing = (account) => async(dispatch) => {
 export const getInfo = () => async (dispatch) => {
   try {
     const {data} = await axios.get('/api/character/info');
-    dispatch(updateInfo(data));
+    dispatch(actions.updateInfo(data));
   } catch(e) {
     console.log(e);
   }
@@ -104,9 +105,39 @@ export const changeMain = (payload) => async (dispatch) => {
   try {
     const {main:newMain, possession} = payload;
     const {data} = await axios.patch('/api/account/main', {main: newMain, possession});
-    dispatch(updateMain(data));
+    dispatch(actions.updateMain(data));
     main = data;
     socket.emit('signIn', {name, gender, main})
+  } catch(e) {
+    console.log(e);
+  }
+}
+
+export const getFriends = (payload) => async(dispatch) => {
+  try {
+    const {data} = await axios.get('/api/friends/' + payload);
+    const friends: {[name: string]: object} = {}
+    data.forEach(element => {
+      friends[element.username] = {
+        id: element.id,
+        gender: element.gender,
+        possession: element.possession
+      };
+    })
+    dispatch(actions.updateFriends(friends));
+  } catch(e) {
+    console.log(e);
+  }
+}
+
+export const getFriendsPossession = (payload) => async(dispatch) => {
+  try {
+    for(const key in payload) {
+      if(typeof payload[key].possession === 'object') return;
+      const {data} = await axios.get('/api/possession/' + payload[key].possession);
+      payload[key].possession = data;
+    }
+    dispatch(actions.updateFriends);
   } catch(e) {
     console.log(e);
   }

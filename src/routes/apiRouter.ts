@@ -7,9 +7,13 @@ import {genSession, verifySession} from '../controllers/sessionController';
 
 import accountRouter from './accountRouter';
 import characterRouter from './characterRouter';
+import friendsRouter from './friendsRouter';
+import possessionRouter from './possessionRouter';
 
 router.use('/account', accountRouter);
 router.use('/character', characterRouter);
+router.use('/friends', friendsRouter);
+router.use('/possession', possessionRouter);
 
 router.post('/login', login, genSession, (req:Request, res:Response) => {
   return res.json(res.locals.authenticated);

@@ -41,6 +41,11 @@ export const receivedFriendRequest = (payload) => ({
   payload: payload
 })
 
+export const updateFriends = (payload) => ({
+  type: actionTypes.UPDATE_FRIENDS,
+  payload: payload
+})
+
 
 //characters
 export const updateInfo = (payload) => ({

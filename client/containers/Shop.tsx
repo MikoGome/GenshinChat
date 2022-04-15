@@ -46,11 +46,11 @@ function Shop({account, authenticate, wish}):JSX.Element {
       <NavBar current="shop"/>
       <main>
         <div className="selection">
-          <button id="gacha-button" className="shop-button" onClick={startWish}>
+          <button id="gacha-button" className="shop-button slow-bubbling" onClick={startWish}>
             <img src={Wish} />
             Wish For A Character
           </button>
-          <button id="mora-button" className="shop-button">
+          <button id="mora-button" className="shop-button slow-bubbling">
             <img src={Mora} />
             Spend Your Mora
           </button>

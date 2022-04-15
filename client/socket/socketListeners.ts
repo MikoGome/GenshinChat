@@ -1,4 +1,5 @@
 import {updateOnlineUsers, sendMessage, receivedFriendRequest} from '../actions/actions';
+import { getFriends } from '../actions/asyncActions';
 
 function socketListeners(socket, dispatch) {
 
@@ -13,6 +14,10 @@ function socketListeners(socket, dispatch) {
 
   socket.on('friendRequest', (data) => {
     dispatch(receivedFriendRequest(data));
+  });
+
+  socket.on('bonded', (data) => {
+    dispatch(getFriends(data));
   });
 }
 

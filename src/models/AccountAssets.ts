@@ -14,7 +14,7 @@ const possessionSchema = new mongoose.Schema({
   wishes: {
     amount: {
       type: Number,
-      default: 0
+      default: 2
     },
     progress: {
       type: Number,

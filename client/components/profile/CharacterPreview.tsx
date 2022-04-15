@@ -18,7 +18,7 @@ function CharacterPreview({character, spotlight, gender}):JSX.Element {
     } else {
       char.current.classList.remove('spotlight');
     }
-  }, [,spotlight])
+  }, [spotlight]);
 
   return(
     <div className="character-preview floating" ref={char}>

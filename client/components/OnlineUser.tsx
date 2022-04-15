@@ -5,10 +5,10 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state => ({
-  account: state.account
+  account: state.account,
 })
 
-function OnlineUser({account, name, gender, main, socket, socketId}): JSX.Element {
+function OnlineUser({account, bond, name, gender, main, socket, socketId}): JSX.Element {
   const myName = account.name;
   const li:React.MutableRefObject<HTMLLIElement> = useRef();
   const append = gender === 'male' ? '-aether' : '-lumine';
@@ -32,6 +32,7 @@ function OnlineUser({account, name, gender, main, socket, socketId}): JSX.Elemen
         myName !== name && (
           <div className="online-bar-buttons">
             <button 
+              className={bond ? "hide" : undefined}
               onClick={() => {
                 addFriend({
                   name: account.name,

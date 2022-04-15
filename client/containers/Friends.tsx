@@ -1,21 +1,24 @@
 import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { authenticate } from '../actions/asyncActions';
+import { authenticate, getFriendsPossession } from '../actions/asyncActions';
 import NavBar from '../components/NavBar';
+import Friend from '../components/friends/Friend';
 import './stylesheets/Friends.scss';
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  page: state.page
+  friends: state.page.friends,
+  online: state.page.users
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  authenticate: () => dispatch(authenticate())
+  authenticate: () => dispatch(authenticate()),
+  getFriendsPossession: (payload) => dispatch(getFriendsPossession(payload))
 });
 
-function Friends({account, authenticate}): JSX.Element {
-  
+function Friends({account, authenticate, friends, getFriendsPossession, online}): JSX.Element {
+  console.log(friends);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,11 +29,30 @@ function Friends({account, authenticate}): JSX.Element {
     if(account.authenticated === false) {
       navigate('/login');
     }
+    getFriendsPossession(friends);
   }, [account.authenticated]);
+
+  const friendsList = [];
+  let counter = 0;
+  for(const key in friends) {
+    counter++;
+    const main = friends[key].possession.main;
+    const friend = main && 
+      <Friend 
+        key={key + '_' + main} 
+        index={counter} name={key} 
+        gender={friends[key].gender} 
+        main={main}
+      />;
+    friendsList.push(friend);
+  }
 
   return (
     <div className="friends">
       <NavBar current="friends"/>
+      <main>
+        {friendsList}
+      </main>
     </div>
   )
 }

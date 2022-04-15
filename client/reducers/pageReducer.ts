@@ -4,6 +4,7 @@ import {deepCopy} from '../utils/helperFunctions';
 const initialState:pageStateShape = {
   chatHistory: [],
   users: [],
+  friends: {},
   friendRequest: null,
 };
 
@@ -28,6 +29,12 @@ function pageReducer(state = initialState, action) {
       return newState;
     }
 
+    case actionTypes.UPDATE_FRIENDS: {
+      const newState = deepCopy(state);
+      newState.friends = action.payload;
+      return newState;
+    }
+
     case actionTypes.LOG_OUT: {
       const newState = deepCopy(initialState);
       return newState;
@@ -42,8 +49,14 @@ function pageReducer(state = initialState, action) {
 interface pageStateShape {
   chatHistory:chatHistoryShape[],
   users: [],
+  friends: {
+    [id: string] : {
+      name: string,
+      possession: string,
+      gender: string
+    }
+  },
   friendRequest: (any | null)
-
 }
 
 interface chatHistoryShape {

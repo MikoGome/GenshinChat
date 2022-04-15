@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+import query from './models/Users';
 
 export const onlineUsers:{[id:number]: accountShape} = {}
 
@@ -25,15 +26,26 @@ function socket(server:any) {
     socket.on('addFriend', (data:any) => {
       socket.to(data.sendee).emit('friendRequest', data);
     })
-  });
 
+    socket.on('friendship', async (friendship:any) => {
+      const {friendA, friendB} = friendship;
+      const queryString = `
+      INSERT INTO friendship
+      VALUES($1, $2)
+      `
+      await query(queryString, [friendA.id, friendB.id]);
+
+      io.to(friendB.socket).emit('bonded', friendB.id);
+      io.to(friendA.socket).emit('bonded', friendA.id);
+    });
+  });
 
 }
 
 interface accountShape {
   name: string,
   gender: string,
-  main: string
+  main: string,
 }
 
 export default socket;

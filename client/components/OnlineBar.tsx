@@ -3,9 +3,11 @@ import OnlineUser from "./OnlineUser";
 
 import './stylesheets/OnlineBar.scss'
 
-function OnlineBar({users, socket}):JSX.Element {
+function OnlineBar({friends, users, socket}):JSX.Element {
   
   const onlineUsers = users.map(([id, el],index) => {
+    let bond = false;
+    if(el.name in friends) bond = true;
     return (
       <OnlineUser 
         key={'onlineUsers_'+el.name+index} 
@@ -14,6 +16,7 @@ function OnlineBar({users, socket}):JSX.Element {
         gender={el.gender}
         main={el.main}
         socket={socket}
+        bond={bond}
       />
     )
   });

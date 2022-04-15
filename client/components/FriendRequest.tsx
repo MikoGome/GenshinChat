@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import { receivedFriendRequest } from "../actions/actions";
 
 const mapStateToProps = state => ({
+  account: state.account,
   friendRequest: state.page.friendRequest
 });
 
@@ -10,12 +11,20 @@ const mapDispatchToProps = dispatch => ({
   updateFriendRequest: () => dispatch(receivedFriendRequest(null))
 })
 
-function FriendRequest({friendRequest, updateFriendRequest}): JSX.Element {
+function FriendRequest({account, friendRequest, updateFriendRequest}): JSX.Element {
   const friendBox:React.MutableRefObject<HTMLDivElement> = useRef();
-  console.log('render');
-  console.log(friendRequest);
-
+  
   function accept() {
+    const friendA = {
+      id: account.id,
+      socket: account.socket.id
+    }
+    const friendB = {
+      id: friendRequest.sender.id,
+      socket: friendRequest.sender.socket 
+    }
+
+    account.socket.emit('friendship', {friendA, friendB});
     updateFriendRequest();
   }
 
