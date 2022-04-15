@@ -1,15 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import '../stylesheets/Friend.scss';
 import ForumIcon from '@mui/icons-material/Forum';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import { iconBig } from "../../utils/helperFunctions";
 
-function Friend({name, gender, main, index}): JSX.Element {
-  console.log('hi');
+function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, index}): JSX.Element {
+  console.log(accountId, friendId);
   const friend:React.MutableRefObject<HTMLDivElement> = useRef();
   const {picture, backupPicture} = iconBig(main, gender);
-
-  console.log('main', main);
 
   setTimeout(() => {
     friend.current.classList.add('slow-bubbling');
@@ -26,11 +24,11 @@ function Friend({name, gender, main, index}): JSX.Element {
         <h1>{name}</h1>
       </div>
       <div className="right">
-        <button>
-          <PersonRemoveIcon className="chat-icon" />
+        <button onClick={() => handleRemoveFriend({removeId: friendId, accountId})}>
+          <PersonRemoveIcon className="friend-list-icons" />
         </button>
         <button>
-          <ForumIcon className="chat-icon"/>
+          <ForumIcon className="friend-list-icon"/>
         </button>
       </div>
     </div>

@@ -115,8 +115,10 @@ export const changeMain = (payload) => async (dispatch) => {
 
 export const getFriends = (payload) => async(dispatch) => {
   try {
+    console.log('getFriends');
     const {data} = await axios.get('/api/friends/' + payload);
     const friends: {[name: string]: object} = {}
+    console.log('data', data);
     data.forEach(element => {
       friends[element.username] = {
         id: element.id,
@@ -124,7 +126,6 @@ export const getFriends = (payload) => async(dispatch) => {
         possessionKey: element.possession
       };
     })
-    console.log('friendfriend', friends);
     dispatch(actions.updateFriends(friends));
   } catch(e) {
     console.log(e);
@@ -133,12 +134,21 @@ export const getFriends = (payload) => async(dispatch) => {
 
 export const getFriendsPossession = (payload) => async(dispatch) => {
   try {
-    console.log('hit friendpossession');
     for(const key in payload) {
       const {data} = await axios.get('/api/possession/' + payload[key].possessionKey);
       payload[key].possession = data;
     }
     dispatch(actions.updateFriends(payload));
+  } catch(e) {
+    console.log(e);
+  }
+}
+
+export const removeFriend = (payload:{removeId:string, accountId:string}) => async(dispatch) => {
+  const {removeId, accountId} = payload;
+  try {
+    await axios.delete(`/api/friends/remove/?remove=${removeId}&account=${accountId}`);
+    dispatch(getFriends(accountId));
   } catch(e) {
     console.log(e);
   }

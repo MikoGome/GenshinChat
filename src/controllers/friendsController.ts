@@ -13,3 +13,13 @@ export const getFriends = async (req: Request, res: Response, next: NextFunction
   res.locals.friends = result.rows;
   return next();
 };
+
+export const removeFriend = async (req: Request, res: Response, next: NextFunction) => {
+  const {remove, account} = req.query;
+  const queryString = `
+  DELETE FROM friendship
+  WHERE (friend_a=$1 AND friend_b=$2) OR (friend_a=$2 AND friend_b=$1)
+  `
+  await query(queryString, [remove, account])
+  return next();
+};

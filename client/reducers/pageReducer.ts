@@ -31,8 +31,7 @@ function pageReducer(state = initialState, action) {
 
     case actionTypes.UPDATE_FRIENDS: {
       const newState = deepCopy(state);
-      newState.friends = {...newState.friends, ...action.payload};
-      console.log('newState', newState);
+      newState.friends = {...action.payload};
       return newState;
     }
 
