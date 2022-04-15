@@ -24,13 +24,14 @@ function Friends({account, authenticate, friends, getFriendsPossession}): JSX.El
 
   useEffect(() => {
     authenticate();
-    getFriendsPossession(friends);
+    account.authenticated && getFriendsPossession(friends);
   }, []);
   
   useEffect(() => {
     if(account.authenticated === false) {
       navigate('/login');
     }
+    getFriendsPossession(friends);
   }, [account.authenticated]);
 
   const friendsList = [];
