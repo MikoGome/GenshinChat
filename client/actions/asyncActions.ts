@@ -121,9 +121,10 @@ export const getFriends = (payload) => async(dispatch) => {
       friends[element.username] = {
         id: element.id,
         gender: element.gender,
-        possession: element.possession
+        possessionKey: element.possession
       };
     })
+    console.log('friendfriend', friends);
     dispatch(actions.updateFriends(friends));
   } catch(e) {
     console.log(e);
@@ -132,10 +133,9 @@ export const getFriends = (payload) => async(dispatch) => {
 
 export const getFriendsPossession = (payload) => async(dispatch) => {
   try {
-    console.log('test');
+    console.log('hit friendpossession');
     for(const key in payload) {
-      if(typeof payload[key].possession === 'object') return;
-      const {data} = await axios.get('/api/possession/' + payload[key].possession);
+      const {data} = await axios.get('/api/possession/' + payload[key].possessionKey);
       payload[key].possession = data;
     }
     dispatch(actions.updateFriends(payload));

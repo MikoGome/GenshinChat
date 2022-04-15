@@ -7,8 +7,9 @@ import { iconBig } from "../../utils/helperFunctions";
 function Friend({name, gender, main, index}): JSX.Element {
   console.log('hi');
   const friend:React.MutableRefObject<HTMLDivElement> = useRef();
-
   const {picture, backupPicture} = iconBig(main, gender);
+
+  console.log('main', main);
 
   setTimeout(() => {
     friend.current.classList.add('slow-bubbling');

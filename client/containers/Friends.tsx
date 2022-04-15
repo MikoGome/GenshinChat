@@ -24,6 +24,7 @@ function Friends({account, authenticate, friends, getFriendsPossession}): JSX.El
 
   useEffect(() => {
     authenticate();
+    console.log('mounted');
     account.authenticated && getFriendsPossession(friends);
   }, []);
   
@@ -38,7 +39,7 @@ function Friends({account, authenticate, friends, getFriendsPossession}): JSX.El
   let counter = 0;
   for(const key in friends) {
     counter++;
-    const main = friends[key].possession.main;
+    const main = friends[key].possession?.main;
     console.log('main', main);
     const friend = main && 
       <Friend 
