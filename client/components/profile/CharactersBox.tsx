@@ -1,23 +1,24 @@
 import React from 'react';
 import Character from './Character';
+import { iconBig } from '../../utils/helperFunctions';
 
 function CharactersBox({account, gender}): JSX.Element {
   
   const characters = account.characters_owned.map((el:string, index) => {
-    let image = `https://api.genshin.dev/characters/${el}/icon-big`;
-    let backupImage = `https://api.genshin.dev/characters/${el}/icon`
     let name = el;
     if(el.startsWith('traveler')) {
       name = gender === 'male' ? 'aether' : 'lumine';
-      image = 'https://api.genshin.dev/characters/traveler-anemo/icon-big-' + name;
     }
+    
+    const {picture, backupPicture} = iconBig(el, gender);
+
     return <Character 
       key={'el.name_'+index} 
       name={name} 
       index={index}
       el={el}
-      picture={image} 
-      backupPicture={backupImage} 
+      picture={picture} 
+      backupPicture={backupPicture} 
     />
   });
 

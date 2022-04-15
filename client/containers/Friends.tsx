@@ -17,19 +17,20 @@ const mapDispatchToProps = (dispatch) => ({
   getFriendsPossession: (payload) => dispatch(getFriendsPossession(payload))
 });
 
-function Friends({account, authenticate, friends, getFriendsPossession, online}): JSX.Element {
-  console.log(friends);
+function Friends({account, authenticate, friends, getFriendsPossession}): JSX.Element {
+  console.log('friends', friends);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     authenticate();
+    getFriendsPossession(friends);
   }, []);
-
+  
   useEffect(() => {
     if(account.authenticated === false) {
       navigate('/login');
     }
-    getFriendsPossession(friends);
   }, [account.authenticated]);
 
   const friendsList = [];
@@ -37,6 +38,7 @@ function Friends({account, authenticate, friends, getFriendsPossession, online})
   for(const key in friends) {
     counter++;
     const main = friends[key].possession.main;
+    console.log('main', main);
     const friend = main && 
       <Friend 
         key={key + '_' + main} 
@@ -46,6 +48,7 @@ function Friends({account, authenticate, friends, getFriendsPossession, online})
       />;
     friendsList.push(friend);
   }
+  console.log('friendsList', friendsList);
 
   return (
     <div className="friends">

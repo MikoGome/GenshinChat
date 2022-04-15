@@ -2,17 +2,13 @@ import React, { useEffect, useRef } from "react";
 import '../stylesheets/Friend.scss';
 import ForumIcon from '@mui/icons-material/Forum';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import { iconBig } from "../../utils/helperFunctions";
 
 function Friend({name, gender, main, index}): JSX.Element {
-
+  console.log('hi');
   const friend:React.MutableRefObject<HTMLDivElement> = useRef();
 
-  let picture = `https://api.genshin.dev/characters/${main}/icon-big`;
-  let backupPicture = `https://api.genshin.dev/characters/${main}/icon`
-  if(main.startsWith('traveler')) {
-    const main = gender === 'male' ? 'aether' : 'lumine';
-    picture = 'https://api.genshin.dev/characters/traveler-anemo/icon-big-' + main;
-  }
+  const {picture, backupPicture} = iconBig(main, gender);
 
   setTimeout(() => {
     friend.current.classList.add('slow-bubbling');

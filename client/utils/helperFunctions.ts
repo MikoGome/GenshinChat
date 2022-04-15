@@ -40,3 +40,28 @@ export const titleCase = (str: string) => {
     .map((el:string) => el[0]?.toUpperCase() + el?.slice(1))
     .join(' ');
 }
+
+export const backupCase = (str: string) => {
+  if(typeof str !== 'string') return;
+  return str[0].toUpperCase() + str.slice(1).replace('-', '');
+}
+
+export const iconBig = (main: string, gender: string) => {
+  let picture = `https://api.genshin.dev/characters/${main}/icon-big`;
+  let backupPicture = `https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_${backupCase(main)}.png`;
+  if(main.startsWith('traveler')) {
+    if(gender === 'male') {
+      picture = `https://api.genshin.dev/characters/traveler-anemo/icon-big-aether`
+      backupPicture = 'https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_PlayerBoy.png';
+    } else if(gender === 'female') {
+      picture = `https://api.genshin.dev/characters/traveler-anemo/icon-big-lumine`
+      backupPicture = 'https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_PlayerGirl.png';
+    }
+  } else if(main === 'thoma') {
+    picture = 'https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_Tohma.png';
+  }
+  return {
+    picture,
+    backupPicture,
+  }
+}

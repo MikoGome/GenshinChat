@@ -3,18 +3,16 @@ import { useRef } from "react";
 import ForumIcon from '@mui/icons-material/Forum';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {connect} from 'react-redux';
+import { iconBig } from "../utils/helperFunctions";
 
 const mapStateToProps = state => ({
   account: state.account,
 })
 
 function OnlineUser({account, bond, name, gender, main, socket, socketId}): JSX.Element {
-  const myName = account.name;
   const li:React.MutableRefObject<HTMLLIElement> = useRef();
-  const append = gender === 'male' ? '-aether' : '-lumine';
-  const picture = `https://api.genshin.dev/characters/${main}/icon-big${main.startsWith('traveler') ? append : ''}`;
-  const backupPicture = `https://api.genshin.dev/characters/${main}/icon`;
-
+  const {picture, backupPicture} = iconBig(main, gender);
+  const myName = account.name;
   function addFriend(sender) {
     socket.emit('addFriend', {sendee: socketId, sender});
   }

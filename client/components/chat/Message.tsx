@@ -1,15 +1,14 @@
 import React from 'react';
+import { iconBig } from '../../utils/helperFunctions';
 
 function Message({account, entry}): JSX.Element {
   const {name, main, gender, message} = entry
-  
-  const append:string = gender === 'male' ? '-aether' : '-lumine';
-  const picture = `https://api.genshin.dev/characters/${main}/icon-big${main.startsWith('traveler') ? append : ''}`;
+  const {picture, backupPicture} = iconBig(main, gender);
   
   return(
     <li className={account.name === name ? 'me': ''}>
       <div className="icon">
-        <img src={picture} alt={main} />
+        <img src={picture} alt={main} onError={(e) => e.target.src=backupPicture}/>
       </div>
       <div className={"message"}>
         <div className="bubble bubbling">

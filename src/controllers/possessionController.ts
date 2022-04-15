@@ -5,6 +5,5 @@ export const getPossession = async (req: Request, res: Response, next: NextFunct
   const id = req.params.id;
   const possession = await Possession.findById(id);
   res.locals.possession = possession;
-  console.log(possession);
   return next();
 };

@@ -132,12 +132,13 @@ export const getFriends = (payload) => async(dispatch) => {
 
 export const getFriendsPossession = (payload) => async(dispatch) => {
   try {
+    console.log('test');
     for(const key in payload) {
       if(typeof payload[key].possession === 'object') return;
       const {data} = await axios.get('/api/possession/' + payload[key].possession);
       payload[key].possession = data;
     }
-    dispatch(actions.updateFriends);
+    dispatch(actions.updateFriends(payload));
   } catch(e) {
     console.log(e);
   }
