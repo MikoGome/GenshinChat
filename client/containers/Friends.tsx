@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { authenticate, getFriendsPossession, removeFriend } from '../actions/asyncActions';
+import { authenticate, getFriends, removeFriend } from '../actions/asyncActions';
 import NavBar from '../components/NavBar';
 import Friend from '../components/friends/Friend';
 import './stylesheets/Friends.scss';
@@ -14,24 +14,21 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate()),
-  getFriendsPossession: (payload) => dispatch(getFriendsPossession(payload)),
   removeFriend: (payload: {removeId:string, accountId:string}) => dispatch(removeFriend(payload))
 });
 
-function Friends({account, authenticate, friends, getFriends, getFriendsPossession, removeFriend}): JSX.Element {
+function Friends({account, authenticate, friends, removeFriend}): JSX.Element {
 
   const navigate = useNavigate();
 
   useEffect(() => {
     authenticate();
-    account.authenticated && getFriendsPossession(friends);
   }, []);
   
   useEffect(() => {
     if(account.authenticated === false) {
       navigate('/login');
     }
-    getFriendsPossession(friends);
   }, [account.authenticated]);
 
   const friendsList = [];
