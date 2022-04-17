@@ -1,6 +1,6 @@
 @import './variables';
 
-$avatar-dimension: 6rem;
+$avatar-dimension: 6.5rem;
 $rounded-edges-width: 10%;
 $round-radius-left: 50% 0 0 50%;
 $round-radius-right: 0 50% 50% 0;
@@ -56,9 +56,10 @@ $friend-tab-background-color: #ece0a3;
       position: relative;
       left: -1.5%;
       border: 3px solid white;
-      filter: drop-shadow(0 0 5px rgb(54, 54, 54))
-    }
+      filter: drop-shadow(0 0 5px rgb(54, 54, 54));
 
+    }
+    
     h1 {
       margin: 1rem;
     }
@@ -68,11 +69,14 @@ $friend-tab-background-color: #ece0a3;
     position: relative;
     left: 1.5%;
     display: flex;
+    align-items: center;
+
+    .status {
+    }
     
     button {
       color: #3f4c62;
       border: none;
-      align-self: center;
       padding: 1rem;
       z-index: 1;
       background-color: transparent;
@@ -83,4 +87,12 @@ $friend-tab-background-color: #ece0a3;
       }
     }
   }
+}
+
+.offline {
+  filter: grayscale(0.75);
+}
+
+.online {
+  color: green;
 }

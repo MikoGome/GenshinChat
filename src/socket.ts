@@ -10,13 +10,22 @@ function socket(server:any) {
   io.on('connection', (socket:any) => {
 
     socket.on('signIn', (account: accountShape) => {
-      //To-Do change associated account status to true
       onlineUsers[socket.id] = account;
       io.emit('updateOnlineUsers', onlineUsers);
     });
 
-    socket.on('disconnect', async () => {
-      //To-Do change associated account status to false
+    socket.on('disconnect', () => {
+      try {
+        const username = onlineUsers[socket.id].name;
+        const queryEntry: string = `
+          UPDATE users
+          SET online = false
+          WHERE username = $1
+        `
+        query(queryEntry, [username]);
+      } catch (e) {
+        console.log(e);
+      }
       delete onlineUsers[socket.id];
       io.emit('updateOnlineUsers', onlineUsers);
     });

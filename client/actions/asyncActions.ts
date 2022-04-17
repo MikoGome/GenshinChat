@@ -124,7 +124,8 @@ export const getFriends = (payload) => async(dispatch) => {
       friends[element.username] = {
         id: element.id,
         gender: element.gender,
-        possessionKey: element.possession
+        possessionKey: element.possession,
+        online: element.online
       };
     })
     dispatch(getFriendsPossession(friends));

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { authenticate, getFriends, removeFriend } from '../actions/asyncActions';
+import { authenticate, removeFriend } from '../actions/asyncActions';
 import NavBar from '../components/NavBar';
 import Friend from '../components/friends/Friend';
 import './stylesheets/Friends.scss';
@@ -34,7 +34,7 @@ function Friends({account, authenticate, friends, removeFriend}): JSX.Element {
   const friendsList = [];
   let counter = 0;
   for(const key in friends) {
-
+    console.log(friends[key]);
     counter++;
     const main = friends[key].possession?.main;
     const id = friends[key].id;
@@ -47,6 +47,7 @@ function Friends({account, authenticate, friends, removeFriend}): JSX.Element {
         name={key} 
         gender={friends[key].gender} 
         main={main}
+        online={friends[key].online}
         handleRemoveFriend={removeFriend}
       />;
     friendsList.push(friend);

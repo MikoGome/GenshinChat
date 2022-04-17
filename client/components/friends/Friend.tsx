@@ -4,18 +4,18 @@ import ForumIcon from '@mui/icons-material/Forum';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import { iconBig } from "../../utils/helperFunctions";
 
-function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, index}): JSX.Element {
-  console.log(accountId, friendId);
+function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, online, index}): JSX.Element {
   const friend:React.MutableRefObject<HTMLDivElement> = useRef();
   const {picture, backupPicture} = iconBig(main, gender);
 
   setTimeout(() => {
     friend.current.classList.add('slow-bubbling');
+    online && friend.current.classList.remove('offline');
     friend.current.classList.remove('hide');
   }, 50 * index)
 
   return(
-    <div className="friend hide" ref={friend}>
+    <div className="friend hide offline" ref={friend}>
       <div className="left">
         <img 
           src={picture} 
@@ -24,6 +24,7 @@ function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, in
         <h1>{name}</h1>
       </div>
       <div className="right">
+        <h4 className={'status ' + (online && 'online')}>{online ? 'online' : 'offline'}</h4>
         <button onClick={() => handleRemoveFriend({removeId: friendId, accountId})}>
           <PersonRemoveIcon className="friend-list-icons" />
         </button>

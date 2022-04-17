@@ -33,6 +33,7 @@ export const signup = async (req:Request, res:Response, next:NextFunction) => {
 
 export const login = async (req:Request, res:Response, next:NextFunction) => {
   const {username, password} = req.body;
+  
   const queryEntry:string = `
     SELECT * FROM users
     WHERE username = $1
@@ -45,6 +46,12 @@ export const login = async (req:Request, res:Response, next:NextFunction) => {
     if(account) {
       authenticated = await bcrypt.compare(password, account.password);
       if(authenticated) {
+        const queryEntry:string = `
+          UPDATE users
+          SET online = true
+          WHERE username = $1
+        `
+        query(queryEntry, [username]);
         res.locals.user_id = account.id;
         res.locals.username = account.username;
         res.locals.gender = account.gender;

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
@@ -25,8 +25,22 @@ function Shop({account, authenticate, wish}):JSX.Element {
 
   const navigate = useNavigate();
 
+  const shopKeeper:React.MutableRefObject<HTMLDivElement> = useRef();
+  const gachaButton:React.MutableRefObject<HTMLButtonElement> = useRef();
+  const moraButton:React.MutableRefObject<HTMLButtonElement> = useRef();
+
   useEffect(() => {
     authenticate();
+    shopKeeper.current.classList.remove('hide');
+    const buttonAnimationDelay = 250;
+    setTimeout(() => {
+      gachaButton.current.classList.add('slow-bubbling');
+      gachaButton.current.classList.remove('hide');
+    }, buttonAnimationDelay);
+    setTimeout(() => {
+      moraButton.current.classList.add('slow-bubbling');
+      moraButton.current.classList.remove('hide');
+    }, buttonAnimationDelay * 2);
   }, []);
 
   useEffect(() => {
@@ -46,16 +60,22 @@ function Shop({account, authenticate, wish}):JSX.Element {
       <NavBar current="shop"/>
       <main>
         <div className="selection">
-          <button id="gacha-button" className="shop-button slow-bubbling" onClick={startWish}>
+          <button id="gacha-button" className="shop-button hide" onClick={startWish} ref={gachaButton}>
             <img src={Wish} />
-            Wish For A Character
+            <div>
+              <p>Wish For A Character</p>
+              <aside>Will consume 1 wish</aside>
+            </div>
           </button>
-          <button id="mora-button" className="shop-button slow-bubbling">
+          <button id="mora-button" className="shop-button hide" ref={moraButton}>
             <img src={Mora} />
-            Spend Your Mora
+            <div>
+              <p>Spend Your Mora</p>
+              <aside>Likely never coming LOL</aside>
+            </div>
           </button>
         </div>
-        <div className="shop-keeper">
+        <div className="shop-keeper hide" ref={shopKeeper}>
           <img onLoad={(e:any) => e.target.classList.add('shop-keeper-appear')} src={Paimon}/>
         </div>
       </main>
