@@ -21,31 +21,25 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 3rem;
+        font-size: 2rem;
         width: 100%;
-        max-width: 60%;
+        max-width: 50%;
         padding: 1rem;
-        border-radius: 2px;
         border: none;
+        transition: all 0.5s;
+        background-color: $button-background-color;
+        color: $button-color;
+        border: $button-border;
+        outline: $button-outline;
 
         img {
-          height: 10rem;
+          height: 7.5rem;
         }
 
         &:hover {
-          filter: brightness(1.1);
+          transform: scale(1.05);
+          filter: brightness(1.1)
         }
-      }
-
-      #gacha-button {
-        background-color: lightgreen;
-        box-shadow: 0 0 0 10px green;
-
-      }
-
-      #mora-button {
-        background-color: rgb(255, 255, 159);
-        box-shadow: 0 0 0 10px rgba(250, 250, 0, 0.836);
       }
     }
 
@@ -53,7 +47,7 @@
       display: flex;
       align-items: center;
       position: relative;
-      right: 50%;
+      right: 40%;
       
       img {
         width: 75%;
@@ -63,7 +57,6 @@
 }
 
 .shop-keeper-appear {
-  animation: animateRight 0.7s ease-out, floating 5s ease-in-out infinite normal;
+  animation: floating 5s ease-in-out infinite normal;
 }
-
 

@@ -29,28 +29,3 @@ const possessionSchema = new mongoose.Schema({
 });
 
 export const Possession = mongoose.model('possession', possessionSchema);
-
-const chatSchema = new mongoose.Schema({
-  chats: {
-    room: {
-      participants: [{
-        user_id: {
-          type: Number,
-          required: true
-        },
-        user_name: {
-          type:String,
-          required: true
-        },
-        main: String
-      }],
-    },
-    chat: [{
-      user_name: String,
-      main: String,
-      message: String
-    }]
-  }
-});
-
-export const Chat = mongoose.model('chat', chatSchema);

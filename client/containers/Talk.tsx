@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
 import NavBar from '../components/NavBar';
 
-import './stylesheets/Talks.scss';
+import './stylesheets/Talk.scss';
 
 const mapStateToProps = (state) => ({
   account: state.account,
@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-function Talks({account, authenticate}): JSX.Element {
+function Talk({account, authenticate}): JSX.Element {
   
   const navigate = useNavigate();
 
@@ -31,10 +31,10 @@ function Talks({account, authenticate}): JSX.Element {
   }, [account.authenticated]);
 
   return(
-    <div className="talks">
-      <NavBar current="talks"/>
+    <div className="talk">
+      <NavBar current="talk"/>
     </div>
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Talks);
+export default connect(mapStateToProps, mapDispatchToProps)(Talk);

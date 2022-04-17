@@ -1,5 +1,5 @@
 import query from '../models/Users';
-import {Possession, Chat}from '../models/AccountAssets';
+import {Possession}from '../models/AccountAssets';
 import bcrypt from 'bcrypt';
 
 import {Request, Response, NextFunction} from 'express';
@@ -16,19 +16,16 @@ export const signup = async (req:Request, res:Response, next:NextFunction) => {
   const possession = await Possession.create({
     characters_owned: [starterChar]
   });
-  const chat = await Chat.create({
-    history: [],
-  });
   const queryEntry:string = `
-    INSERT INTO users(username, password, gender, possession, chat_history)
-    VALUES($1, $2, $3, $4, $5)
+    INSERT INTO users(username, password, gender, possession)
+    VALUES($1, $2, $3, $4)
   `
   let authenticated:boolean = false;
   try {
-    await query(queryEntry, [username, password, gender, possession.id, chat.id]);
+    await query(queryEntry, [username, password, gender, possession.id]);
     authenticated = true;
   } catch(e) {
-    await Promise.all([Possession.findByIdAndDelete(possession.id), Chat.findByIdAndDelete(chat.id)]);
+    await Possession.findByIdAndDelete(possession.id);
   }
   res.locals.authenticated = authenticated;
   return next();

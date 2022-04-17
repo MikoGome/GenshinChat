@@ -76,7 +76,7 @@ function NavBar({account, current, signOut}) {
         <li id="home" className="clickable"  onMouseEnter={tempFocus} onClick={redirect}><Home/>Home</li>
         <li id="shop" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><LocalGroceryStore/>Shop</li>
         <li id="friends" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><PeopleAlt/>Friends</li>
-        <li id="talks" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><Chat/>Talks</li>
+        <li id="talk" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><Chat/>Talk</li>
         <li id="profile" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><AccountBox/>Profile</li>
         <li id="logout" className="clickable" onMouseEnter={tempFocus} onClick={signOut}><Logout/>Log Out</li>
         <span id="focus-line" ref={focusLine}></span>

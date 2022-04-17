@@ -24,7 +24,6 @@ export const authenticate = () => async (dispatch, getState) => {
     const {data} = await axios.get('/api/authenticate');
     if(data.authenticated) {
       if(getState().account.initialized) {
-        console.log('hit');
         dispatch(getFriends(getState().account.id));
         return;
       }
@@ -118,12 +117,9 @@ export const changeMain = (payload) => async (dispatch) => {
 }
 
 export const getFriends = (payload) => async(dispatch) => {
-  console.log('hey');
   try {
-    console.log('getFriends');
     const {data} = await axios.get('/api/friends/' + payload);
     const friends: {[name: string]: object} = {}
-    console.log('data', data);
     data.forEach(element => {
       friends[element.username] = {
         id: element.id,
@@ -132,7 +128,6 @@ export const getFriends = (payload) => async(dispatch) => {
       };
     })
     dispatch(getFriendsPossession(friends));
-    // dispatch(actions.updateFriends(friends));
   } catch(e) {
     console.log(e);
   }

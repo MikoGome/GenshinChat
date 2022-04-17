@@ -10,11 +10,13 @@ function socket(server:any) {
   io.on('connection', (socket:any) => {
 
     socket.on('signIn', (account: accountShape) => {
+      //To-Do change associated account status to true
       onlineUsers[socket.id] = account;
       io.emit('updateOnlineUsers', onlineUsers);
     });
 
-    socket.on('disconnect', () => {
+    socket.on('disconnect', async () => {
+      //To-Do change associated account status to false
       delete onlineUsers[socket.id];
       io.emit('updateOnlineUsers', onlineUsers);
     });

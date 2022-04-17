@@ -47,6 +47,7 @@ export const backupCase = (str: string) => {
 }
 
 export const iconBig = (main: string, gender: string) => {
+  if(typeof main !== 'string' || typeof gender !== 'string') return;
   let picture = `https://api.genshin.dev/characters/${main}/icon-big`;
   let backupPicture = `https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_${backupCase(main)}.png`;
   if(main.startsWith('traveler')) {
@@ -64,4 +65,17 @@ export const iconBig = (main: string, gender: string) => {
     picture,
     backupPicture,
   }
+}
+
+export const portrait = (main:string, gender: string) => {
+  if(typeof main !== 'string' || typeof gender !== 'string') return;
+  if(main.startsWith('traveler')) {
+    if(gender === 'male') {
+      return 'https://api.genshin.dev/characters/traveler-anemo/portraitm'
+    } else if (gender === 'female') {
+      return 'https://api.genshin.dev/characters/traveler-anemo/portraitf'
+    }
+  }
+
+  return `https://api.genshin.dev/characters/${main}/portrait`
 }

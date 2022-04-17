@@ -5,7 +5,7 @@ import Home from './containers/Home';
 import Login from './containers/Login';
 import Shop from './containers/Shop';
 import Friends from './containers/Friends';
-import Talks from './containers/Talks';
+import Talk from './containers/Talk';
 import Profile from './containers/Profile';
 import NotFound from './containers/NotFound';
 
@@ -22,7 +22,7 @@ function App():JSX.Element {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/shop' element={<Shop />}></Route>
         <Route path='/friends' element={<Friends />}></Route>
-        <Route path='/talks' element={<Talks />}></Route>
+        <Route path='/talk' element={<Talk />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>

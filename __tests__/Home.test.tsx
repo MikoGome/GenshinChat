@@ -43,9 +43,9 @@ describe('Elements present', () => {
     expect(friendsElement).toBeInTheDocument();
   });
 
-  it('should have a talks tab in the navbar', () => {
-    const talksElement = screen.getByText(/talks/i);
-    expect(talksElement).toBeInTheDocument();
+  it('should have a talk tab in the navbar', () => {
+    const talkElement = screen.getByText(/talk/i);
+    expect(talkElement).toBeInTheDocument();
   });
 
   it('should have a profile tab in the navbar', () => {

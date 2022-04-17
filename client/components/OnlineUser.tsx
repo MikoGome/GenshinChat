@@ -13,7 +13,15 @@ function OnlineUser({account, bond, name, gender, main, socket, socketId}): JSX.
   const li:React.MutableRefObject<HTMLLIElement> = useRef();
   const {picture, backupPicture} = iconBig(main, gender);
   const myName = account.name;
-  function addFriend(sender) {
+
+  function addFriend() {
+    const sender = {
+      name: account.name,
+      main: account.main,
+      gender: account.gender,
+      id: account.id,
+      socket: socket.id,
+    }
     socket.emit('addFriend', {sendee: socketId, sender});
   }
 
@@ -29,17 +37,7 @@ function OnlineUser({account, bond, name, gender, main, socket, socketId}): JSX.
       {
         myName !== name && (
           <div className="online-bar-buttons">
-            <button 
-              className={bond ? "hide" : undefined}
-              onClick={() => {
-                addFriend({
-                  name: account.name,
-                  main: account.main,
-                  id: account.id,
-                  socket: socket.id,
-                })
-              }}
-            >
+            <button className={bond ? "hide" : undefined} onClick={addFriend}>
               <PersonAddIcon />
             </button>
             <button><ForumIcon /></button>

@@ -97,31 +97,6 @@ img {
   margin: 0.15rem;
 }
 
-
-//friend-request
-
-.friend-request {
-  width: 50%;
-  height: 60%;
-  background-color: orange;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  z-index: 10;
-}
-
-.friend-bubbling {
-  animation: friend-bubbling 0.5s ease-in-out;
-  animation-fill-mode: forwards;
-
-  @keyframes friend-bubbling {
-    0%{opacity: 0; width: 0; height: 0}
-    70% {opacity: 1; width: 55%; height: 65%}
-    100%{opacity: 1; width: 50%; height: 60%}
-  }  
-}
-
 .hide {
   visibility: hidden;
 }
