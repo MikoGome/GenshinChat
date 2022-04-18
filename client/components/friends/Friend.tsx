@@ -22,9 +22,9 @@ function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, on
           onError={e => e.target.src=backupPicture}
         />
         <h1>{name}</h1>
+        <h4 className={'status ' + (online && 'online')}>{online ? 'online' : 'offline'}</h4>
       </div>
       <div className="right">
-        <h4 className={'status ' + (online && 'online')}>{online ? 'online' : 'offline'}</h4>
         <button onClick={() => handleRemoveFriend({removeId: friendId, accountId})}>
           <PersonRemoveIcon className="friend-list-icons" />
         </button>

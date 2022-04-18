@@ -14,15 +14,20 @@ function OnlineUser({account, bond, name, gender, main, socket, socketId}): JSX.
   const {picture, backupPicture} = iconBig(main, gender);
   const myName = account.name;
 
+  const sender = {
+    name: account.name,
+    main: account.main,
+    gender: account.gender,
+    id: account.id,
+    socket: socket.id,
+  }
+
   function addFriend() {
-    const sender = {
-      name: account.name,
-      main: account.main,
-      gender: account.gender,
-      id: account.id,
-      socket: socket.id,
-    }
     socket.emit('addFriend', {sendee: socketId, sender});
+  }
+
+  function talkTo() {
+    socket.emit('talkTo', {sendee: socketId, sender});
   }
 
   return(
@@ -40,7 +45,9 @@ function OnlineUser({account, bond, name, gender, main, socket, socketId}): JSX.
             <button className={bond ? "hide" : undefined} onClick={addFriend}>
               <PersonAddIcon />
             </button>
-            <button><ForumIcon /></button>
+            <button onClick={talkTo}>
+              <ForumIcon />
+            </button>
           </div>
         )
       }

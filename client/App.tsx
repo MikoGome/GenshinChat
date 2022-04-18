@@ -9,8 +9,7 @@ import Talk from './containers/Talk';
 import Profile from './containers/Profile';
 import NotFound from './containers/NotFound';
 
-import FriendRequest
- from "./components/FriendRequest";
+import FriendRequest from "./components/FriendRequest";
 import './assets/preload';
 
 function App():JSX.Element {

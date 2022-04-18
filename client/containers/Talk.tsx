@@ -2,7 +2,11 @@ import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
+
 import NavBar from '../components/NavBar';
+import Chat from '../components/chat/Chat';
+import Avatar from '../components/Avatar';
+import Partner from '../components/talk/Partner';
 
 import './stylesheets/Talk.scss';
 
@@ -33,6 +37,11 @@ function Talk({account, authenticate}): JSX.Element {
   return(
     <div className="talk">
       <NavBar current="talk"/>
+      <main>
+      <Partner />
+        <Chat />
+      <Avatar />
+      </main>
     </div>
   )
 }

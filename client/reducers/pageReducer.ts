@@ -48,7 +48,7 @@ function pageReducer(state = initialState, action) {
 
 interface pageStateShape {
   chatHistory:chatHistoryShape[],
-  users: [],
+  users: userShape[],
   friends: {
     [id: string] : {
       name: string,

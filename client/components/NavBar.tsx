@@ -28,6 +28,7 @@ function NavBar({account, current, signOut}) {
   const navigate = useNavigate();
   const focusLine = useRef();
   const navBar = useRef();
+  const name = useRef();
 
   useEffect(() => {
     const currPage = document.getElementById(current);
@@ -42,7 +43,7 @@ function NavBar({account, current, signOut}) {
       if(navTabs[i].id === current) continue;
       navTabs[i].classList.add('transition');
     }
-
+      
   }, []);
 
   function redirect(e) {
@@ -80,8 +81,17 @@ function NavBar({account, current, signOut}) {
         <li id="profile" className="clickable" onMouseEnter={tempFocus} onClick={redirect}><AccountBox/>Profile</li>
         <li id="logout" className="clickable" onMouseEnter={tempFocus} onClick={signOut}><Logout/>Log Out</li>
         <span id="focus-line" ref={focusLine}></span>
-        <li id="currency" onMouseEnter={() => returnFocus(current)}>
+      </ul>
+      <ul onMouseEnter={() => returnFocus(current)}>
+        <li id="nav-account">
           <Currency account={account} />
+          <h2 
+            ref={name}
+            onMouseEnter={e => e.target.scrollTo(e.target.scrollWidth, 0)}
+            onMouseLeave={e => e.target.scrollTo(0, 0)}
+          >
+            {account.name}
+          </h2>
         </li>
       </ul>
     </nav>

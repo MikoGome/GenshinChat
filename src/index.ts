@@ -34,6 +34,6 @@ const server = app.listen(PORT, () => {
 
 //socket stuff
 
-import socket from './socket';
+import socket from './socket/socket';
 
 socket(server);

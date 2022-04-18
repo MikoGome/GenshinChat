@@ -45,18 +45,10 @@ export const login = async (req:Request, res:Response, next:NextFunction) => {
     let authenticated = false;
     if(account) {
       authenticated = await bcrypt.compare(password, account.password);
-      if(authenticated) {
-        const queryEntry:string = `
-          UPDATE users
-          SET online = true
-          WHERE username = $1
-        `
-        query(queryEntry, [username]);
-        res.locals.user_id = account.id;
-        res.locals.username = account.username;
-        res.locals.gender = account.gender;
-        res.locals.possession = account.possession;
-      }
+      res.locals.user_id = account.id;
+      res.locals.username = account.username;
+      res.locals.gender = account.gender;
+      res.locals.possession = account.possession;
     }
     res.locals.authenticated = authenticated;
     return next();
