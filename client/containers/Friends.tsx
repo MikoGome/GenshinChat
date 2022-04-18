@@ -34,8 +34,6 @@ function Friends({account, authenticate, friends, removeFriend}): JSX.Element {
   const friendsList = [];
   let counter = 0;
   for(const key in friends) {
-    console.log(friends[key]);
-    counter++;
     const main = friends[key].possession?.main;
     const id = friends[key].id;
     const friend = main && 
@@ -51,6 +49,7 @@ function Friends({account, authenticate, friends, removeFriend}): JSX.Element {
         handleRemoveFriend={removeFriend}
       />;
     friendsList.push(friend);
+    counter++;
   }
 
   return (

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, memo} from "react";
 import {useNavigate} from "react-router-dom";
 import { connect } from "react-redux";
 import { clearSession } from "../actions/asyncActions";
@@ -43,7 +43,6 @@ function NavBar({account, current, signOut}) {
       if(navTabs[i].id === current) continue;
       navTabs[i].classList.add('transition');
     }
-      
   }, []);
 
   function redirect(e) {
@@ -98,4 +97,4 @@ function NavBar({account, current, signOut}) {
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(NavBar));
