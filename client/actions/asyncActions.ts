@@ -106,6 +106,7 @@ export const getInfo = () => async (dispatch) => {
 
 export const changeMain = (payload) => async (dispatch) => {
   try {
+    console.log('hit');
     const {main:newMain, possession} = payload;
     const {data} = await axios.patch('/api/account/main', {main: newMain, possession});
     dispatch(actions.updateMain(data));

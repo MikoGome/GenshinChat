@@ -5,7 +5,7 @@ const initialState:pageStateShape = {
   chatHistory: [],
   users: [],
   friends: {},
-  friendRequest: null,
+  friendRequest: null
 };
 
 function pageReducer(state = initialState, action) {

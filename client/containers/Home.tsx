@@ -38,7 +38,7 @@ function Home({account, page, authenticate}): JSX.Element {
       <NavBar current="home"/>
       <main>
         <OnlineBar users={page.users} socket={account.socket} friends={page.friends}/>
-        <Chat />
+        <Chat account={account} room={page}/>
         <Avatar />
       </main>
     </div>

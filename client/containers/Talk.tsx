@@ -12,7 +12,7 @@ import './stylesheets/Talk.scss';
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  page: state.page
+  talk: state.talk
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-function Talk({account, authenticate}): JSX.Element {
+function Talk({account, authenticate, talk}): JSX.Element {
   
   const navigate = useNavigate();
 
@@ -34,12 +34,25 @@ function Talk({account, authenticate}): JSX.Element {
     }
   }, [account.authenticated]);
 
+  if(!talk.roomId) {
+    return(
+     <div className="talk">
+        <NavBar current="talk"/>
+        <main>
+        <Partner />
+        <h1>Currently Not Talking To Anyone</h1>
+        <Avatar />
+        </main>
+      </div>
+    )
+  }
+
   return(
     <div className="talk">
       <NavBar current="talk"/>
       <main>
       <Partner />
-        <Chat />
+      <Chat account={account} room={talk}/>
       <Avatar />
       </main>
     </div>

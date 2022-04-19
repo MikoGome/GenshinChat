@@ -22,7 +22,7 @@ export const deepCopy = (input: any) => {
   if(typeof input === 'object' && input !== null) {
     const clone = input.constructor();
     for(const key in input) {
-      if(typeof input[key] === 'object' && input !== null) {
+      if(typeof input[key] === 'object' && key !== 'socket' && input !== null) {
         clone[key] = deepCopy(input[key]);
       } else {
         clone[key] = input[key];

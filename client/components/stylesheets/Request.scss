@@ -1,6 +1,6 @@
 @import './variables';
 
-.friend-request {
+.request-box {
   background-color: #ece0a3;
   left: 50%;
   top: 50%;
@@ -61,7 +61,7 @@
   }
 }
 
-.friend-bubbling {
+.box-bubbling {
   animation: friend-bubbling 0.5s ease-in-out forwards;
 
   @keyframes friend-bubbling {

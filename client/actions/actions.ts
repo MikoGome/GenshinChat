@@ -46,6 +46,21 @@ export const updateFriends = (payload) => ({
   payload: payload
 })
 
+//talk
+export const receivedTalkRequest = (payload) => ({
+  type: actionTypes.RECEIVED_TALK_REQUEST,
+  payload: payload
+})
+
+export const sendTalk = (payload) => ({
+  type: actionTypes.SEND_TALK,
+  payload: payload
+});
+
+export const joinRoom = (payload) => ({
+  type: actionTypes.JOIN_ROOM,
+  payload: payload
+})
 
 //characters
 export const updateInfo = (payload) => ({

@@ -1,13 +1,19 @@
 import React, { useEffect, useRef } from "react";
 import SendIcon from '@mui/icons-material/Send';
 
-function InputBox({name, gender, main, socket}): JSX.Element {
+function InputBox({name, gender, main, socket, roomId}): JSX.Element {
   const message:React.MutableRefObject<HTMLInputElement> = useRef();
 
   function send(name, main, gender, messageElement) {
     const message = messageElement.value.trim();
     if(message.length === 0) return;
-    socket.emit('sendMessage', {name, main, gender, message});
+
+    if(roomId) {
+      socket.emit('talk', {name, main, gender, message, roomId});
+    } else {
+      socket.emit('sendMessage', {name, main, gender, message});
+    }
+
     messageElement.value = '';
   }
 

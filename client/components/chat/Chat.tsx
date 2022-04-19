@@ -1,28 +1,21 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import InputBox from './InputBox';
-import { connect } from 'react-redux';
 
 import Message from './Message';
 
 import '../stylesheets/Chat.scss';
 
-const mapStateToProps = state => ({
-  account: state.account,
-  page: state.page
-});
+function Chat({room, account}): JSX.Element {
 
-function Chat({page, account}): JSX.Element {
-  const messages:JSX.Element[] = page.chatHistory.map((el, index) => {
+  const messages:JSX.Element[] = room.chatHistory.map((el, index) => {
     return <Message key={"Message_"+index} account={account} entry={el}/>
   });
 
   const chatBox:React.MutableRefObject<HTMLUListElement> = useRef();
 
   useEffect(() => {
-    // const latest = page.chatHistory[page.chatHistory.length - 1];
-    // if (latest?.name !== account.name) return;
     chatBox.current.scrollTo(0, chatBox.current.scrollHeight);
-  }, [page.chatHistory.length]);
+  }, [room.chatHistory.length]);
 
   return (
     <div className="chat">
@@ -34,9 +27,10 @@ function Chat({page, account}): JSX.Element {
         name={account.name} 
         gender={account.gender} 
         main={account.main}
+        roomId = {room.roomId}
       />
     </div>
   )
 }
 
-export default connect(mapStateToProps, null)(Chat);
+export default Chat;

@@ -14,3 +14,9 @@ export const UPDATE_FRIENDS = 'UPDATE_FRIENDS';
 //Characters
 export const GET_INFO = 'GET_INFO';
 export const UPDATE_SPOTLIGHT = 'UPDATE_SPOTLIGHT';
+
+//Talk
+export const LEAVE_TALK = 'LEAVE_TALK';
+export const RECEIVED_TALK_REQUEST = 'RECEIVED_TALK_REQUEST';
+export const SEND_TALK = 'SEND_TALK';
+export const JOIN_ROOM = 'JOIN_ROOM';

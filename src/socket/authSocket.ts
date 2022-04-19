@@ -14,7 +14,7 @@ function authSocket (socket: any, io: any) {
       `
       query(queryEntry, [username]);
     } catch(e) {
-      console.log(e);
+
     }
     io.emit('updateOnlineUsers', onlineUsers);
   });
@@ -29,7 +29,7 @@ function authSocket (socket: any, io: any) {
       `
       query(queryEntry, [username]);
     } catch (e) {
-      console.log(e);
+      
     }
     delete onlineUsers[socket.id];
     io.emit('updateOnlineUsers', onlineUsers);

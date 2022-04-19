@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import { receivedFriendRequest } from "../actions/actions";
 import { iconBig } from "../utils/helperFunctions";
 
-import './stylesheets/FriendRequest.scss';
+import './stylesheets/Request.scss';
 
 const mapStateToProps = state => ({
   account: state.account,
@@ -40,7 +40,7 @@ function FriendRequest({account, friendRequest, updateFriendRequest}): JSX.Eleme
 
   if(friendRequest) {
     return (
-      <div className="friend-request friend-bubbling" ref={friendBox}>
+      <div className="request-box box-bubbling" ref={friendBox}>
         <div className="portrait">
           <img src={photo.picture} onError={e => e.target.src=photo.backupPicture}/>
         </div>

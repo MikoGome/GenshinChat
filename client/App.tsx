@@ -9,7 +9,8 @@ import Talk from './containers/Talk';
 import Profile from './containers/Profile';
 import NotFound from './containers/NotFound';
 
-import FriendRequest from "./components/FriendRequest";
+import FriendRequest from './components/FriendRequest';
+import TalkRequest  from './components/TalkRequest';
 import './assets/preload';
 
 function App():JSX.Element {
@@ -26,6 +27,7 @@ function App():JSX.Element {
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
       <FriendRequest />
+      <TalkRequest />
     </BrowserRouter>
   )
 }
