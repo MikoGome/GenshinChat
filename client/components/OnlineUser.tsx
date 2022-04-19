@@ -7,9 +7,10 @@ import { iconBig } from "../utils/helperFunctions";
 
 const mapStateToProps = state => ({
   account: state.account,
+  roomId: state.talk.roomId
 })
 
-function OnlineUser({account, bond, name, gender, main, socket, socketId}): JSX.Element {
+function OnlineUser({account, bond, name, gender, main, socket, socketId, roomId}): JSX.Element {
   const li:React.MutableRefObject<HTMLLIElement> = useRef();
   const {picture, backupPicture} = iconBig(main, gender);
   const myName = account.name;
@@ -27,7 +28,7 @@ function OnlineUser({account, bond, name, gender, main, socket, socketId}): JSX.
   }
 
   function talkTo() {
-    socket.emit('talkTo', {sendee: socketId, sender});
+    socket.emit('talkTo', {sendee: socketId, sender, roomId});
   }
 
   return(

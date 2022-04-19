@@ -8,7 +8,8 @@ function talkSocket(socket: any, io: any) {
   socket.on('initiateTalk', (data:any) => {
     const {participantA, participantB} = data;
 
-    const roomId = uuidv4();
+    const roomId = data.roomId || uuidv4();
+    
     io.to(participantA.socket).emit('beginTalk', roomId);
     io.to(participantB.socket).emit('beginTalk', roomId);
   });
