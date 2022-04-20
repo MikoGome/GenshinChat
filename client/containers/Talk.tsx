@@ -5,7 +5,7 @@ import { authenticate } from '../actions/asyncActions';
 
 import NavBar from '../components/NavBar';
 import Chat from '../components/chat/Chat';
-import Avatar from '../components/Avatar';
+import Me from '../components/talk/Me';
 import Partner from '../components/talk/Partner';
 
 import { account } from '../reducers/accountReducer';
@@ -43,7 +43,7 @@ const Talk: React.FC<{account: account, authenticate:Function, talk: talkStateSh
         <NavBar current="talk"/>
         <main>
         <h1>Currently Not Talking To Anyone</h1>
-        <Avatar />
+        <Me name={account.name} gender={account.gender} main={account.main}/>
         </main>
       </div>
     )
@@ -62,7 +62,7 @@ const Talk: React.FC<{account: account, authenticate:Function, talk: talkStateSh
         {partners}
       </div>
       <Chat account={account} room={talk}/>
-      <Avatar />
+      <Me name={account.name} gender={account.gender} main={account.main}/>
       </main>
     </div>
   )

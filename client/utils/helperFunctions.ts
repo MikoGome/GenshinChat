@@ -18,7 +18,7 @@ export const validate = (method:boolean, account:accountStructure):boolean => {
   return true;
 }
 
-export const deepCopy = (input: any) => {
+export const deepCopy = <T>(input: T): T => {
   if(typeof input === 'object' && input !== null) {
     const clone = input.constructor();
     for(const key in input) {

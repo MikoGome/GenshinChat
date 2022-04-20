@@ -7,10 +7,10 @@ const Partner: React.FC<talkStateShape["focus"]> = (participant): JSX.Element =>
   console.log('participant', participant);
   const partnerPortrait = portrait(participant.main, participant.gender);
   return (
-    <div className="avatar partner">
+    <div className="partner">
       <img
-         src={partnerPortrait} 
-         onLoad={(e:any) => e.target.classList.add('avatar-appear')}
+        src={partnerPortrait} 
+        onLoad={(e:any) => e.target.classList.add('floating')}
       />
     </div>
   )
