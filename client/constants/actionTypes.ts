@@ -20,3 +20,4 @@ export const LEAVE_TALK = 'LEAVE_TALK';
 export const RECEIVED_TALK_REQUEST = 'RECEIVED_TALK_REQUEST';
 export const SEND_TALK = 'SEND_TALK';
 export const JOIN_ROOM = 'JOIN_ROOM';
+export const UPDATE_ROOM = 'UPDATE_ROOM';

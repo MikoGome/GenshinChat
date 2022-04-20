@@ -25,7 +25,9 @@ function talkReducer(state = initialState, action: actionObject) {
     
     case actionTypes.JOIN_ROOM: {
       const newState = deepCopy(state);
-      newState.roomId = action.payload;
+      const {roomId, participants} = action.payload;
+      newState.roomId = roomId;
+      newState.participants = participants;
       return newState;
     }
 
@@ -35,12 +37,17 @@ function talkReducer(state = initialState, action: actionObject) {
       return newState;
     }
 
+    case actionTypes.UPDATE_ROOM: {
+      const newState = deepCopy(state);
+      return {...newState, ...action.payload};
+    }
+
     default:
       return state;
   }
 }
 
-interface talkStateShape {
+export interface talkStateShape {
   roomId: string,
   participants: participantShape[],
   chatHistory: chatHistoryShape[],

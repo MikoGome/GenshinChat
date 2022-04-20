@@ -1,27 +1,19 @@
 import React from "react";
-import {connect} from "react-redux";
 import { portrait } from "../../utils/helperFunctions";
 
-const mapStateToProps = state => ({
-  talk: state.talk
-});
+import { talkStateShape } from "../../reducers/talkReducer";
 
-const mapDispatchToProps = dispatch => ({
-
-});
-
-function Partner(): JSX.Element {
-  const partnerPortrait = portrait();
-  const partner = {};
-  
+const Partner: React.FC<talkStateShape["focus"]> = (participant): JSX.Element => {
+  console.log('participant', participant);
+  const partnerPortrait = portrait(participant.main, participant.gender);
   return (
     <div className="avatar partner">
       <img
-         src={partner.main && partnerPortrait} 
+         src={partnerPortrait} 
          onLoad={(e:any) => e.target.classList.add('avatar-appear')}
       />
     </div>
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Partner);
+export default Partner;

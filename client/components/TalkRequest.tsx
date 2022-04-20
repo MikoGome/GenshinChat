@@ -7,15 +7,14 @@ import './stylesheets/Request.scss';
 
 const mapStateToProps = state => ({
   account: state.account,
-  talkRequest: state.talk.talkRequest,
-  roomId: state.talk.roomId
+  talkRequest: state.talk.talkRequest
 });
 
 const mapDispatchToProps = dispatch => ({
   updateTalkRequest: () => dispatch(receivedTalkRequest(null))
 })
 
-function TalkRequest({account, talkRequest, roomId, updateTalkRequest}): JSX.Element {
+function TalkRequest({account, talkRequest, updateTalkRequest}): JSX.Element {
 
   const talkBox:React.MutableRefObject<HTMLDivElement> = useRef();
   function accept() {

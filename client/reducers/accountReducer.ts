@@ -10,7 +10,8 @@ const initialState:account = {
   characters_owned: [],
   wishes: {amount: 0, progress: 0},
   socket: null,
-  initialized: false
+  initialized: false,
+  authenticated: null
 };
 
 function accountReducer(state = initialState, action:actionObject) {
@@ -33,9 +34,7 @@ function accountReducer(state = initialState, action:actionObject) {
     }
 
     case actionTypes.UPDATE_MAIN: {
-      console.log('test', action.payload);
       const newState = deepCopy(state);
-      console.log({...newState, ...action.payload});
       return {...newState, ...action.payload};
     }
       
@@ -49,7 +48,7 @@ function accountReducer(state = initialState, action:actionObject) {
   }
 };
 
-interface account {
+export interface account {
   name: string | null,
   gender: string | null,
   main: string | null,
@@ -57,7 +56,8 @@ interface account {
   characters_owned: string[],
   wishes: {amount: number, progress: number},
   socket: Socket,
-  initialized: boolean
+  initialized: boolean,
+  authenticated: boolean
 }
 
 interface actionObject {

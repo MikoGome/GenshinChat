@@ -2,6 +2,8 @@ import query from '../models/Users';
 
 import { onlineUsers } from './socket';
 
+import {talkRooms} from './talkSocket';
+
 function authSocket (socket: any, io: any) {
   socket.on('signIn', (account: accountShape) => {
     onlineUsers[socket.id] = account;
@@ -30,6 +32,14 @@ function authSocket (socket: any, io: any) {
       query(queryEntry, [username]);
     } catch (e) {
       
+    }
+
+    if(socket.room) {
+      const filteredRoom = talkRooms[socket.room].filter(el => {
+        return el.name !== onlineUsers[socket.id].name
+      });
+      talkRooms[socket.room] = filteredRoom;
+      io.to(socket.room).emit('updateRoom', {participants: filteredRoom});
     }
     delete onlineUsers[socket.id];
     io.emit('updateOnlineUsers', onlineUsers);

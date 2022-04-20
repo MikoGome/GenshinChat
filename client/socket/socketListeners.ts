@@ -28,13 +28,17 @@ function socketListeners(socket, dispatch) {
     socket.emit('joinTalkRoom', roomId);
   });
 
-  socket.on('joinTalkRoom', (roomId) => {
-    dispatch(actions.joinRoom(roomId));
+  socket.on('joinTalkRoom', (data) => {
+    dispatch(actions.joinRoom(data));
   });
 
   socket.on('newTalk', (data) => {
     dispatch(actions.sendTalk(data));
-  })
+  });
+
+  socket.on('updateRoom', (data) => {
+    dispatch(actions.updateRoom(data));
+  });
 }
 
 export default socketListeners;

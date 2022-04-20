@@ -60,6 +60,11 @@ export const sendTalk = (payload) => ({
 export const joinRoom = (payload) => ({
   type: actionTypes.JOIN_ROOM,
   payload: payload
+});
+
+export const updateRoom = (payload) => ({
+  type: actionTypes.UPDATE_ROOM,
+  payload: payload
 })
 
 //characters

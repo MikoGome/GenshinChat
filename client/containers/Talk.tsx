@@ -8,6 +8,9 @@ import Chat from '../components/chat/Chat';
 import Avatar from '../components/Avatar';
 import Partner from '../components/talk/Partner';
 
+import { account } from '../reducers/accountReducer';
+import { talkStateShape } from '../reducers/talkReducer';
+
 import './stylesheets/Talk.scss';
 
 const mapStateToProps = (state) => ({
@@ -20,8 +23,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-function Talk({account, authenticate, talk}): JSX.Element {
-  
+const Talk: React.FC<{account: account, authenticate:Function, talk: talkStateShape}> = ({account, authenticate, talk}): JSX.Element => {
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,7 +42,6 @@ function Talk({account, authenticate, talk}): JSX.Element {
      <div className="talk">
         <NavBar current="talk"/>
         <main>
-        <Partner />
         <h1>Currently Not Talking To Anyone</h1>
         <Avatar />
         </main>
@@ -47,11 +49,18 @@ function Talk({account, authenticate, talk}): JSX.Element {
     )
   }
 
+  const partners = talk.participants
+    .map((el: talkStateShape["focus"]) => {
+      if(el.name !== account.name) return <Partner {...el}/>;
+    });
+
   return(
     <div className="talk">
       <NavBar current="talk"/>
       <main>
-      <Partner />
+      <div className="partners">
+        {partners}
+      </div>
       <Chat account={account} room={talk}/>
       <Avatar />
       </main>
