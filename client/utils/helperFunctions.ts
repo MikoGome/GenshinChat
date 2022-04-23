@@ -67,15 +67,28 @@ export const iconBig = (main: string, gender: string) => {
   }
 }
 
-export const portrait = (main:string, gender: string) => {
+export const portrait = (main: string, gender: string):string => {
   if(typeof main !== 'string' || typeof gender !== 'string') return;
   if(main.startsWith('traveler')) {
     if(gender === 'male') {
-      return 'https://api.genshin.dev/characters/traveler-anemo/portraitm'
+      return 'https://api.genshin.dev/characters/traveler-anemo/portraitm';
     } else if (gender === 'female') {
-      return 'https://api.genshin.dev/characters/traveler-anemo/portraitf'
+      return 'https://api.genshin.dev/characters/traveler-anemo/portraitf';
     }
   }
 
-  return `https://api.genshin.dev/characters/${main}/portrait`
+  return `https://api.genshin.dev/characters/${main}/portrait`;
+}
+
+export const iconSide = (main: string, gender: string):string => {
+  if(typeof main !== 'string' || typeof gender !== 'string') return;
+  if(main.startsWith('traveler')) {
+    if(gender === 'male') {
+      return 'https://api.genshin.dev/characters/traveler-anemo/icon-side-aether';
+    } else if (gender === 'female') {
+      return 'https://api.genshin.dev/characters/traveler-anemo/icon-side-lumine';
+    }
+  }
+
+  return `https://api.genshin.dev/characters/${main}/icon-side`;
 }

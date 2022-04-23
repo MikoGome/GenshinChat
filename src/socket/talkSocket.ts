@@ -19,6 +19,7 @@ function talkSocket(socket: any, io: any) {
   socket.on('joinTalkRoom', (roomId:string) => {
     socket.join(roomId);
     socket.room = roomId;
+    console.log('talk', talkRooms[roomId]);
     talkRooms[roomId].push(onlineUsers[socket.id]);
     io.to(roomId).emit('joinTalkRoom', {roomId, participants: talkRooms[roomId]});
   });

@@ -76,6 +76,37 @@ img {
     to{opacity: 1; transform: scale(1)}
   }  
 }
+
+.breathing {
+  animation: breathing 10s ease-out infinite;
+
+  @keyframes breathing {
+    0% {
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+    }
+  
+    25% {
+      -webkit-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+      transform: scale(1.05);
+    }
+  
+    60% {
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+    }
+  
+    100% {
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+    }
+  }
+}
+
 //scrollbar
 *::-webkit-scrollbar {
   cursor: url('http://www.rw-designer.com/cursor-extern.php?id=168734'), auto;
@@ -108,4 +139,9 @@ img {
     from{opacity: 0; transform: scale(0)}
     to{opacity: 1; transform: scale(1)}
   }  
+}
+
+.button-hover:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }

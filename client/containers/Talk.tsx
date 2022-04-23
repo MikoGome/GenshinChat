@@ -5,8 +5,9 @@ import { authenticate } from '../actions/asyncActions';
 
 import NavBar from '../components/NavBar';
 import Chat from '../components/chat/Chat';
-import Me from '../components/talk/Me';
+import MyAvatar from '../components/talk/MyAvatar';
 import Partner from '../components/talk/Partner';
+import Participant from '../components/talk/Participant';
 
 import { account } from '../reducers/accountReducer';
 import { talkStateShape } from '../reducers/talkReducer';
@@ -24,7 +25,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 const Talk: React.FC<{account: account, authenticate:Function, talk: talkStateShape}> = ({account, authenticate, talk}): JSX.Element => {
-
+  console.log('account');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,30 +40,42 @@ const Talk: React.FC<{account: account, authenticate:Function, talk: talkStateSh
 
   if(!talk.roomId) {
     return(
-     <div className="talk">
+     <div className="talk-inactive">
         <NavBar current="talk"/>
         <main>
-        <h1>Currently Not Talking To Anyone</h1>
-        <Me name={account.name} gender={account.gender} main={account.main}/>
+        <div className="info-box">
+            <h1>Currently Not Talking To Anyone</h1>
+            <h1>Invite Someone To Talk To</h1>
+        </div>
+        <MyAvatar name={account.name} gender={account.gender} main={account.main}/>
         </main>
       </div>
     )
   }
 
-  const partners = talk.participants
-    .map((el: talkStateShape["focus"]) => {
-      if(el.name !== account.name) return <Partner {...el}/>;
-    });
+  const partners = [];
+  const participants = [];
+
+  talk.participants.forEach((el: talkStateShape["focus"]) => {
+    if(el.name !== account.name) {
+      partners.push(<Partner {...el}/>);
+      participants.push(<Participant {...el}/>);
+    }
+  });
 
   return(
     <div className="talk">
       <NavBar current="talk"/>
       <main>
+      <div className="chat-bar">
+        <div className="participants">{participants}</div>
+        <button className="button-hover">Leave</button>
+      </div>
       <div className="partners">
         {partners}
       </div>
       <Chat account={account} room={talk}/>
-      <Me name={account.name} gender={account.gender} main={account.main}/>
+      <MyAvatar name={account.name} gender={account.gender} main={account.main} />
       </main>
     </div>
   )

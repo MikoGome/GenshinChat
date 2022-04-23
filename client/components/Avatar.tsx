@@ -11,12 +11,16 @@ const mapStateToProps = state => ({
 
 function Avatar({account}) {
  const avatarPortrait =  portrait(account.main, account.gender);
+
+ function appear(e: React.SyntheticEvent<HTMLImageElement>): void {
+  (e.target as HTMLImageElement).classList.add('avatar-appear'); 
+ }
  
   return(
     <div className="avatar">
       <img
          src={account.main && avatarPortrait} 
-         onLoad={(e:any) => e.target.classList.add('avatar-appear')}
+         onLoad={appear}
       />
     </div>
   )

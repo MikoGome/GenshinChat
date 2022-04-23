@@ -3,20 +3,19 @@ import { portrait } from "../../utils/helperFunctions";
 
 import { talkStateShape } from "../../reducers/talkReducer";
 
-import '../stylesheets/Me.scss';
+import '../stylesheets/MyAvatar.scss';
 
-const Me:React.FC<talkStateShape["focus"]> = ({name, main, gender}): JSX.Element => {
+const MyAvatar:React.FC<talkStateShape["focus"]> = ({name, main, gender}): JSX.Element => {
 
   const picture = portrait(main, gender);
 
   return (
-    <div className="me">
+    <div className="my-avatar">
       <img 
         src={picture} 
-        onLoad={(e:any) => e.target.classList.add('floating')}
       />
     </div>
   )
 }
 
-export default Me;
+export default MyAvatar;

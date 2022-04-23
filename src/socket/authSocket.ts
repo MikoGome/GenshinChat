@@ -34,7 +34,7 @@ function authSocket (socket: any, io: any) {
       
     }
 
-    if(socket.room) {
+    if(talkRooms[socket.room]) {
       const filteredRoom = talkRooms[socket.room].filter(el => {
         return el.name !== onlineUsers[socket.id].name
       });

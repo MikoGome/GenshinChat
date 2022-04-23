@@ -15,15 +15,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  logIn: (url, account) => dispatch(logIn(url, account))
+  logIn: (url, account):void => dispatch(logIn(url, account))
 });
 
 function Login({account, logIn}): JSX.Element {
   
   const [login, changeLogin] = useState<boolean>(true);
   const [gender, changeGender] = useState<string>(null);
-
-  document.title = 'Genshin Chat | ' + (login ? 'Login' : 'Sign Up');
 
   const navigate = useNavigate();
 
