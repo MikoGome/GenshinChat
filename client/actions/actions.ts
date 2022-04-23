@@ -65,6 +65,10 @@ export const joinRoom = (payload) => ({
 export const updateRoom = (payload) => ({
   type: actionTypes.UPDATE_ROOM,
   payload: payload
+});
+
+export const leaveTalk = () => ({
+  type: actionTypes.LEAVE_TALK
 })
 
 //characters

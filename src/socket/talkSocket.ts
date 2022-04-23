@@ -16,7 +16,7 @@ function talkSocket(socket: any, io: any) {
 
   socket.on('initiateTalk', (data:any) => {
     const roomId = data.roomId || uuidv4();
-    if(!talkRooms[roomId]?.length) talkRooms[roomId] = []; //if condition, stops resetting the room every invite
+    if(!talkRooms[roomId]) talkRooms[roomId] = []; //if condition stops resetting the room every invite
     const {participantA, participantB} = data;
     io.to(participantA.socket).emit('beginTalk', roomId);
     io.to(participantB.socket).emit('beginTalk', roomId);
@@ -44,6 +44,7 @@ function talkSocket(socket: any, io: any) {
       });
       talkRooms[socket.room] = filteredRoom;
       io.to(socket.room).emit('updateRoom', {participants: filteredRoom});
+      socket.leave(socket.room);
       delete socket.room;
     }
   });

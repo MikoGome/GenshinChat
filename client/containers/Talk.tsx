@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
+import { leaveTalk } from '../actions/actions';
 
 import NavBar from '../components/NavBar';
 import Chat from '../components/chat/Chat';
@@ -20,11 +21,19 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  authenticate: () => dispatch(authenticate())
+  authenticate: () => dispatch(authenticate()),
+  leaveTalk: () => dispatch(leaveTalk())
 });
 
+interface TalkProps {
+  account: account,
+  authenticate: Function,
+  talk: talkStateShape,
+  leaveTalk: Function
+}
 
-const Talk: React.FC<{account: account, authenticate:Function, talk: talkStateShape}> = ({account, authenticate, talk}): JSX.Element => {
+
+const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk}): JSX.Element => {
   console.log('account');
   const navigate = useNavigate();
 
@@ -65,6 +74,7 @@ const Talk: React.FC<{account: account, authenticate:Function, talk: talkStateSh
 
   function leaveRoom() {
     account.socket.emit('leaveRoom');
+    leaveTalk();
   }
 
   return(
