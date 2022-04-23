@@ -63,13 +63,17 @@ const Talk: React.FC<{account: account, authenticate:Function, talk: talkStateSh
     }
   });
 
+  function leaveRoom() {
+    account.socket.emit('leaveRoom');
+  }
+
   return(
     <div className="talk">
       <NavBar current="talk"/>
       <main>
       <div className="chat-bar">
         <div className="participants">{participants}</div>
-        <button className="button-hover">Leave</button>
+        <button className="button-hover" onClick={leaveRoom}>Leave</button>
       </div>
       <div className="partners">
         {partners}

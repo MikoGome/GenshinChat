@@ -24,7 +24,8 @@ $chat-bar-height: 4rem;
       z-index: 1;
 
       .participants {
-
+        display: flex;
+        
         img {
           display: block;
           height: $chat-bar-height;

@@ -40,6 +40,7 @@ function authSocket (socket: any, io: any) {
       });
       talkRooms[socket.room] = filteredRoom;
       io.to(socket.room).emit('updateRoom', {participants: filteredRoom});
+      delete socket.room;
     }
     delete onlineUsers[socket.id];
     io.emit('updateOnlineUsers', onlineUsers);
