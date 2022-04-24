@@ -1,8 +1,12 @@
 .partner {
-  transform: translateX(-50%);
-  
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  transition: all 0.5s ease-in-out;
+
   img {
-    height: 150vh;
+    height: 100%;
     object-fit: cover;
+    transform: translateY(3rem);
   }
 }

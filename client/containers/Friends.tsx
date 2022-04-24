@@ -31,6 +31,18 @@ function Friends({account, authenticate, friends, removeFriend}): JSX.Element {
     }
   }, [account.authenticated]);
 
+  // const sender = {
+  //   name: account.name,
+  //   main: account.main,
+  //   gender: account.gender,
+  //   id: account.id,
+  //   socket: account.socket.id,
+  // }
+
+  // function talkTo() {
+  //   socket.emit('talkTo', {sendee: socketId, sender, roomId});
+  // }
+
   const friendsList = [];
   let counter = 0;
   for(const key in friends) {

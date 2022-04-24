@@ -65,10 +65,10 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk}): JS
   const partners = [];
   const participants = [];
 
-  talk.participants.forEach((el: talkStateShape["focus"]) => {
+  talk.participants.forEach((el: talkStateShape["focus"], index) => {
     if(el.name !== account.name) {
-      partners.push(<Partner {...el}/>);
-      participants.push(<Participant {...el}/>);
+      partners.push(<Partner key={'partner_' + index} {...el}/>);
+      participants.push(<Participant key={'participant_' + index} {...el}/>);
     }
   });
 

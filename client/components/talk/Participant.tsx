@@ -9,7 +9,7 @@ const Participant: React.FC<talkStateShape["focus"]> = ({name, main, gender}): J
   const picture = iconSide(main ,gender);
 
   return (
-    <div className="participant" title={name}>
+    <div className="participant bubbling" title={name}>
       <img src={picture} />
     </div>
   )
