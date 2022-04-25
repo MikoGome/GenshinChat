@@ -3,7 +3,7 @@ import {onlineUsers} from './socket';
 
 
 interface talkRoomsShape {
-  [roomId:string]: {name:string, main: string, gender:string}[]
+  [roomId:string]: {[name:string]: {main: string, gender:string}}
 }
 
 export const talkRooms:talkRoomsShape = {}
@@ -15,7 +15,7 @@ function talkSocket(socket: any, io: any) {
 
   socket.on('initiateTalk', (data:any) => {
     const roomId = data.roomId || uuidv4();
-    if(!talkRooms[roomId]) talkRooms[roomId] = []; //if condition stops resetting the room every invite
+    if(!talkRooms[roomId]) talkRooms[roomId] = {}; //if condition stops resetting the room every invite
     const {participantA, participantB} = data;
     io.to(participantA.socket).emit('beginTalk', roomId);
     io.to(participantB.socket).emit('beginTalk', roomId);
@@ -25,7 +25,8 @@ function talkSocket(socket: any, io: any) {
     socket.join(roomId);
     if(!socket.room) {
       socket.room = roomId;
-      talkRooms[roomId].push(onlineUsers[socket.id]);
+      const {name, main, gender} = onlineUsers[socket.id];
+      talkRooms[roomId][name] = {main, gender};
     }
     io.to(roomId).emit('joinTalkRoom', {roomId, participants: talkRooms[roomId]});
   });
@@ -38,10 +39,9 @@ function talkSocket(socket: any, io: any) {
 
   socket.on('leaveRoom', () => {
     if(talkRooms[socket.room]) {
-      const filteredRoom = talkRooms[socket.room].filter(el => {
-        return el.name !== onlineUsers[socket.id].name
-      });
-      talkRooms[socket.room] = filteredRoom;
+      const {name} = onlineUsers[socket.id];
+      delete talkRooms[socket.room][name];
+      const filteredRoom = talkRooms[socket.room];
       io.to(socket.room).emit('updateRoom', {participants: filteredRoom});
       socket.leave(socket.room);
       delete socket.room;

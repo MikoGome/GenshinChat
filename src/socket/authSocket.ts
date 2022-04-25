@@ -35,11 +35,11 @@ function authSocket (socket: any, io: any) {
     }
 
     if(talkRooms[socket.room]) {
-      const filteredRoom = talkRooms[socket.room].filter(el => {
-        return el.name !== onlineUsers[socket.id].name
-      });
-      talkRooms[socket.room] = filteredRoom;
+      const {name} = onlineUsers[socket.id];
+      delete talkRooms[socket.room][name];
+      const filteredRoom = talkRooms[socket.room];
       io.to(socket.room).emit('updateRoom', {participants: filteredRoom});
+      socket.leave(socket.room);
       delete socket.room;
     }
     delete onlineUsers[socket.id];

@@ -3,7 +3,7 @@ import { deepCopy } from '../utils/helperFunctions';
 
 const initialState: talkStateShape = {
   roomId: '',
-  participants: [],
+  participants: {},
   chatHistory: [],
   focus: null,
   typer: {},
@@ -28,6 +28,7 @@ function talkReducer(state = initialState, action: actionObject) {
       const {roomId, participants} = action.payload;
       newState.roomId = roomId;
       newState.participants = participants;
+      console.log('JOINROOM', newState);
       return newState;
     }
 
@@ -57,10 +58,10 @@ function talkReducer(state = initialState, action: actionObject) {
 
 export interface talkStateShape {
   roomId: string,
-  participants: participantShape[],
+  participants: participantShape,
   chatHistory: chatHistoryShape[],
-  focus: participantShape,
-  typer: object,
+  focus: focusShape
+  typer: typerShape,
   talkRequest: (any | null),
 }
 
@@ -77,7 +78,11 @@ interface chatHistoryShape {
 }
 
 interface participantShape {
-  name: string,
+  [name: string]: {gender: string, main: string}
+}
+
+interface focusShape {
+  name: string, 
   gender: string,
   main: string
 }

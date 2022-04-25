@@ -66,12 +66,22 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk}): JS
   const partners = [];
   const participants = [];
 
-  talk.participants.forEach((el: talkStateShape["focus"], index) => {
-    if(el.name !== account.name) {
-      partners.push(<Partner key={'partner_' + index} {...el}/>);
-      participants.push(<Participant key={'participant_' + index} {...el}/>);
+  // talk.participants.forEach((el: talkStateShape["focus"], index) => {
+  //   if(el.name !== account.name) {
+  //     partners.push(<Partner key={'partner_' + index} {...el}/>);
+  //     participants.push(<Participant key={'participant_' + index} {...el}/>);
+  //   }
+  // });
+
+  for(const participant in talk.participants) {
+    if(participant === account.name) continue;
+    const participantInfo = {
+      name: participant,
+      ...talk.participants[participant]
     }
-  });
+    partners.push(<Partner key={'partner_' + partners.length} {...participantInfo}/>);
+    participants.push(<Participant key={'participant_'+ participants.length} {...participantInfo}/>);
+  }
 
   function leaveRoom() {
     account.socket.emit('leaveRoom');
