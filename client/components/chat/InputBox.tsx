@@ -26,7 +26,7 @@ function InputBox({name, gender, main, socket, roomId}): JSX.Element {
   function typing(e:React.KeyboardEvent<HTMLInputElement>):void {
     if(e.key === 'Enter') {
       send(name, main, gender, message.current);
-    } else if(roomId && e.key !== 'Backspace' && !e.altKey){
+    } else if(roomId && e.key !== 'Backspace' && !e.altKey && !e.ctrlKey){
 
       if(doneTyping.current) {
         clearInterval(doneTyping.current);

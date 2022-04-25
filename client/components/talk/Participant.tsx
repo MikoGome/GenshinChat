@@ -4,7 +4,7 @@ import { talkStateShape } from "../../reducers/talkReducer";
 
 import {iconSide} from '../../utils/helperFunctions';
 
-const Participant: React.FC<talkStateShape["focus"]> = ({name, main, gender}): JSX.Element => {
+const Participant: React.FC<talkStateShape["focus"] & ({typer: ({[name:string]: boolean}|{})})> = ({name, main, gender, typer}): JSX.Element => {
 
   const picture = iconSide(main ,gender);
 
