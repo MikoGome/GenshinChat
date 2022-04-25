@@ -17,7 +17,8 @@ const Partner: React.FC<talkStateShape["focus"]> = (participant): JSX.Element =>
   return (
     <div className="partner" ref={partner}>
       <img
-        src={partnerPortrait} 
+        src={partnerPortrait}
+        className="breathing"
       />
     </div>
   )

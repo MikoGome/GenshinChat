@@ -1,4 +1,3 @@
-import { Socket } from 'socket.io';
 import {v4 as uuidv4} from 'uuid';
 import {onlineUsers} from './socket';
 
@@ -47,6 +46,16 @@ function talkSocket(socket: any, io: any) {
       socket.leave(socket.room);
       delete socket.room;
     }
+  });
+
+  socket.on('typing', (roomId:string) => {
+    const typer = onlineUsers[socket.id]?.name;
+    io.to(roomId).emit('typing', typer)
+  });
+
+  socket.on('doneTyping', (roomId: string) => {
+    const typer = onlineUsers[socket.id]?.name;
+    io.to(roomId).emit('doneTyping', typer);
   });
 }
 

@@ -69,7 +69,17 @@ export const updateRoom = (payload) => ({
 
 export const leaveTalk = () => ({
   type: actionTypes.LEAVE_TALK
-})
+});
+
+export const typing = (payload) => ({
+  type: actionTypes.TYPING,
+  payload: payload
+});
+
+export const doneTyping = (payload) => ({
+  type: actionTypes.DONE_TYPING,
+  payload: payload
+});
 
 //characters
 export const updateInfo = (payload) => ({

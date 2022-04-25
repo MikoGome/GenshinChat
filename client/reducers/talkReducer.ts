@@ -6,10 +6,12 @@ const initialState: talkStateShape = {
   participants: [],
   chatHistory: [],
   focus: null,
+  typer: {},
   talkRequest: null
 }
 
 function talkReducer(state = initialState, action: actionObject) {
+  const newState = deepCopy(state);
   switch(action.type) {
 
     case actionTypes.LEAVE_TALK: {
@@ -18,13 +20,11 @@ function talkReducer(state = initialState, action: actionObject) {
     }
     
     case actionTypes.RECEIVED_TALK_REQUEST: {
-      const newState = deepCopy(state);
       newState.talkRequest = action.payload;
       return newState;
     }
     
     case actionTypes.JOIN_ROOM: {
-      const newState = deepCopy(state);
       const {roomId, participants} = action.payload;
       newState.roomId = roomId;
       newState.participants = participants;
@@ -32,14 +32,22 @@ function talkReducer(state = initialState, action: actionObject) {
     }
 
     case actionTypes.SEND_TALK: {
-      const newState = deepCopy(state);
       newState.chatHistory.push(action.payload);
       return newState;
     }
 
     case actionTypes.UPDATE_ROOM: {
-      const newState = deepCopy(state);
       return {...newState, ...action.payload};
+    }
+
+    case actionTypes.TYPING: {
+      newState.typer[action.payload] = true;
+      return newState;
+    }
+
+    case actionTypes.DONE_TYPING: {
+      delete newState.typer[action.payload];
+      return newState;
     }
 
     default:
@@ -52,7 +60,8 @@ export interface talkStateShape {
   participants: participantShape[],
   chatHistory: chatHistoryShape[],
   focus: participantShape,
-  talkRequest: (any | null)
+  typer: object,
+  talkRequest: (any | null),
 }
 
 interface actionObject {
@@ -71,6 +80,10 @@ interface participantShape {
   name: string,
   gender: string,
   main: string
+}
+
+interface typerShape {
+  name: boolean
 }
 
 export default talkReducer;

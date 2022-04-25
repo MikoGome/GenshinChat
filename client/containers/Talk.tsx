@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
@@ -37,10 +37,11 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk}): JS
   console.log('account');
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     authenticate();
   }, []);
-
+  
   useEffect(() => {
     if(account.authenticated === false) {
       navigate('/login');
@@ -56,7 +57,7 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk}): JS
             <h1>Currently Not Talking To Anyone</h1>
             <h1>Invite Someone To Talk To</h1>
         </div>
-        <MyAvatar name={account.name} gender={account.gender} main={account.main}/>
+        <MyAvatar name={account.name} gender={account.gender} main={account.main} typer={talk.typer}/>
         </main>
       </div>
     )
@@ -89,7 +90,7 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk}): JS
         {partners}
       </div>
       <Chat account={account} room={talk}/>
-      <MyAvatar name={account.name} gender={account.gender} main={account.main} />
+      <MyAvatar name={account.name} gender={account.gender} main={account.main} typer={talk.typer}/>
       </main>
     </div>
   )

@@ -39,6 +39,14 @@ function socketListeners(socket, dispatch) {
   socket.on('updateRoom', (data) => {
     dispatch(actions.updateRoom(data));
   });
+
+  socket.on('typing', (typer:string) => {
+    dispatch(actions.typing(typer));
+  });
+
+  socket.on('doneTyping', (typer:string) => {
+    dispatch(actions.doneTyping(typer));
+  });
 }
 
 export default socketListeners;

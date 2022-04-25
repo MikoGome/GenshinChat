@@ -3,9 +3,16 @@
   display: flex;
   justify-content: flex-start;
   transition: all 0.5s ease-in-out;
-  
+
   img {
-    height: 150%;
-    transform: translateY(3rem);
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    top: 100px;
+    transition: all 0.5s ease-out;
+  }
+
+  .typing {
+    top: 30px;
   }
 }

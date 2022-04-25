@@ -21,3 +21,5 @@ export const RECEIVED_TALK_REQUEST = 'RECEIVED_TALK_REQUEST';
 export const SEND_TALK = 'SEND_TALK';
 export const JOIN_ROOM = 'JOIN_ROOM';
 export const UPDATE_ROOM = 'UPDATE_ROOM';
+export const TYPING = 'TYPING';
+export const DONE_TYPING = 'DONE_TYPING';

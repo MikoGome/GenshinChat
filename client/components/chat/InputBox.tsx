@@ -21,12 +21,31 @@ function InputBox({name, gender, main, socket, roomId}): JSX.Element {
     message.current.focus();
   }, []);
 
+  const doneTyping:React.MutableRefObject<undefined | NodeJS.Timeout> = useRef();
+
+  function typing(e:React.KeyboardEvent<HTMLInputElement>):void {
+    if(e.key === 'Enter') {
+      send(name, main, gender, message.current);
+    } else if(roomId && e.key !== 'Backspace' && !e.altKey){
+
+      if(doneTyping.current) {
+        clearInterval(doneTyping.current);
+      }
+
+      socket.emit('typing', roomId);
+
+      doneTyping.current = setTimeout(() => {
+        socket.emit('doneTyping', roomId);
+      }, 3000);
+    }
+  }
+
   return (
     <div className='input-box'>
       <input 
         type='text' 
         ref={message} 
-        onKeyDown={(e) => {if(e.key === 'Enter') send(name, main, gender, message.current)}}
+        onKeyDown={typing}
       />
       <button onClick={() => send(name, main, gender, message.current)}>
         <SendIcon />
