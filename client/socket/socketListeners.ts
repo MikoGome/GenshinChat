@@ -47,6 +47,10 @@ function socketListeners(socket, dispatch) {
   socket.on('doneTyping', (typer:string) => {
     dispatch(actions.doneTyping(typer));
   });
+
+  socket.on('updatePartner', (data) => {
+    dispatch(actions.updateRoom(data));
+  });
 }
 
 export default socketListeners;

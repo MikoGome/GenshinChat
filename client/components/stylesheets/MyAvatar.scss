@@ -10,9 +10,16 @@
     position: relative;
     top: 100px;
     transition: all 0.5s ease-out;
+    left: 0;
+    opacity: 1;
   }
 
   .typing {
     top: 60px;
+  }
+
+  .hide-me {
+    left: 300px;
+    opacity: 0;
   }
 }

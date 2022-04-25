@@ -19,6 +19,11 @@ function authSocket (socket: any, io: any) {
 
     }
     io.emit('updateOnlineUsers', onlineUsers);
+    if(socket.room) {
+      const {name, gender, main} = onlineUsers[socket.id];
+      talkRooms[socket.room][name] = {main, gender};
+      io.to(socket.room).emit('updatePartner', {participants: talkRooms[socket.room]});
+    }
   });
 
   socket.on('disconnect', () => {

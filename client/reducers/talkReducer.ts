@@ -28,7 +28,6 @@ function talkReducer(state = initialState, action: actionObject) {
       const {roomId, participants} = action.payload;
       newState.roomId = roomId;
       newState.participants = participants;
-      console.log('JOINROOM', newState);
       return newState;
     }
 
@@ -38,6 +37,7 @@ function talkReducer(state = initialState, action: actionObject) {
     }
 
     case actionTypes.UPDATE_ROOM: {
+      console.log({...newState, ...action.payload})
       return {...newState, ...action.payload};
     }
 

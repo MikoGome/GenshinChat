@@ -11,6 +11,11 @@ const MyAvatar:React.FC<talkStateShape["focus"] & ({typer: ({[name:string]: bool
 
   const me: React.MutableRefObject<HTMLImageElement> = useRef();
 
+
+  useEffect(() => {
+    me.current.classList.remove('hide-me');
+  }, [])
+
   useEffect(() => {
     if(name in typer) {
       me.current.classList.add('typing');
@@ -23,7 +28,7 @@ const MyAvatar:React.FC<talkStateShape["focus"] & ({typer: ({[name:string]: bool
     <div className="my-avatar">
       <img 
         src={picture} 
-        className="breathing"
+        className="breathing hide-me"
         ref={me}
       />
     </div>

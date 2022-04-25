@@ -12,6 +12,7 @@ const Partner: React.FC<talkStateShape["focus"] & ({typer: ({[name:string]: bool
   const you:React.MutableRefObject<HTMLImageElement> = useRef();
 
   useEffect(() => {
+    you.current.classList.remove('hide-partner');
   }, []);
 
 
@@ -27,7 +28,7 @@ const Partner: React.FC<talkStateShape["focus"] & ({typer: ({[name:string]: bool
     <div className="partner" ref={partner}>
       <img
         src={partnerPortrait}
-        className="breathing"
+        className="breathing hide-partner"
         ref={you}
       />
     </div>
