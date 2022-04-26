@@ -4,6 +4,8 @@ import { onlineUsers } from './socket';
 
 import {talkRooms} from './talkSocket';
 
+const inactive:{[name:string]: true} = {};
+
 function authSocket (socket: any, io: any) {
   socket.on('signIn', (account: accountShape) => {
     onlineUsers[socket.id] = account;
@@ -23,6 +25,22 @@ function authSocket (socket: any, io: any) {
       const {name, gender, main} = onlineUsers[socket.id];
       talkRooms[socket.room][name] = {main, gender};
       io.to(socket.room).emit('updatePartner', {participants: talkRooms[socket.room]});
+    }
+  });
+
+  socket.on('active', () => {
+    if(onlineUsers[socket.id] && socket.room) {
+      const {name} = onlineUsers[socket.id];
+      delete inactive[name];
+      io.to(socket.room).emit('active', inactive);
+    }
+  });
+
+  socket.on('inactive', () => {
+    if(onlineUsers[socket.id] && socket.room) {
+      const {name} = onlineUsers[socket.id];
+      inactive[name] = true;
+      io.to(socket.room).emit('inactive', inactive);
     }
   });
 

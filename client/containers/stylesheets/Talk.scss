@@ -27,10 +27,11 @@ $chat-bar-height: 4rem;
 
       .participants {
         display: flex;
-        
+
         img {
           display: block;
           height: $chat-bar-height;
+          transition: all 0.5s ease-out;
         }
       }
 

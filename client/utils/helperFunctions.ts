@@ -20,7 +20,7 @@ export const validate = (method:boolean, account:accountStructure):boolean => {
 
 export const deepCopy = <T>(input: T): T => {
   if(typeof input === 'object' && input !== null) {
-    const clone = input.constructor();
+    const clone = new input.constructor();
     for(const key in input) {
       if(typeof input[key] === 'object' && key !== 'socket' && input !== null) {
         clone[key] = deepCopy(input[key]);
@@ -48,14 +48,14 @@ export const backupCase = (str: string) => {
 
 export const iconBig = (main: string, gender: string) => {
   if(typeof main !== 'string' || typeof gender !== 'string') return;
-  let picture = `https://api.genshin.dev/characters/${main}/icon-big`;
+  let picture = pictures[main]?.iconBig;
   let backupPicture = `https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_${backupCase(main)}.png`;
   if(main.startsWith('traveler')) {
     if(gender === 'male') {
-      picture = `https://api.genshin.dev/characters/traveler-anemo/icon-big-aether`
+      picture = pictures.aether.iconBig;
       backupPicture = 'https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_PlayerBoy.png';
     } else if(gender === 'female') {
-      picture = `https://api.genshin.dev/characters/traveler-anemo/icon-big-lumine`
+      picture = pictures.lumine.iconBig;
       backupPicture = 'https://upload-os-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_PlayerGirl.png';
     }
   } else if(main === 'thoma') {
@@ -67,28 +67,30 @@ export const iconBig = (main: string, gender: string) => {
   }
 }
 
-export const portrait = (main: string, gender: string):string => {
+import pictures from '../assets/preload';
+
+export const portrait = (main: string, gender: string) => {
   if(typeof main !== 'string' || typeof gender !== 'string') return;
   if(main.startsWith('traveler')) {
     if(gender === 'male') {
-      return 'https://api.genshin.dev/characters/traveler-anemo/portraitm';
+      return pictures.aether?.portrait;
     } else if (gender === 'female') {
-      return 'https://api.genshin.dev/characters/traveler-anemo/portraitf';
+      return pictures.lumine?.portrait;
     }
   }
 
-  return `https://api.genshin.dev/characters/${main}/portrait`;
+  return pictures[main]?.portrait;
 }
 
 export const iconSide = (main: string, gender: string):string => {
   if(typeof main !== 'string' || typeof gender !== 'string') return;
   if(main.startsWith('traveler')) {
     if(gender === 'male') {
-      return 'https://api.genshin.dev/characters/traveler-anemo/icon-side-aether';
+      return pictures.aether?.iconSide;
     } else if (gender === 'female') {
-      return 'https://api.genshin.dev/characters/traveler-anemo/icon-side-lumine';
+      return pictures.lumine?.iconSide;
     }
   }
 
-  return `https://api.genshin.dev/characters/${main}/icon-side`;
+  return pictures[main]?.iconSide;
 }

@@ -79,8 +79,8 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk}): JS
       name: participant,
       ...talk.participants[participant]
     }
-    partners.push(<Partner key={'partner_' + partners.length} {...participantInfo} typer={talk.typer}/>);
-    participants.push(<Participant key={'participant_'+ participants.length} {...participantInfo} typer={talk.typer}/>);
+    partners.push(<Partner key={'partner_' + partners.length} {...participantInfo} typer={talk.typer} inactive={talk.inactive}/>);
+    participants.push(<Participant key={'participant_'+ participants.length} {...participantInfo} typer={talk.typer} inactive={talk.inactive}/>);
   }
 
   function leaveRoom() {

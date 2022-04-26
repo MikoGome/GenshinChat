@@ -1,14 +1,9 @@
 import React, {useEffect, useRef} from 'react';
+import {portrait} from '../../utils/helperFunctions';
 
 function CharacterPreview({character, spotlight, gender}):JSX.Element {
   
-  let image = `https://api.genshin.dev/characters/${character}/portrait`;
-  
-  if(character.startsWith('traveler')) {
-    const append = gender === 'male' ? 'm' : 'f';
-    image = "https://api.genshin.dev/characters/traveler-anemo/portrait" + append;
-    character = gender === 'male' ? 'aether' : 'lumine';
-  }
+  const image = portrait(character, gender);
 
   const char:React.MutableRefObject<HTMLDivElement> = useRef();
 

@@ -51,6 +51,15 @@ function socketListeners(socket, dispatch) {
   socket.on('updatePartner', (data) => {
     dispatch(actions.updateRoom(data));
   });
+
+  socket.on('inactive', (data) => {
+    console.log('data', data);
+    dispatch(actions.updateInactive(data));
+  });
+
+  socket.on('active', (data) => {
+    dispatch(actions.updateInactive(data));
+  });
 }
 
 export default socketListeners;

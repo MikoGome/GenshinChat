@@ -4,6 +4,7 @@ import { deepCopy } from '../utils/helperFunctions';
 const initialState: talkStateShape = {
   roomId: '',
   participants: {},
+  inactive: {},
   chatHistory: [],
   focus: null,
   typer: {},
@@ -37,7 +38,6 @@ function talkReducer(state = initialState, action: actionObject) {
     }
 
     case actionTypes.UPDATE_ROOM: {
-      console.log({...newState, ...action.payload})
       return {...newState, ...action.payload};
     }
 
@@ -51,6 +51,12 @@ function talkReducer(state = initialState, action: actionObject) {
       return newState;
     }
 
+    case actionTypes.UPDATE_INACTIVE: {
+      newState.inactive = action.payload;
+      console.log(newState.inactive);
+      return newState;
+    }
+
     default:
       return state;
   }
@@ -59,6 +65,7 @@ function talkReducer(state = initialState, action: actionObject) {
 export interface talkStateShape {
   roomId: string,
   participants: participantShape,
+  inactive: {[name:string]: true},
   chatHistory: chatHistoryShape[],
   focus: focusShape
   typer: typerShape,
@@ -88,7 +95,7 @@ interface focusShape {
 }
 
 interface typerShape {
-  name: boolean
+  [name: string]: boolean
 }
 
 export default talkReducer;

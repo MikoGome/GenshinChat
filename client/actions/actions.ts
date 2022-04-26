@@ -81,6 +81,11 @@ export const doneTyping = (payload) => ({
   payload: payload
 });
 
+export const updateInactive = (payload) => ({
+  type: actionTypes.UPDATE_INACTIVE,
+  payload: payload
+});
+
 //characters
 export const updateInfo = (payload) => ({
   type: actionTypes.GET_INFO,
