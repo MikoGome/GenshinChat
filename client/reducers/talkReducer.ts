@@ -12,7 +12,9 @@ const initialState: talkStateShape = {
     main: ''
   },
   typer: {},
-  talkRequest: null
+  talkRequest: null,
+  messageProg: 1,
+  friendInRoom: false
 }
 
 function talkReducer(state = initialState, action: actionObject) {
@@ -37,7 +39,9 @@ function talkReducer(state = initialState, action: actionObject) {
     }
 
     case actionTypes.SEND_TALK: {
-      newState.chatHistory.push(action.payload);
+      const {name, main, gender, message, possession} = action.payload;
+      newState.chatHistory.push({name, main, gender, message});
+      newState.messageProg++;
       return newState;
     }
 
@@ -79,6 +83,8 @@ export interface talkStateShape {
   focus: focusShape
   typer: typerShape,
   talkRequest: (any | null),
+  messageProg: number,
+  friendInRoom: false
 }
 
 interface actionObject {

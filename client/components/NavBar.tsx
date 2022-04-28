@@ -24,7 +24,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 function NavBar({account, current, signOut}) {
-
   const navigate = useNavigate();
   const focusLine = useRef();
   const navBar = useRef();

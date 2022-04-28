@@ -8,6 +8,8 @@ function Currency({account}): JSX.Element {
 
   function showProgress() {
     //16 - 100 //84-empty
+    console.log(account.wishes.progress);
+    console.log('rerender');
 
     const wishProg = account.wishes.progress / 100;
     const full = 68;

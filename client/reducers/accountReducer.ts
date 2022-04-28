@@ -30,7 +30,8 @@ function accountReducer(state = initialState, action:actionObject) {
     
     case actionTypes.UPDATE_WISH: {
       const newState = deepCopy(state);
-      return {...newState, ...action.payload};
+      console.log(newState, action.payload);
+      return {...newState, wishes: action.payload};
     }
 
     case actionTypes.UPDATE_MAIN: {

@@ -1,7 +1,9 @@
 import React, {useEffect, useRef} from 'react';
+import { useDispatch } from 'react-redux';
 import InputBox from './InputBox';
-
 import Message from './Message';
+
+import { wishing } from '../../actions/asyncActions';
 
 import '../stylesheets/Chat.scss';
 
@@ -13,9 +15,18 @@ function Chat({room, account}): JSX.Element {
 
   const chatBox:React.MutableRefObject<HTMLUListElement> = useRef();
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     chatBox.current.scrollTo(0, chatBox.current.scrollHeight);
   }, [room.chatHistory.length]);
+
+  function incrementWish() {
+    console.log(room.messageProg)
+    if(room.messageProg % 20 === 0) {
+      dispatch(wishing({possession: account.possession}))
+    }
+  }
 
   return (
     <div className="chat">
@@ -23,11 +34,9 @@ function Chat({room, account}): JSX.Element {
         {messages}
       </ul>
       <InputBox 
-        socket={account.socket} 
-        name={account.name} 
-        gender={account.gender} 
-        main={account.main}
-        roomId = {room.roomId}
+        account={account}
+        roomId={room.roomId}
+        incrementWish={incrementWish}
       />
     </div>
   )

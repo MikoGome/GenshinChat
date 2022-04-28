@@ -36,9 +36,8 @@ interface TalkProps {
 
 
 const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk, updateFocus}): JSX.Element => {
-  console.log('account');
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   
   useEffect(() => {
     authenticate();
@@ -117,7 +116,7 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk, upda
       <div className="partners">
         {partners}
       </div>
-      <Chat account={account} room={talk}/>
+      <Chat account={account} room={talk} />
       <MyAvatar name={account.name} gender={account.gender} main={account.main} typer={talk.typer}/>
       </main>
     </div>

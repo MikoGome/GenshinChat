@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import SendIcon from '@mui/icons-material/Send';
 
-function InputBox({name, gender, main, socket, roomId}): JSX.Element {
+function InputBox({account, roomId, incrementWish}): JSX.Element {
   const message:React.MutableRefObject<HTMLInputElement> = useRef();
 
   function send(name, main, gender, messageElement) {
@@ -9,9 +9,10 @@ function InputBox({name, gender, main, socket, roomId}): JSX.Element {
     if(message.length === 0) return;
 
     if(roomId) {
-      socket.emit('talk', {name, main, gender, message, roomId});
+      account.socket.emit('talk', {name, main, gender, message, roomId, possession: account.possession});
+      incrementWish();
     } else {
-      socket.emit('sendMessage', {name, main, gender, message});
+      account.socket.emit('sendMessage', {name, main, gender, message});
     }
 
     messageElement.value = '';
@@ -25,17 +26,17 @@ function InputBox({name, gender, main, socket, roomId}): JSX.Element {
 
   function typing(e:React.KeyboardEvent<HTMLInputElement>):void {
     if(e.key === 'Enter') {
-      send(name, main, gender, message.current);
+      send(account.name, account.main, account.gender, message.current);
     } else if(roomId && e.key !== 'Backspace' && !e.altKey && !e.ctrlKey){
 
       if(doneTyping.current) {
         clearInterval(doneTyping.current);
       }
 
-      socket.emit('typing', roomId);
+      account.socket.emit('typing', roomId);
 
       doneTyping.current = setTimeout(() => {
-        socket.emit('doneTyping', roomId);
+        account.socket.emit('doneTyping', roomId);
       }, 1500);
     }
   }
@@ -47,7 +48,7 @@ function InputBox({name, gender, main, socket, roomId}): JSX.Element {
         ref={message} 
         onKeyDown={typing}
       />
-      <button onClick={() => send(name, main, gender, message.current)}>
+      <button onClick={() => send(account.name, account.main, account.gender, message.current)}>
         <SendIcon />
       </button>
     </div>

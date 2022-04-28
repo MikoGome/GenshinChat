@@ -31,9 +31,9 @@ function talkSocket(socket: any, io: any) {
     io.to(roomId).emit('joinTalkRoom', {roomId, participants: talkRooms[roomId]});
   });
 
-  socket.on('talk', (data:{name: string, main:string, gender:string, message: string, roomId: string}) => {
-    const {name, main, gender ,message, roomId} = data;
-    const newTalk = {name, main, gender, message};
+  socket.on('talk', (data:{name: string, main:string, gender:string, message: string, roomId: string, possession: string}) => {
+    const {name, main, gender ,message, roomId, possession} = data;
+    const newTalk = {name, main, gender, message, possession};
     io.to(roomId).emit('newTalk', newTalk);
   });
 

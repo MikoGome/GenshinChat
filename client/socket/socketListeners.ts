@@ -53,7 +53,6 @@ function socketListeners(socket, dispatch) {
   });
 
   socket.on('inactive', (data) => {
-    console.log('data', data);
     dispatch(actions.updateInactive(data));
   });
 
