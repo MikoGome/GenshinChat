@@ -8,12 +8,12 @@ export interface talkStateShapeExtension {
   typer: {
     [name:string]: boolean
   },
-  inactive: {[name:string]: true}
+  inactive: {[name:string]: true},
+  focus: talkStateShape["focus"],
+  updateFocus?: Function
 }
 
-const Participant: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({name, main, gender, typer, inactive}): JSX.Element => {
-
-  console.log('inactive', inactive);
+const Participant: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({name, main, gender, typer, inactive, focus, updateFocus}): JSX.Element => {
 
   const picture = iconSide(main ,gender);
 
@@ -33,10 +33,14 @@ const Participant: React.FC<talkStateShape["focus"] & talkStateShapeExtension> =
     } else {
       participant.current.classList.remove('inactive');
     }
-  }, [inactive])
+  }, [inactive]);
+
+  function focusChange() {
+    updateFocus({name, gender, main});
+  }
 
   return (
-    <div className="participant bubbling" title={name}>
+    <div className="participant bubbling" title={name} onClick={focusChange} >
       <img 
         src={picture} 
         ref={participant}

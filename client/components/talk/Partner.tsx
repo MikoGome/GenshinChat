@@ -7,15 +7,19 @@ import { talkStateShapeExtension } from "./Participant";
 import '../stylesheets/Partner.scss';
 
 
-const Partner: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({name, main, gender, typer, inactive}): JSX.Element => {
+const Partner: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({name, main, gender, typer, inactive, focus}): JSX.Element => {
   const partnerPortrait = portrait(main, gender);
 
   const partner:React.MutableRefObject<HTMLDivElement> = useRef();
   const you:React.MutableRefObject<HTMLImageElement> = useRef();
 
   useEffect(() => {
-    you.current.classList.remove('hide-partner');
-  }, []);
+    if(focus.name === name) {
+      you.current.classList.remove('hide-partner');
+    } else {
+      you.current.classList.add('hide-partner');
+    }
+  }, [focus]);
 
 
   useEffect(() => {
@@ -28,9 +32,9 @@ const Partner: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({n
 
   useEffect(() => {
     if(name in inactive) {
-      partner.current.classList.add('inactive');
+      you.current.classList.add('inactive');
     } else {
-      partner.current.classList.remove('inactive');
+      you.current.classList.remove('inactive');
     }
   }, [inactive])
 

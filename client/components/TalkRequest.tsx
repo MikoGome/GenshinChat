@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import {connect} from "react-redux";
-import { receivedTalkRequest } from "../actions/actions";
+import { receivedTalkRequest, leaveTalk } from "../actions/actions";
 import { iconBig } from "../utils/helperFunctions";
 
 import './stylesheets/Request.scss';
@@ -11,10 +11,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateTalkRequest: () => dispatch(receivedTalkRequest(null))
+  updateTalkRequest: () => dispatch(receivedTalkRequest(null)),
+  leaveTalk: () => dispatch(leaveTalk())
 })
 
-function TalkRequest({account, talkRequest, updateTalkRequest}): JSX.Element {
+function TalkRequest({account,leaveTalk, talkRequest, updateTalkRequest}): JSX.Element {
 
   const talkBox:React.MutableRefObject<HTMLDivElement> = useRef();
   function accept() {
@@ -29,6 +30,9 @@ function TalkRequest({account, talkRequest, updateTalkRequest}): JSX.Element {
 
     const roomId = talkRequest.roomId;
 
+    account.socket.emit('leaveRoom');
+    leaveTalk();
+    
     account.socket.emit('initiateTalk', {participantA, participantB, roomId});
     updateTalkRequest();
   }

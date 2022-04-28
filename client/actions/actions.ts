@@ -86,6 +86,11 @@ export const updateInactive = (payload) => ({
   payload: payload
 });
 
+export const updateFocus = (payload) => ({
+  type: actionTypes.UPDATE_FOCUS,
+  payload: payload
+});
+
 //characters
 export const updateInfo = (payload) => ({
   type: actionTypes.GET_INFO,

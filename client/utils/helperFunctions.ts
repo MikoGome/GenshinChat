@@ -8,8 +8,8 @@ export const validate = (method:boolean, account:accountStructure):boolean => {
   if(!method && (account.gender !== 'male' && account.gender !== 'female')) return false;
   for(const key in account) {
     const str = account[key];
-    // if(key === 'username' && str.length < 3 && str.length > 20) return false;
-    // else if(key === 'password' && str.length < 4) return false;
+    if(key === 'username' && str.length < 3 && str.length > 20) return false;
+    else if(key === 'password' && str.length < 4) return false;
     if(!str.length) return false;
     for(let i = 0; i < str.length; i++) {
       if(!(/[A-Za-z0-9]/.test(str[i]))) return false;
@@ -20,7 +20,7 @@ export const validate = (method:boolean, account:accountStructure):boolean => {
 
 export const deepCopy = <T>(input: T): T => {
   if(typeof input === 'object' && input !== null) {
-    const clone = new input.constructor();
+    const clone = input.constructor();
     for(const key in input) {
       if(typeof input[key] === 'object' && key !== 'socket' && input !== null) {
         clone[key] = deepCopy(input[key]);

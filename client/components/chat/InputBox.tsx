@@ -36,7 +36,7 @@ function InputBox({name, gender, main, socket, roomId}): JSX.Element {
 
       doneTyping.current = setTimeout(() => {
         socket.emit('doneTyping', roomId);
-      }, 3000);
+      }, 1500);
     }
   }
 

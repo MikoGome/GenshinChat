@@ -1,8 +1,8 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
-import { leaveTalk } from '../actions/actions';
+import { leaveTalk, updateFocus } from '../actions/actions';
 
 import NavBar from '../components/NavBar';
 import Chat from '../components/chat/Chat';
@@ -22,18 +22,20 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate()),
-  leaveTalk: () => dispatch(leaveTalk())
+  leaveTalk: () => dispatch(leaveTalk()),
+  updateFocus: (payload) => dispatch(updateFocus(payload)),
 });
 
 interface TalkProps {
   account: account,
   authenticate: Function,
   talk: talkStateShape,
-  leaveTalk: Function
+  leaveTalk: Function,
+  updateFocus: Function
 }
 
 
-const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk}): JSX.Element => {
+const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk, updateFocus}): JSX.Element => {
   console.log('account');
   const navigate = useNavigate();
 
@@ -66,21 +68,37 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk}): JS
   const partners = [];
   const participants = [];
 
-  // talk.participants.forEach((el: talkStateShape["focus"], index) => {
-  //   if(el.name !== account.name) {
-  //     partners.push(<Partner key={'partner_' + index} {...el}/>);
-  //     participants.push(<Participant key={'participant_' + index} {...el}/>);
-  //   }
-  // });
-
   for(const participant in talk.participants) {
     if(participant === account.name) continue;
+    if(talk.focus.name === '') {
+      const {main, gender} = talk.participants[participant];
+        talk.focus = {
+        name: participant,
+        main,
+        gender
+      }
+    }
     const participantInfo = {
       name: participant,
       ...talk.participants[participant]
     }
-    partners.push(<Partner key={'partner_' + partners.length} {...participantInfo} typer={talk.typer} inactive={talk.inactive}/>);
-    participants.push(<Participant key={'participant_'+ participants.length} {...participantInfo} typer={talk.typer} inactive={talk.inactive}/>);
+    partners.push(
+      <Partner 
+        key={'partner_' + partners.length} 
+        {...participantInfo} 
+        typer={talk.typer} 
+        inactive={talk.inactive} 
+        focus={talk.focus}
+      />);
+    participants.push(
+      <Participant 
+      key={'participant_'+ participants.length} 
+      {...participantInfo}
+      typer={talk.typer} 
+      inactive={talk.inactive} 
+      focus={talk.focus} 
+      updateFocus={updateFocus}
+      />);
   }
 
   function leaveRoom() {

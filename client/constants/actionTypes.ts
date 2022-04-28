@@ -24,3 +24,4 @@ export const UPDATE_ROOM = 'UPDATE_ROOM';
 export const TYPING = 'TYPING';
 export const DONE_TYPING = 'DONE_TYPING';
 export const UPDATE_INACTIVE = 'UPDATE_INACTIVE';
+export const UPDATE_FOCUS = 'UPDATE_FOCUS';

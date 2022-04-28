@@ -6,7 +6,11 @@ const initialState: talkStateShape = {
   participants: {},
   inactive: {},
   chatHistory: [],
-  focus: null,
+  focus: {
+    name: '', 
+    gender: '',
+    main: ''
+  },
   typer: {},
   talkRequest: null
 }
@@ -54,6 +58,11 @@ function talkReducer(state = initialState, action: actionObject) {
     case actionTypes.UPDATE_INACTIVE: {
       newState.inactive = action.payload;
       console.log(newState.inactive);
+      return newState;
+    }
+
+    case actionTypes.UPDATE_FOCUS: {
+      newState.focus = action.payload;
       return newState;
     }
 
