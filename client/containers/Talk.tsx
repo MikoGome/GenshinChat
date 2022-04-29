@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, memo} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
@@ -17,7 +17,8 @@ import './stylesheets/Talk.scss';
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  talk: state.talk
+  talk: state.talk,
+  friends: state.page.friends
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -29,13 +30,13 @@ const mapDispatchToProps = (dispatch) => ({
 interface TalkProps {
   account: account,
   authenticate: Function,
+  friends: any,
   talk: talkStateShape,
   leaveTalk: Function,
   updateFocus: Function
 }
 
-
-const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk, updateFocus}): JSX.Element => {
+const Talk: React.FC<TalkProps> = ({account, authenticate, friends, talk, leaveTalk, updateFocus}): JSX.Element => {
 
   const navigate = useNavigate();
   
@@ -66,9 +67,11 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk, upda
 
   const partners = [];
   const participants = [];
+  let friendFlag = false;
 
   for(const participant in talk.participants) {
     if(participant === account.name) continue;
+    if(participant in friends) friendFlag = true;
     if(talk.focus.name === '') {
       const {main, gender} = talk.participants[participant];
         talk.focus = {
@@ -116,11 +119,11 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, talk, leaveTalk, upda
       <div className="partners">
         {partners}
       </div>
-      <Chat account={account} room={talk} />
+      <Chat account={account} room={talk} friend={friendFlag}/>
       <MyAvatar name={account.name} gender={account.gender} main={account.main} typer={talk.typer}/>
       </main>
     </div>
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Talk);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Talk));

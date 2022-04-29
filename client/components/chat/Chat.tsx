@@ -1,13 +1,14 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import { useDispatch } from 'react-redux';
 import InputBox from './InputBox';
 import Message from './Message';
 
 import { wishing } from '../../actions/asyncActions';
+import { incrementMsgProg } from '../../actions/actions';
 
 import '../stylesheets/Chat.scss';
 
-function Chat({room, account}): JSX.Element {
+function Chat({room, account, friend}): JSX.Element {
 
   const messages:JSX.Element[] = room.chatHistory.map((el, index) => {
     return <Message key={"Message_"+index} account={account} entry={el}/>
@@ -22,8 +23,9 @@ function Chat({room, account}): JSX.Element {
   }, [room.chatHistory.length]);
 
   function incrementWish() {
-    console.log(room.messageProg)
-    if(room.messageProg % 20 === 0) {
+    dispatch(incrementMsgProg());
+    const goal = friend ? 10 : 20;
+    if(room.messageProg % goal === 0) {
       dispatch(wishing({possession: account.possession}))
     }
   }

@@ -20,14 +20,6 @@ const mapDispatchToProps = (dispatch) => ({
 function Home({account, page, authenticate}): JSX.Element {
 
   const navigate = useNavigate();
-
-  document.onvisibilitychange = () => {
-    if(document.visibilityState === 'hidden') {
-      account.socket.emit('inactive');
-    } else if(document.visibilityState === 'visible') {
-      account.socket.emit('active');
-    }
-  };
   
   useEffect(() => {
     authenticate();

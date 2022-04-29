@@ -39,9 +39,8 @@ function talkReducer(state = initialState, action: actionObject) {
     }
 
     case actionTypes.SEND_TALK: {
-      const {name, main, gender, message, possession} = action.payload;
+      const {name, main, gender, message} = action.payload;
       newState.chatHistory.push({name, main, gender, message});
-      newState.messageProg++;
       return newState;
     }
 
@@ -61,12 +60,21 @@ function talkReducer(state = initialState, action: actionObject) {
 
     case actionTypes.UPDATE_INACTIVE: {
       newState.inactive = action.payload;
-      console.log(newState.inactive);
       return newState;
     }
 
     case actionTypes.UPDATE_FOCUS: {
       newState.focus = action.payload;
+      return newState;
+    }
+
+    case actionTypes.INCREMENT_MSG_PROG: {
+      newState.messageProg += 1;
+      return newState;
+    }
+
+    case actionTypes.FRIEND_IN_ROOM: {
+      newState.friendInRoom = action.payload;
       return newState;
     }
 
@@ -84,7 +92,7 @@ export interface talkStateShape {
   typer: typerShape,
   talkRequest: (any | null),
   messageProg: number,
-  friendInRoom: false
+  friendInRoom: boolean
 }
 
 interface actionObject {

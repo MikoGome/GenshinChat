@@ -9,6 +9,7 @@ let socket = null;
 let name = null;
 let gender = null;
 let main = null;
+let visibility = null;
 
 export const logIn = (url, account) => async (dispatch) => {
   try{
@@ -51,6 +52,13 @@ export const getAccount = ({account}) => async (dispatch) => {
     wishInterval = setInterval(() => {
       dispatch(wishing(account));
     }, 60000);
+    visibility = document.onvisibilitychange = () => {
+      if(document.visibilityState === 'hidden') {
+        socket.emit('inactive');
+      } else if(document.visibilityState === 'visible') {
+        socket.emit('active');
+      }
+    };
     dispatch(
       actions.initialize({
         ...account,
@@ -69,6 +77,8 @@ export const clearSession = () => async (dispatch, getState) => {
     await axios.get('/api/logout');
     clearInterval(wishInterval);
     wishInterval = null;
+    document.removeEventListener('visibilitychange', visibility);
+    visibility = null;
     getState().account.socket.disconnect();
     dispatch(actions.logOut());
   } catch(e) {

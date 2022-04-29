@@ -25,3 +25,5 @@ export const TYPING = 'TYPING';
 export const DONE_TYPING = 'DONE_TYPING';
 export const UPDATE_INACTIVE = 'UPDATE_INACTIVE';
 export const UPDATE_FOCUS = 'UPDATE_FOCUS';
+export const INCREMENT_MSG_PROG = 'INCREMENT_MSG_PROG';
+export const FRIEND_IN_ROOM = 'FRIEND_IN_ROOM';

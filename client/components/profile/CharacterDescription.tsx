@@ -36,17 +36,27 @@ function CharacterDescription({spotlight, changeMain, currentMain, gender, info,
     changeMain(input);
   }
 
+  function handleClick():void {
+    if(spotlight === currentMain) return;
+    newMain({main: spotlight, possession});
+  }
+
   return (
     <div className="character-description">
       {spotlight && (
       <>
         <h1>{titleCase(name)}</h1>
         <h4>Birthday: {birthday}</h4>
-        <h3>Vision: {char.vision} </h3>
-        <h3>Nation: {char.nation}</h3>
-        <h3>Affiliation: {char.affiliation}</h3> 
-        <h3>Description: {char.description}</h3>
-        <button id='main-button' onClick={() => newMain({main: spotlight, possession})}>Set as Main</button>
+        <h3>Vision: {char.vision || 'N/A'} </h3>
+        <h3>Nation: {char.nation || 'N/A'}</h3>
+        <h3>Affiliation: {char.affiliation || 'N/A'}</h3> 
+        <h4><fieldset><legend>Description</legend>{char.description || 'N/A'}</fieldset></h4>
+        <button 
+          id='main-button' 
+          className="button-hover" 
+          onClick={handleClick}>
+            {currentMain === spotlight ? 'Current Main' : 'Set as Main'}
+        </button>
       </>
       )}
     </div>

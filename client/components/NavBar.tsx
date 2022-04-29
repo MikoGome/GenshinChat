@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
 
 function NavBar({account, current, signOut}) {
   const navigate = useNavigate();
-  const focusLine = useRef();
+  const focusLine:React.MutableRefObject<HTMLSpanElement> = useRef();
   const navBar = useRef();
   const name = useRef();
 
@@ -68,6 +68,16 @@ function NavBar({account, current, signOut}) {
     }
   }
 
+  function handleMouseEnter(e):void {
+    const scroll = e.target as HTMLHeadingElement;
+    scroll.scrollTo(scroll.scrollWidth, 0);
+  }
+
+  function handleMouseLeave(e):void {
+    const scroll = e.target as HTMLHeadingElement;
+    scroll.scrollTo(0, 0);
+  }
+
   return (
     <nav className="nav-bar">
       <ul onMouseLeave={() => returnFocus(current)} ref={navBar}>
@@ -85,8 +95,8 @@ function NavBar({account, current, signOut}) {
           <Currency account={account} />
           <h2 
             ref={name}
-            onMouseEnter={e => e.target.scrollTo(e.target.scrollWidth, 0)}
-            onMouseLeave={e => e.target.scrollTo(0, 0)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             {account.name}
           </h2>
