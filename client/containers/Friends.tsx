@@ -17,7 +17,9 @@ const mapDispatchToProps = (dispatch) => ({
   removeFriend: (payload: {removeId:string, accountId:string}) => dispatch(removeFriend(payload))
 });
 
-function Friends({account, authenticate, friends, removeFriend}): JSX.Element {
+function Friends({account, authenticate, friends, online, removeFriend}): JSX.Element {
+
+  console.log('online', online);
 
   const navigate = useNavigate();
 
@@ -56,7 +58,11 @@ function Friends({account, authenticate, friends, removeFriend}): JSX.Element {
     <div className="friends">
       <NavBar current="friends"/>
       <main>
-        {friendsList}
+        {friendsList.length ? friendsList : (
+          <div className="no-friends">
+            <h1>You Currently Do Not Have Any Friends</h1>
+          </div>
+        )}
       </main>
     </div>
   )

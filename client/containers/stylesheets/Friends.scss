@@ -12,5 +12,18 @@
     grid-template-rows: repeat(auto-fit, 7rem);
     overflow-y: auto;
     gap: 1rem;
+
+    .no-friends {
+      position: relative;
+      top: 20vh;
+      margin: 0 auto;
+      background-color: red;
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      padding: 1rem;
+      background-color: $chat-color;
+      color: white;
+    }
   }
 }

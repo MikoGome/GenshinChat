@@ -8,7 +8,7 @@ import { incrementMsgProg } from '../../actions/actions';
 
 import '../stylesheets/Chat.scss';
 
-function Chat({room, account, friend}): JSX.Element {
+const Chat:React.FC<{room: any, account: any, friend?: string}> = ({room, account, friend}): JSX.Element => {
   
   const messages:JSX.Element[] = room.chatHistory.map((el, index) => {
       return <Message key={"Message_"+index} myName={account.name} entry={el}/>
@@ -45,5 +45,6 @@ function Chat({room, account, friend}): JSX.Element {
 }
 
 export default memo(Chat, (prevProps, nextProps) => {
+  if(prevProps.account.socket !== nextProps.account.socket) return false; 
   return prevProps.room.chatHistory.length === nextProps.room.chatHistory.length;
 });

@@ -12,7 +12,7 @@ function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, on
     friend.current.classList.add('slow-bubbling');
     online && friend.current.classList.remove('offline');
     friend.current.classList.remove('hide');
-  }, 50 * index)
+  }, 50 * index);
 
   return(
     <div className="friend hide offline" ref={friend}>
@@ -28,9 +28,11 @@ function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, on
         <button onClick={() => handleRemoveFriend({removeId: friendId, accountId})}>
           <PersonRemoveIcon className="friend-list-icons" />
         </button>
-        <button>
-          <ForumIcon className="friend-list-icon"/>
-        </button>
+        {online && (
+          <button>
+            <ForumIcon className="friend-list-icon"/>
+          </button>
+        )}
       </div>
     </div>
   )

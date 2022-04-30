@@ -4,6 +4,7 @@ import { getFriends } from '../actions/asyncActions';
 function socketListeners(socket, dispatch) {
 
   socket.on('updateOnlineUsers', (data) => {
+    console.log('onlineUsers', data);
     const onlineUsers = Object.entries(data);
     dispatch(actions.updateOnlineUsers(onlineUsers));
   });

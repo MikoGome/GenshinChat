@@ -17,7 +17,15 @@ function LoginForm({login, changeLogin, submit}) {
         <aside>{(login ? 'Continue' : 'Start') + ' your adventure in the continent of Teyvat'}</aside>
       </div>
       <label>Username:
-        <input data-testid="username-input" required name="username"/>
+        <input 
+          data-testid="username-input" 
+          required 
+          name="username" 
+          maxLength={20} 
+          minLength={3} 
+          pattern="[\w]+" 
+          title="Must contain only letters/numbers/underscores"
+        />
       </label>
       <label>Password:
         <input data-testid="password-input" required type="password" name="password"/>
