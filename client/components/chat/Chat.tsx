@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef} from 'react';
+import React, {useEffect, useRef, memo} from 'react';
 import { useDispatch } from 'react-redux';
 import InputBox from './InputBox';
 import Message from './Message';
@@ -9,10 +9,10 @@ import { incrementMsgProg } from '../../actions/actions';
 import '../stylesheets/Chat.scss';
 
 function Chat({room, account, friend}): JSX.Element {
-
+  
   const messages:JSX.Element[] = room.chatHistory.map((el, index) => {
-    return <Message key={"Message_"+index} account={account} entry={el}/>
-  });
+      return <Message key={"Message_"+index} myName={account.name} entry={el}/>
+    });
 
   const chatBox:React.MutableRefObject<HTMLUListElement> = useRef();
 
@@ -44,4 +44,6 @@ function Chat({room, account, friend}): JSX.Element {
   )
 }
 
-export default Chat;
+export default memo(Chat, (prevProps, nextProps) => {
+  return prevProps.room.chatHistory.length === nextProps.room.chatHistory.length;
+});

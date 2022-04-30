@@ -1,27 +1,29 @@
 import React, {useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { authenticate } from '../actions/asyncActions';
+import { prize } from '../actions/actions';
+import { authenticate, wish } from '../actions/asyncActions';
 import NavBar from '../components/NavBar';
 import './stylesheets/Shop.scss';
 import Paimon from '../assets/paimon.png';
 import Mora from '../assets/mora.png';
 import Wish from '../assets/wish.png';
-import { wish } from '../actions/asyncActions';
+import pictures from '../assets/preload';
 
 import './stylesheets/Shop.scss';
 
 const mapStateToProps = (state) => ({
   account: state.account,
-  page: state.page
+  prize: state.characters.prize
 });
 
 const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate()),
-  wish: (acc) => dispatch(wish(acc))
+  wish: (acc) => dispatch(wish(acc)),
+  updatePrize: () => dispatch(prize(''))
 });
 
-function Shop({account, authenticate, wish}):JSX.Element {
+function Shop({account, authenticate, prize, updatePrize, wish}):JSX.Element {
 
   const navigate = useNavigate();
 
@@ -49,11 +51,30 @@ function Shop({account, authenticate, wish}):JSX.Element {
     }
   }, [account.authenticated]);
 
-  function startWish() {
+  function startWish():void {
     const {possession, characters_owned, wishes} = account;
     if(wishes.amount - 1 >= 0) wish({possession, characters_owned, wishes});
     else console.log('not enough wishes');
   }
+
+  const prizeChar = useRef<HTMLImageElement>();
+  
+  function closureClick(time:number):()=>void {
+    let counter = 0;
+    setTimeout(() => counter++, time);
+
+    return function ():void {
+      counter++;
+      if(counter === 1) {
+        console.log('test');
+        prizeChar.current.classList.add('skip-prize-animate');
+      } else {
+        updatePrize();
+      }
+    }
+  }
+
+  const handlePrizeClick = closureClick(2000);
 
   return (
     <div className="shop">
@@ -78,6 +99,11 @@ function Shop({account, authenticate, wish}):JSX.Element {
         <div className="shop-keeper hide" ref={shopKeeper}>
           <img onLoad={(e:any) => e.target.classList.add('shop-keeper-appear')} src={Paimon}/>
         </div>
+        {prize && (
+          <div className="prize" onClick={handlePrizeClick}>
+            <img src={pictures[prize].gachaSplash} className="prize-animate" ref={prizeChar}/>
+          </div>
+        )}
       </main>
     </div>
   )

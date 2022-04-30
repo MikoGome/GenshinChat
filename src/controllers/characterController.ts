@@ -39,6 +39,7 @@ export const wish = (req: Request, res:Response, next:NextFunction) => {
     fresh = true;
     const randomIndex = Math.floor(Math.random() * characterCache.length);
     const prize = characterCache[randomIndex];
+    res.locals.prize = prize;
     if(ownedChars.some((el:string) => el === prize)) fresh = false;
     else ownedChars.push(prize);
   }

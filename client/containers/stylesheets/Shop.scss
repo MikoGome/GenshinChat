@@ -72,6 +72,44 @@ $delay-time: 0.5s;
       opacity: 0;
       bottom: -100%;
     }
+
+    .prize {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+
+      img {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+        filter: brightness(0);
+      }
+
+      .prize-animate {
+        animation: prize-animate 1s forwards;
+        animation-timing-function: ease-in-out;
+
+        @keyframes prize-animate{
+          0%{opacity: 0; filter: brightness(0); height: 200vh}
+          50%{opacity: 1; filter: brightness(0); height: 100vh}
+          100%{opacity: 1; filter: brightness(1); height: 100vh}
+        }
+      }
+
+      .skip-prize-animate {
+        animation-duration: 1ms;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    .none {
+      display: none;
+    }
   }
 }
 

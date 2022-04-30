@@ -45,6 +45,7 @@ const Partner: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({n
         className="breathing hide-partner"
         ref={you}
       />
+      <div className="name-tag">{name}</div>
     </div>
   )
 }

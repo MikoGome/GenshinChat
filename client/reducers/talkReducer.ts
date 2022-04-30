@@ -13,8 +13,7 @@ const initialState: talkStateShape = {
   },
   typer: {},
   talkRequest: null,
-  messageProg: 1,
-  friendInRoom: false
+  messageProg: 1
 }
 
 function talkReducer(state = initialState, action: actionObject) {
@@ -73,11 +72,6 @@ function talkReducer(state = initialState, action: actionObject) {
       return newState;
     }
 
-    case actionTypes.FRIEND_IN_ROOM: {
-      newState.friendInRoom = action.payload;
-      return newState;
-    }
-
     default:
       return state;
   }
@@ -91,8 +85,7 @@ export interface talkStateShape {
   focus: focusShape
   typer: typerShape,
   talkRequest: (any | null),
-  messageProg: number,
-  friendInRoom: boolean
+  messageProg: number
 }
 
 interface actionObject {

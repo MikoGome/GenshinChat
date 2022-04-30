@@ -91,22 +91,22 @@ export const updateFocus = (payload) => ({
   payload: payload
 });
 
-export const friendInRoom = (payload) => ({
-  type: actionTypes.FRIEND_IN_ROOM,
-  payload: payload
-})
-
 //characters
 export const updateInfo = (payload) => ({
   type: actionTypes.GET_INFO,
   payload: payload
-})
+});
 
 export const updateSpotlight = (payload) => ({
   type: actionTypes.UPDATE_SPOTLIGHT,
   payload: payload
-})
+});
 
 export const incrementMsgProg = () => ({
   type: actionTypes.INCREMENT_MSG_PROG,
-})
+});
+
+export const prize = (payload) => ({
+  type: actionTypes.PRIZE,
+  payload: payload
+});

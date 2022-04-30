@@ -89,8 +89,11 @@ export const clearSession = () => async (dispatch, getState) => {
 export const wish = (account) => async (dispatch) => {
   try {
     const {data} = await axios.patch('/api/wish', account);
-    dispatch(actions.updateCharPool(data));
-
+    const {pool, prize} = data;
+    console.log('prize', prize);
+    dispatch(actions.updateCharPool(pool));
+    dispatch(actions.prize(prize));
+    dispatch(actions.updateSpotlight(prize));
   } catch(e) {
     console.log(e)
   }
@@ -99,7 +102,7 @@ export const wish = (account) => async (dispatch) => {
 export const wishing = (account) => async(dispatch) => {
   try {
     const {data: newWishes} = await axios.patch('/api/account/wishing', account);
-    dispatch(actions.updateWish(newWishes))
+    dispatch(actions.updateWish(newWishes));
   } catch(e) {
     console.log(e);
   }

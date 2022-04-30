@@ -14,6 +14,7 @@ export const UPDATE_FRIENDS = 'UPDATE_FRIENDS';
 //Characters
 export const GET_INFO = 'GET_INFO';
 export const UPDATE_SPOTLIGHT = 'UPDATE_SPOTLIGHT';
+export const PRIZE = 'PRIZE';
 
 //Talk
 export const LEAVE_TALK = 'LEAVE_TALK';
@@ -26,4 +27,3 @@ export const DONE_TYPING = 'DONE_TYPING';
 export const UPDATE_INACTIVE = 'UPDATE_INACTIVE';
 export const UPDATE_FOCUS = 'UPDATE_FOCUS';
 export const INCREMENT_MSG_PROG = 'INCREMENT_MSG_PROG';
-export const FRIEND_IN_ROOM = 'FRIEND_IN_ROOM';

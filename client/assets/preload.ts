@@ -5,7 +5,8 @@ interface picturesShape {
     portrait: string,
     iconBig: string,
     iconSide: string
-    icon?: string
+    icon?: string,
+    gachaSplash?: string
   }
 }
 
@@ -30,7 +31,8 @@ axios.get('https://api.genshin.dev/characters/')
           portrait: new Image().src = `https://api.genshin.dev/characters/${element}/portrait`,
           iconBig: new Image().src = `https://api.genshin.dev/characters/${element}/icon-big`,
           iconSide: new Image().src = `https://api.genshin.dev/characters/${element}/icon-side`,
-          icon: new Image().src = `https://api.genshin.dev/characters/${element}/icon`
+          icon: new Image().src = `https://api.genshin.dev/characters/${element}/icon`,
+          gachaSplash: new Image().src = `https://api.genshin.dev/characters/${element}/gacha-splash`
         }
       }
     });

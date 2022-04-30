@@ -126,4 +126,4 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, friends, talk, leaveT
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Talk));
+export default connect(mapStateToProps, mapDispatchToProps)(Talk);

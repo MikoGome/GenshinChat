@@ -32,7 +32,7 @@ router.get('/authenticate', verifySession, (req:Request, res:Response) => {
 });
 
 router.patch('/wish', wishCheck, wish, updateCharPool, (req: Request, res: Response) => {
-  return res.json(res.locals.updatedPossession);
+  return res.json({pool: res.locals.updatedPossession, prize: res.locals.prize});
 });
 
 export default router;
