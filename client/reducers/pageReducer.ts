@@ -3,7 +3,7 @@ import {deepCopy} from '../utils/helperFunctions';
 
 const initialState:pageStateShape = {
   chatHistory: [],
-  users: [],
+  users: {},
   friends: {},
   friendRequest: null
 };
@@ -48,7 +48,7 @@ function pageReducer(state = initialState, action) {
 
 interface pageStateShape {
   chatHistory:chatHistoryShape[],
-  users: userShape[],
+  users: {[socket:string]: userShape},
   friends: {
     [id: string] : {
       name: string,

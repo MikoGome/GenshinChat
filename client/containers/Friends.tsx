@@ -20,6 +20,15 @@ const mapDispatchToProps = (dispatch) => ({
 function Friends({account, authenticate, friends, online, removeFriend}): JSX.Element {
 
   console.log('online', online);
+  console.log('friends', friends);
+
+  const onlineUsers = {};
+  for(const socket in online) {
+    const name = online[socket].name;
+    onlineUsers[name] = {
+      socket
+    }
+  }
 
   const navigate = useNavigate();
 
@@ -49,6 +58,7 @@ function Friends({account, authenticate, friends, online, removeFriend}): JSX.El
         main={main}
         online={friends[key].online}
         handleRemoveFriend={removeFriend}
+        socket={onlineUsers[key]?.socket}
       />;
     friendsList.push(friend);
     counter++;

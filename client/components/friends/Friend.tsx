@@ -1,18 +1,40 @@
 import React, { useRef } from "react";
+import {connect} from "react-redux";
 import '../stylesheets/Friend.scss';
 import ForumIcon from '@mui/icons-material/Forum';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import { iconBig } from "../../utils/helperFunctions";
 
-function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, online, index}): JSX.Element {
+const mapStateToProps = state => ({
+  account: state.account,
+  roomId: state.talk.roomId
+})
+
+function Friend({account, accountId, friendId, name, handleRemoveFriend, gender, main, roomId, online, index, socket}): JSX.Element {
   const friend:React.MutableRefObject<HTMLDivElement> = useRef();
   const {picture, backupPicture} = iconBig(main, gender);
+
+  console.log('socket', socket);
 
   setTimeout(() => {
     friend.current.classList.add('slow-bubbling');
     online && friend.current.classList.remove('offline');
     friend.current.classList.remove('hide');
   }, 50 * index);
+
+  
+  const sender = {
+    name: account.name,
+    main: account.main,
+    gender: account.gender,
+    id: account.id,
+    socket: account.socket.id,
+  }
+
+  
+  function talkTo() {
+    account.socket.emit('talkTo', {sendee: socket, sender, roomId});
+  }
 
   return(
     <div className="friend hide offline" ref={friend}>
@@ -28,8 +50,8 @@ function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, on
         <button onClick={() => handleRemoveFriend({removeId: friendId, accountId})}>
           <PersonRemoveIcon className="friend-list-icons" />
         </button>
-        {online && (
-          <button>
+        {socket && (
+          <button onClick={talkTo}>
             <ForumIcon className="friend-list-icon"/>
           </button>
         )}
@@ -38,4 +60,4 @@ function Friend({accountId, friendId, name, handleRemoveFriend, gender, main, on
   )
 }
 
-export default Friend;
+export default connect(mapStateToProps, null)(Friend);
