@@ -2,7 +2,7 @@ import React from 'react';
 import Character from './Character';
 import { iconBig } from '../../utils/helperFunctions';
 
-function CharactersBox({account, gender}): JSX.Element {
+function CharactersBox({account, gender, spotlight}): JSX.Element {
   
   const characters = account.characters_owned.map((el:string, index) => {
     let name = el;
@@ -17,7 +17,8 @@ function CharactersBox({account, gender}): JSX.Element {
       name={name} 
       index={index}
       el={el}
-      picture={picture} 
+      picture={picture}
+      spotlight={spotlight}
     />
   });
 

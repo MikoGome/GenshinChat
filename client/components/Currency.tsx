@@ -3,8 +3,10 @@ import React, {useRef} from 'react';
 import Mora from '../assets/mora.png';
 import Wish from '../assets/wish.png';
 
+import {sfx} from '../assets/preload';
+
 function Currency({account}): JSX.Element {
-  const progress = useRef();
+  const progress = useRef<HTMLDivElement>();
 
   function showProgress() {
     //16 - 100 //84-empty
@@ -12,7 +14,7 @@ function Currency({account}): JSX.Element {
     const wishProg = account.wishes.progress / 100;
     const full = 68;
     const displayProg = (84 - full * wishProg);
-    
+    sfx(9);
     progress.current.style.transitionTimingFunction = 'ease-out';
     progress.current.style.height = displayProg + '%';
     

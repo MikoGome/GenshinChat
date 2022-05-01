@@ -1,4 +1,4 @@
-import React, {useEffect, memo} from 'react';
+import React, {useEffect, useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { authenticate } from '../actions/asyncActions';
@@ -14,6 +14,8 @@ import { account } from '../reducers/accountReducer';
 import { talkStateShape } from '../reducers/talkReducer';
 
 import './stylesheets/Talk.scss';
+
+import {sfx} from '../assets/preload';
 
 const mapStateToProps = (state) => ({
   account: state.account,
@@ -49,21 +51,6 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, friends, talk, leaveT
       navigate('/login');
     }
   }, [account.authenticated]);
-
-  if(!talk.roomId) {
-    return(
-     <div className="talk-inactive">
-        <NavBar current="talk"/>
-        <main>
-        <div className="info-box">
-            <h1>Currently Not Talking To Anyone</h1>
-            <h1>Invite Someone To Talk To</h1>
-        </div>
-        <MyAvatar name={account.name} gender={account.gender} main={account.main} typer={talk.typer}/>
-        </main>
-      </div>
-    )
-  }
 
   const partners = [];
   const participants = [];
@@ -104,8 +91,34 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, friends, talk, leaveT
   }
 
   function leaveRoom() {
+    sfx(2);
     account.socket.emit('leaveRoom');
     leaveTalk();
+  }
+
+  const participantsLength = useRef<number>(participants.length);
+
+  useEffect(() => {
+    console.log(participantsLength.current, participants.length);
+    if(participantsLength.current !== participants.length) {
+      console.log('sound');
+      sfx(8);
+    }
+  }, [participants.length]);
+
+  if(!talk.roomId) {
+    return(
+     <div className="talk-inactive">
+        <NavBar current="talk"/>
+        <main>
+        <div className="info-box">
+            <h1>Currently Not Talking To Anyone</h1>
+            <h1>Invite Someone To Talk To</h1>
+        </div>
+        <MyAvatar name={account.name} gender={account.gender} main={account.main} typer={talk.typer}/>
+        </main>
+      </div>
+    )
   }
 
   return(

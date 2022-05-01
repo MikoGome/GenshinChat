@@ -53,7 +53,6 @@ function TalkRequest({account,leaveTalk, talkRequest, updateTalkRequest}): JSX.E
   const picture = iconBig(senderMain, senderGender);
 
   if(talkRequest) {
-    sfx(8);
     return (
       <div className="request-box box-bubbling" ref={talkBox}>
         <div className="portrait">

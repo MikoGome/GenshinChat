@@ -1,10 +1,5 @@
 import React from 'react';
 import CharacterPreview from './CharacterPreview';
-import {connect} from 'react-redux';
-
-const mapStateToProps = state => ({
-  spotlight: state.characters.spotlight
-})
 
 function CharactersPreview({spotlight, characters_owned, gender}): JSX.Element {
 
@@ -20,4 +15,4 @@ function CharactersPreview({spotlight, characters_owned, gender}): JSX.Element {
   return characters
 }
 
-export default connect(mapStateToProps, null)(CharactersPreview);
+export default CharactersPreview;

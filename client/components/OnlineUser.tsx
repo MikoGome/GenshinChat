@@ -4,6 +4,7 @@ import ForumIcon from '@mui/icons-material/Forum';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import {connect} from 'react-redux';
 import { iconBig } from "../utils/helperFunctions";
+import { sfx } from "../assets/preload";
 
 const mapStateToProps = state => ({
   account: state.account,
@@ -24,10 +25,12 @@ function OnlineUser({account, bond, name, gender, main, socket, socketId, roomId
   }
 
   function addFriend() {
+    sfx(0);
     socket.emit('addFriend', {sendee: socketId, sender});
   }
 
   function talkTo() {
+    sfx(0);
     socket.emit('talkTo', {sendee: socketId, sender, roomId});
   }
 

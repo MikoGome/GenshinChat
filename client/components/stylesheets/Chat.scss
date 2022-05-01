@@ -3,7 +3,7 @@
 .chat {
   display: grid;
   grid-template-rows: 90% 5% 5%;
-  max-height: $max-height;
+  height: $max-height;
   z-index: 1;
 
   ul {

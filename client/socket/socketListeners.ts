@@ -1,6 +1,8 @@
 import * as actions from '../actions/actions';
 import { getFriends } from '../actions/asyncActions';
 
+import {sfx} from '../assets/preload';
+
 function socketListeners(socket, dispatch) {
 
   socket.on('updateOnlineUsers', (data) => {
@@ -12,6 +14,7 @@ function socketListeners(socket, dispatch) {
   });
 
   socket.on('friendRequest', (data) => {
+    sfx(8);
     dispatch(actions.receivedFriendRequest(data));
   });
 
@@ -20,6 +23,7 @@ function socketListeners(socket, dispatch) {
   });
 
   socket.on('talkRequest', (data) => {
+    sfx(8);
     dispatch(actions.receivedTalkRequest(data));
   });
 

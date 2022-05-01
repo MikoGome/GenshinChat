@@ -5,6 +5,8 @@ import ForumIcon from '@mui/icons-material/Forum';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import { iconBig } from "../../utils/helperFunctions";
 
+import {sfx} from '../../assets/preload';
+
 const mapStateToProps = state => ({
   account: state.account,
   roomId: state.talk.roomId
@@ -13,8 +15,6 @@ const mapStateToProps = state => ({
 function Friend({account, accountId, friendId, name, handleRemoveFriend, gender, main, roomId, online, index, socket}): JSX.Element {
   const friend:React.MutableRefObject<HTMLDivElement> = useRef();
   const picture = iconBig(main, gender);
-
-  console.log('socket', socket);
 
   setTimeout(() => {
     friend.current.classList.add('slow-bubbling');
@@ -33,6 +33,7 @@ function Friend({account, accountId, friendId, name, handleRemoveFriend, gender,
 
   
   function talkTo() {
+    sfx(0);
     account.socket.emit('talkTo', {sendee: socket, sender, roomId});
   }
 
@@ -46,7 +47,10 @@ function Friend({account, accountId, friendId, name, handleRemoveFriend, gender,
         <h4 className={'status ' + (online && 'online')}>{online ? 'online' : 'offline'}</h4>
       </div>
       <div className="right">
-        <button onClick={() => handleRemoveFriend({removeId: friendId, accountId})}>
+        <button onClick={() =>{
+          sfx(0);
+          handleRemoveFriend({removeId: friendId, accountId})
+        }}>
           <PersonRemoveIcon className="friend-list-icons" />
         </button>
         {socket && (

@@ -38,15 +38,18 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
   useEffect(() => {
     authenticate();
     shopKeeper.current.classList.remove('hide');
+    sfx(11);
     const buttonAnimationDelay = 250;
 
     setTimeout(() => {
       gachaButton.current.classList.add('slow-bubbling');
       gachaButton.current.classList.remove('hide');
+      sfx(9, 0.15);
     }, buttonAnimationDelay);
     setTimeout(() => {
       moraButton.current.classList.add('slow-bubbling');
       moraButton.current.classList.remove('hide');
+      sfx(9, 0.15);
     }, buttonAnimationDelay * 2);
   }, []);
 
@@ -87,7 +90,7 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
     }
   }
 
-  const handlePrizeClick = closureClick(1000);
+  const handlePrizeClick = closureClick(2000);
 
   return (
     <div className="shop">

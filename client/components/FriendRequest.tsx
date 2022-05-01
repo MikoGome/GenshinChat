@@ -4,6 +4,7 @@ import { receivedFriendRequest } from "../actions/actions";
 import { iconBig } from "../utils/helperFunctions";
 
 import './stylesheets/Request.scss';
+import {sfx} from '../assets/preload';
 
 const mapStateToProps = state => ({
   account: state.account,
@@ -26,11 +27,13 @@ function FriendRequest({account, friendRequest, updateFriendRequest}): JSX.Eleme
       socket: friendRequest.sender.socket 
     }
 
+    sfx(5);
     account.socket.emit('friendship', {friendA, friendB});
     updateFriendRequest();
   }
 
   function decline() {
+    sfx(4);
     updateFriendRequest();
   }
 

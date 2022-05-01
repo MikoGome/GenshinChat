@@ -4,6 +4,8 @@ import { talkStateShape } from "../../reducers/talkReducer";
 
 import {iconSide} from '../../utils/helperFunctions';
 
+import {sfx} from '../../assets/preload';
+
 export interface talkStateShapeExtension {
   typer: {
     [name:string]: boolean
@@ -36,6 +38,7 @@ const Participant: React.FC<talkStateShape["focus"] & talkStateShapeExtension> =
   }, [inactive]);
 
   function focusChange() {
+    if(focus.name !== name) sfx(8);
     updateFocus({name, gender, main});
   }
 

@@ -11,8 +11,6 @@ app.use(cookieParser());
 
 app.use('/api', apiRouter);
 
-console.log('NODE_ENV', process.env.NODE_ENV);
-
 app.get('/bundle.js', (req, res) => {
   return res.sendFile(path.join(__dirname, '../build', 'bundle.js'));
 });

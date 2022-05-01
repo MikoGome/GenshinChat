@@ -39,7 +39,7 @@ function CharacterDescription({spotlight, changeMain, currentMain, gender, info,
 
   function handleClick():void {
     if(spotlight === currentMain) return;
-    sfx(8);
+    sfx(9);
     newMain({main: spotlight, possession});
   }
 

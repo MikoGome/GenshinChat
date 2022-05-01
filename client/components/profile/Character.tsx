@@ -3,7 +3,9 @@ import {titleCase} from '../../utils/helperFunctions';
 import {useDispatch} from 'react-redux';
 import {updateSpotlight} from '../../actions/actions';
 
-function Character({name, el, index, picture}):JSX.Element {
+import {sfx} from '../../assets/preload';
+
+function Character({name, el, index, picture, spotlight}):JSX.Element {
   const dispatch = useDispatch();
 
   const char:React.MutableRefObject<HTMLImageElement> = useRef();
@@ -14,6 +16,7 @@ function Character({name, el, index, picture}):JSX.Element {
     <div 
       className="character" 
       onClick={() => {
+        if(name !== spotlight) sfx(8);
         dispatch(updateSpotlight(el));
       }}
     >

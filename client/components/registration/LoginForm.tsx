@@ -51,6 +51,7 @@ function LoginForm({message, login, changeLogin, submit}) {
         <button onClick={():void => {
           error.current.innerText='';
           changeLogin(!login)
+          sfx(3).play();
           if(login === false) {
             changeGender(null);
           }

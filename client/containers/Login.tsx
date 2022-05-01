@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { logIn } from '../actions/asyncActions';
 
 import './stylesheets/Login.scss';
+import { sfx } from "../assets/preload";
 
 export const GenderContext = createContext(null);
 
@@ -27,7 +28,10 @@ function Login({account, logIn}): JSX.Element {
 
   useEffect(() => {
     if(account.authenticated === true) {
+      sfx(9);
       navigate('/');
+    } else {
+      sfx(4);
     }
   }, [account.authenticated]);
   
@@ -51,7 +55,7 @@ function Login({account, logIn}): JSX.Element {
       accountInfo.gender = e.target.gender.value;
     }
 
-    if(!validate(login, accountInfo)) return console.log('invalid');
+    if(!validate(login, accountInfo)) return;
 
     logIn(endPoint, accountInfo);
   }

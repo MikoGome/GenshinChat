@@ -12,14 +12,15 @@ import { updateSpotlight } from '../actions/actions';
 const mapStateToProps = (state) => ({
   account: state.account,
   page: state.page,
-  amount: state.characters.amount
+  amount: state.characters.amount,
+  spotlight: state.characters.spotlight
 });
 
 const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate())
 });
 
-function Profile({account, amount, authenticate}): JSX.Element {
+function Profile({account, amount, authenticate, spotlight}): JSX.Element {
 
   const navigate = useNavigate();
   
@@ -44,11 +45,11 @@ function Profile({account, amount, authenticate}): JSX.Element {
       <NavBar current="profile"/>
       <main>
         <div className="avatar-hold">
-          <CharactersPreview characters_owned={account.characters_owned} gender={account.gender}/>
+          <CharactersPreview characters_owned={account.characters_owned} gender={account.gender} spotlight={spotlight}/>
         </div>
         <div className="character-box-hold">
           <CharacterDescription gender={account.gender}/>
-          <CharactersBox account={account} gender={account.gender}/>
+          <CharactersBox account={account} gender={account.gender} spotlight={spotlight}/>
           <div className="character-amount"><h4>{`${account.characters_owned.length}/${amount} owned`}</h4></div>
         </div>
       </main>

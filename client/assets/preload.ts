@@ -52,8 +52,11 @@ sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772
 sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/8_wp2izg.mp3'));
 sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/9_zyigw0.mp3'));
 sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651372163/10_twym3a.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651385970/oi-paimon_uigsjj.mp3'));
 
-export const sfx = (num) => {
+export const sfx = (num:number, volume?:number):void => {
+  sounds[num].volume = 1;
+  if(volume) sounds[num].volume = volume;
   sounds[num].load();
   sounds[num].play();
 };
