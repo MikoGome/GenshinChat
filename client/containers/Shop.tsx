@@ -12,9 +12,12 @@ import pictures from '../assets/preload';
 
 import './stylesheets/Shop.scss';
 
+import {sfx, sounds} from '../assets/preload';
+
 const mapStateToProps = (state) => ({
   account: state.account,
-  prize: state.characters.prize
+  prize: state.characters.prize,
+  amount: state.characters.amount
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -23,18 +26,20 @@ const mapDispatchToProps = (dispatch) => ({
   updatePrize: () => dispatch(prize(''))
 });
 
-function Shop({account, authenticate, prize, updatePrize, wish}):JSX.Element {
+function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Element {
 
   const navigate = useNavigate();
 
   const shopKeeper:React.MutableRefObject<HTMLDivElement> = useRef();
   const gachaButton:React.MutableRefObject<HTMLButtonElement> = useRef();
   const moraButton:React.MutableRefObject<HTMLButtonElement> = useRef();
+  const wishImg: React.MutableRefObject<HTMLImageElement> = useRef();
 
   useEffect(() => {
     authenticate();
     shopKeeper.current.classList.remove('hide');
     const buttonAnimationDelay = 250;
+
     setTimeout(() => {
       gachaButton.current.classList.add('slow-bubbling');
       gachaButton.current.classList.remove('hide');
@@ -53,8 +58,17 @@ function Shop({account, authenticate, prize, updatePrize, wish}):JSX.Element {
 
   function startWish():void {
     const {possession, characters_owned, wishes} = account;
-    if(wishes.amount - 1 >= 0) wish({possession, characters_owned, wishes});
-    else console.log('not enough wishes');
+
+    if(wishes.amount - 1 >= 0 && amount - account.characters_owned.length > 0) {
+      sfx(10);
+      wish({possession, characters_owned, wishes});
+    }
+    else {
+      sfx(4);
+      wishImg.current.classList.remove('shake');
+      void wishImg.current.offsetWidth;
+      wishImg.current.classList.add('shake');
+    };
   }
 
   const prizeChar = useRef<HTMLImageElement>();
@@ -66,7 +80,6 @@ function Shop({account, authenticate, prize, updatePrize, wish}):JSX.Element {
     return function ():void {
       counter++;
       if(counter === 1) {
-        console.log('test');
         prizeChar.current.classList.add('skip-prize-animate');
       } else {
         updatePrize();
@@ -74,7 +87,7 @@ function Shop({account, authenticate, prize, updatePrize, wish}):JSX.Element {
     }
   }
 
-  const handlePrizeClick = closureClick(2000);
+  const handlePrizeClick = closureClick(1000);
 
   return (
     <div className="shop">
@@ -82,7 +95,7 @@ function Shop({account, authenticate, prize, updatePrize, wish}):JSX.Element {
       <main>
         <div className="selection">
           <button id="gacha-button" className="shop-button hide" onClick={startWish} ref={gachaButton}>
-            <img src={Wish} />
+            <img src={Wish} ref={wishImg} />
             <div>
               <p>Wish For A Character</p>
               <aside>Will consume 1 wish</aside>
@@ -101,7 +114,7 @@ function Shop({account, authenticate, prize, updatePrize, wish}):JSX.Element {
         </div>
         {prize && (
           <div className="prize" onClick={handlePrizeClick}>
-            <img src={pictures[prize].gachaSplash} className="prize-animate" ref={prizeChar}/>
+            <img src={pictures[prize]?.gachaSplash} className="prize-animate" ref={prizeChar}/>
           </div>
         )}
       </main>

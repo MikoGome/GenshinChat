@@ -36,13 +36,13 @@ function FriendRequest({account, friendRequest, updateFriendRequest}): JSX.Eleme
 
   const senderMain = friendRequest?.sender.main;
   const senderGender = friendRequest?.sender.gender;
-  const photo = iconBig(senderMain, senderGender);
+  const picture = iconBig(senderMain, senderGender);
 
   if(friendRequest) {
     return (
       <div className="request-box box-bubbling" ref={friendBox}>
         <div className="portrait">
-          <img src={photo.picture} onError={e => e.target.src=photo.backupPicture}/>
+          <img src={picture} />
         </div>
         <div className="request request-bubbling">
           <div>

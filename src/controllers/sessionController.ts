@@ -13,7 +13,7 @@ export const genSession = (req:Request, res:Response, next:NextFunction) => {
     possession: res.locals.possession
   };
   const expireTime = 6 * 60 * 60 * 1000; // 6 hours
-  res.cookie('GCToken', jwt.sign(payload, JWT_SECRET, {expiresIn: '6h'}), {httpOnly: true, maxAge: expireTime});
+  if(res.locals.authenticated) res.cookie('GCToken', jwt.sign(payload, JWT_SECRET, {expiresIn: '6h'}), {httpOnly: true, maxAge: expireTime});
   return next();
 }
 

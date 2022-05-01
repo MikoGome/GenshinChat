@@ -24,8 +24,13 @@ export const signup = async (req:Request, res:Response, next:NextFunction) => {
   try {
     await query(queryEntry, [username, password, gender, possession.id]);
     authenticated = true;
-  } catch(e) {
+  } catch(e:any) {
     await Possession.findByIdAndDelete(possession.id);
+    if(e.constraint === 'users_username_key') {
+      return res.json({message: 'Adventurer Already Exists'});
+    } else {
+      return res.json({message: 'An Error Has Occured'});
+    }
   }
   res.locals.authenticated = authenticated;
   return next();
@@ -45,10 +50,14 @@ export const login = async (req:Request, res:Response, next:NextFunction) => {
     let authenticated = false;
     if(account) {
       authenticated = await bcrypt.compare(password, account.password);
+      if(!authenticated) return res.json({message: 'Password Is Incorrect'});
+      else if(account.online) return res.json({message: 'Adventurer Is Already Signed In'});
       res.locals.user_id = account.id;
       res.locals.username = account.username;
       res.locals.gender = account.gender;
       res.locals.possession = account.possession;
+    } else {
+      return res.json({message: 'Adventurer Not Found'});
     }
     res.locals.authenticated = authenticated;
     return next();

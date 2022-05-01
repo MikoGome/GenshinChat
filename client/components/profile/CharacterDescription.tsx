@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { changeMain } from '../../actions/asyncActions';
 
 import '../stylesheets/CharacterDescription.scss';
+import {sfx} from '../../assets/preload';
 
 const mapStateToProps = state => ({
   currentMain: state.account.main,
@@ -38,6 +39,7 @@ function CharacterDescription({spotlight, changeMain, currentMain, gender, info,
 
   function handleClick():void {
     if(spotlight === currentMain) return;
+    sfx(8);
     newMain({main: spotlight, possession});
   }
 
@@ -53,7 +55,7 @@ function CharacterDescription({spotlight, changeMain, currentMain, gender, info,
         <h4><fieldset><legend>Description</legend>{char.description || 'N/A'}</fieldset></h4>
         <button 
           id='main-button' 
-          className="button-hover" 
+          className={spotlight !== currentMain ? 'button-hover': null} 
           onClick={handleClick}>
             {currentMain === spotlight ? 'Current Main' : 'Set as Main'}
         </button>

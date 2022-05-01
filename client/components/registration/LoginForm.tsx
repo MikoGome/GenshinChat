@@ -1,11 +1,14 @@
-import React, {useContext} from "react";
+import React, {useContext, useRef} from "react";
 import GenshinLogo from '../../assets/genshin-logo.png';
 import Gender from './Gender';
 import {GenderContext} from '../../containers/Login';
 
-function LoginForm({login, changeLogin, submit}) {
-  const {changeGender} = useContext(GenderContext);
+import {sfx} from '../../assets/preload';
 
+function LoginForm({message, login, changeLogin, submit}) {
+  const {changeGender} = useContext(GenderContext);
+  const error = useRef<HTMLElement>();
+  
   return(
     <div className="login-form appearBottom">
       <img className="genshin-logo" src={GenshinLogo} />
@@ -15,6 +18,7 @@ function LoginForm({login, changeLogin, submit}) {
           {login ? 'Login' : 'Sign Up'}
         </h1>
         <aside>{(login ? 'Continue' : 'Start') + ' your adventure in the continent of Teyvat'}</aside>
+        <aside className="error-message" ref={error}>{message}</aside>
       </div>
       <label>Username:
         <input 
@@ -28,16 +32,24 @@ function LoginForm({login, changeLogin, submit}) {
         />
       </label>
       <label>Password:
-        <input data-testid="password-input" required type="password" name="password"/>
+        <input 
+          data-testid="password-input" 
+          required type="password" 
+          name="password"
+          minLength={4}
+        />
       </label>
       {login || <Gender />}
-      <button type='submit'>{login ? 'LOGIN' : 'SIGN UP'}</button>
+      <button type='submit'>
+        {login ? 'LOGIN' : 'SIGN UP'}
+      </button>
       </form>
       <div className="switch-caption">
         <p>
           {(login ? 'Not' : 'Already') + ' an adventurer?'}
         </p>
         <button onClick={():void => {
+          error.current.innerText='';
           changeLogin(!login)
           if(login === false) {
             changeGender(null);

@@ -5,7 +5,7 @@ module.exports = {
   entry: path.resolve('client', 'index.tsx'),
   output: {
     path: path.resolve('build'),
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -46,6 +46,9 @@ module.exports = {
     historyApiFallback: true
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      'assets': path.resolve('client', 'assets')
+    }
   }
 }

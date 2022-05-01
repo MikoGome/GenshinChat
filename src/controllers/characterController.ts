@@ -4,21 +4,23 @@ import {Request, Response, NextFunction} from 'express';
 const genshinCharacterUrl:string = 'https://api.genshin.dev/characters';
 
 const characterCache:string[] = [];
-const travelerCache:string[] = [];
+const travelerCache:[string] = ['traveler-anemo'];
+const allCache: string[] = ['traveler-anemo'];
+let characterAmount = 1;
 export const characterInfoCache:any = {};
 
 axios.get(genshinCharacterUrl)
   .then(res => {
     res.data.forEach((el:string):void => {
-      if(el.startsWith('traveler')) {
-        travelerCache.push(el);
-      } else {
+      if(!el.startsWith('traveler')) {
         characterCache.push(el);
+        allCache.push(el);
+        characterAmount++;
       }
     });
   })
   .then(() => {
-    [...travelerCache, ...characterCache].forEach(el => {
+    allCache.forEach(el => {
       axios.get(genshinCharacterUrl + '/' + el)
         .then(res => characterInfoCache[el] = res.data);
     });
@@ -78,6 +80,11 @@ export const wishCheck = (req: Request, res: Response, next: NextFunction) => {
 }
 
 export const characterInfo = (req: Request, res: Response, next: NextFunction) => {
-  res.locals.characterInfo = characterInfoCache;
+  res.locals.characterInfo = {info: characterInfoCache, amount: characterAmount};
+  return next();
+}
+
+export const allCharacters = (req: Request , res: Response, next: NextFunction) => {
+  res.locals.allCharacters = allCache;
   return next();
 }

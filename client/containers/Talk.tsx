@@ -119,7 +119,7 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, friends, talk, leaveT
       <div className="partners">
         {partners}
       </div>
-      <Chat account={account} room={talk} friend={friendFlag}/>
+      <Chat account={account} room={talk} friend={friendFlag} others={participants.length}/>
       <MyAvatar name={account.name} gender={account.gender} main={account.main} typer={talk.typer}/>
       </main>
     </div>

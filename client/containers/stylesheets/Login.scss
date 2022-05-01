@@ -121,6 +121,13 @@
     p {
       display: block;
     }
+
+    .error-message {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      color: red;
+    }
   }
 
   .character-image {

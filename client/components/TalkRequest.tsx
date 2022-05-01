@@ -1,7 +1,10 @@
 import React, {useRef} from "react";
+import { useNavigate } from "react-router-dom";
 import {connect} from "react-redux";
 import { receivedTalkRequest, leaveTalk } from "../actions/actions";
 import { iconBig } from "../utils/helperFunctions";
+
+import {sfx} from '../assets/preload';
 
 import './stylesheets/Request.scss';
 
@@ -16,6 +19,8 @@ const mapDispatchToProps = dispatch => ({
 })
 
 function TalkRequest({account,leaveTalk, talkRequest, updateTalkRequest}): JSX.Element {
+  
+  const navigate = useNavigate();
 
   const talkBox:React.MutableRefObject<HTMLDivElement> = useRef();
   function accept() {
@@ -32,24 +37,27 @@ function TalkRequest({account,leaveTalk, talkRequest, updateTalkRequest}): JSX.E
 
     account.socket.emit('leaveRoom');
     leaveTalk();
-    
     account.socket.emit('initiateTalk', {participantA, participantB, roomId});
     updateTalkRequest();
+    sfx(5);
+    navigate('/talk');
   }
 
   function decline() {
+    sfx(4);
     updateTalkRequest();
   }
 
   const senderMain = talkRequest?.sender.main;
   const senderGender = talkRequest?.sender.gender;
-  const photo = iconBig(senderMain, senderGender);
+  const picture = iconBig(senderMain, senderGender);
 
   if(talkRequest) {
+    sfx(8);
     return (
       <div className="request-box box-bubbling" ref={talkBox}>
         <div className="portrait">
-          <img src={photo.picture} onError={e => e.target.src=photo.backupPicture}/>
+          <img src={picture} />
         </div>
         <div className="request request-bubbling">
           <div>

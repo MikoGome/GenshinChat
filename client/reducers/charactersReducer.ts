@@ -3,6 +3,7 @@ import { deepCopy } from '../utils/helperFunctions';
 
 const initialState: initialStateShape = {
   info: {},
+  amount: 0,
   spotlight: '',
   prize: ''
 }
@@ -12,7 +13,9 @@ function characters(state = initialState, action) {
   switch(action.type) {
 
     case actionTypes.GET_INFO:
-      newState.info = action.payload;
+      const {info, amount} = action.payload;
+      newState.info = info;
+      newState.amount = amount;
       return newState;
     
     case actionTypes.UPDATE_SPOTLIGHT:
@@ -21,7 +24,6 @@ function characters(state = initialState, action) {
 
     case actionTypes.PRIZE:
       newState.prize = action.payload;
-      console.log('newState', newState);
       return newState;
       
     default: 
@@ -31,6 +33,7 @@ function characters(state = initialState, action) {
 
 interface initialStateShape {
   info: object,
+  amount: number,
   spotlight: string,
   prize: string
 }

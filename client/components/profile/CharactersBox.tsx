@@ -10,7 +10,7 @@ function CharactersBox({account, gender}): JSX.Element {
       name = gender === 'male' ? 'aether' : 'lumine';
     }
     
-    const {picture, backupPicture} = iconBig(el, gender);
+    const picture = iconBig(el, gender);
 
     return <Character 
       key={'el.name_'+index} 
@@ -18,7 +18,6 @@ function CharactersBox({account, gender}): JSX.Element {
       index={index}
       el={el}
       picture={picture} 
-      backupPicture={backupPicture} 
     />
   });
 

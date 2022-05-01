@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 function OnlineUser({account, bond, name, gender, main, socket, socketId, roomId}): JSX.Element {
   const li:React.MutableRefObject<HTMLLIElement> = useRef();
-  const {picture, backupPicture} = iconBig(main, gender);
+  const picture = iconBig(main, gender);
   const myName = account.name;
 
   const sender = {
@@ -36,7 +36,6 @@ function OnlineUser({account, bond, name, gender, main, socket, socketId, roomId
       <div className="online-profile">
         <img src={picture} 
           onLoad={() => li.current.classList.add('appearBottom')} 
-          onError={(e) => e.target.src=backupPicture}
         />
         <h4>{name}</h4>
       </div>

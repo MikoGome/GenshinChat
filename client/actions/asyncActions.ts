@@ -14,7 +14,7 @@ let visibility = null;
 export const logIn = (url, account) => async (dispatch) => {
   try{
     const {data} = await axios.post(url, account);
-    if(data) dispatch(actions.initialize({authenticated: data}));
+    dispatch(actions.initialize({authenticated: data}));
   } catch(e) {
     console.log(e)
   }
@@ -111,6 +111,7 @@ export const wishing = (account) => async(dispatch) => {
 export const getInfo = () => async (dispatch) => {
   try {
     const {data} = await axios.get('/api/character/info');
+    console.log('info data', data);
     dispatch(actions.updateInfo(data));
   } catch(e) {
     console.log(e);

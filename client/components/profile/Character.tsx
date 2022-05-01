@@ -3,12 +3,12 @@ import {titleCase} from '../../utils/helperFunctions';
 import {useDispatch} from 'react-redux';
 import {updateSpotlight} from '../../actions/actions';
 
-function Character({name, el, index, picture, backupPicture}):JSX.Element {
+function Character({name, el, index, picture}):JSX.Element {
   const dispatch = useDispatch();
 
   const char:React.MutableRefObject<HTMLImageElement> = useRef();
   useEffect(() => {
-    setTimeout(() => char.current.classList.add('bubbling'), 25 * index);
+    setTimeout(() => char.current?.classList.add('bubbling'), 25 * index);
   }, [])
   return(
     <div 
@@ -19,8 +19,7 @@ function Character({name, el, index, picture, backupPicture}):JSX.Element {
     >
       <figure  ref={char} style={{opacity: 0}}>
         <img 
-          src={picture} 
-          onError={e => e.target.src=backupPicture}
+          src={picture}
         />
         <figcaption>{titleCase(name)}</figcaption>
       </figure>

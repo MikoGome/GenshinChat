@@ -12,13 +12,14 @@ import { updateSpotlight } from '../actions/actions';
 const mapStateToProps = (state) => ({
   account: state.account,
   page: state.page,
+  amount: state.characters.amount
 });
 
 const mapDispatchToProps = (dispatch) => ({
   authenticate: () => dispatch(authenticate())
 });
 
-function Profile({account, authenticate}): JSX.Element {
+function Profile({account, amount, authenticate}): JSX.Element {
 
   const navigate = useNavigate();
   
@@ -48,6 +49,7 @@ function Profile({account, authenticate}): JSX.Element {
         <div className="character-box-hold">
           <CharacterDescription gender={account.gender}/>
           <CharactersBox account={account} gender={account.gender}/>
+          <div className="character-amount"><h4>{`${account.characters_owned.length}/${amount} owned`}</h4></div>
         </div>
       </main>
     </div>

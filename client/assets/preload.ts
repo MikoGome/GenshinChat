@@ -12,7 +12,7 @@ interface picturesShape {
 
 const pictures: picturesShape = {};
 
-axios.get('https://api.genshin.dev/characters/')
+axios.get('/api/character/all')
   .then(res => {
     res.data.forEach(element => {
       if(element.startsWith('traveler')) {
@@ -38,4 +38,22 @@ axios.get('https://api.genshin.dev/characters/')
     });
   })
 
-  export default pictures;
+export default pictures;
+
+export const sounds: HTMLAudioElement[] = [];
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/0_socu4w.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367773/1_upiwkf.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367773/2_ueea6t.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/3_yfodwk.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/4_ydoikh.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/5_thxali.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/6_pr4bdn.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/7_yczkix.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/8_wp2izg.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651367772/9_zyigw0.mp3'));
+sounds.push(new Audio('https://res.cloudinary.com/miko2/video/upload/v1651372163/10_twym3a.mp3'));
+
+export const sfx = (num) => {
+  sounds[num].load();
+  sounds[num].play();
+};

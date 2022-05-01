@@ -74,5 +74,14 @@
         }
       }
     }
+
+    .character-amount {
+      display: flex;
+      justify-self: flex-end;
+      align-self: flex-start;
+      padding: 0.25rem;
+      background-color: $chat-color;
+      color: white;
+    }
   }
 }

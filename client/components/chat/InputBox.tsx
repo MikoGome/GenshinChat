@@ -14,7 +14,6 @@ function InputBox({account, roomId, incrementWish}): JSX.Element {
     } else {
       account.socket.emit('sendMessage', {name, main, gender, message});
     }
-
     messageElement.value = '';
   }
 

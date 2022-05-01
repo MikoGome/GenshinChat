@@ -7,8 +7,9 @@ import { wishing } from '../../actions/asyncActions';
 import { incrementMsgProg } from '../../actions/actions';
 
 import '../stylesheets/Chat.scss';
+import {sfx} from '../../assets/preload';
 
-const Chat:React.FC<{room: any, account: any, friend?: string}> = ({room, account, friend}): JSX.Element => {
+const Chat:React.FC<{room: any, account: any, friend?: boolean, others?: number}> = ({room, account, friend, others}): JSX.Element => {
   
   const messages:JSX.Element[] = room.chatHistory.map((el, index) => {
       return <Message key={"Message_"+index} myName={account.name} entry={el}/>
@@ -18,11 +19,15 @@ const Chat:React.FC<{room: any, account: any, friend?: string}> = ({room, accoun
 
   const dispatch = useDispatch();
 
+  const chatLength = useRef<number>(room.chatHistory.length);
+
   useEffect(() => {
+    if(room.chatHistory.length !== chatLength.current) sfx(7);
     chatBox.current.scrollTo(0, chatBox.current.scrollHeight);
   }, [room.chatHistory.length]);
 
   function incrementWish() {
+    if(!others) return;
     dispatch(incrementMsgProg());
     const goal = friend ? 10 : 20;
     if(room.messageProg % goal === 0) {

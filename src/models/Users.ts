@@ -7,7 +7,10 @@ const pool = new pg.Pool({
 });
 
 pool.connect()
-  .then(():void => console.log('PostgreSQL database connected'))
+  .then(():void => {
+    pool.query('Update users SET online=false');
+    console.log('PostgreSQL database connected');
+  })
   .catch(():void => console.log('PostgreSQL database failed to connect'));
 
 export default function (text:string, params?:any, callback?:any) {

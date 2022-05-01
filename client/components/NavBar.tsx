@@ -13,6 +13,7 @@ import GenshinLogo from '../assets/genshin-home-logo.png';
 
 import Currency from './Currency';
 
+import { sfx } from "../assets/preload";
 import './stylesheets/NavBar.scss';
 
 const mapStateToProps = state => ({
@@ -47,6 +48,7 @@ function NavBar({account, current, signOut}) {
   function redirect(e) {
     const target = e.currentTarget.id;
     if(target === current) return;
+    sfx(5);
     const route = target === 'home' ? '' : target;
     navigate('/' + route);
   }

@@ -59,7 +59,7 @@ function Login({account, logIn}): JSX.Element {
   return (
     <GenderContext.Provider value={{gender, changeGender}}>
       <div className='login'>
-        <LoginForm login={login} changeLogin={changeLogin} submit={submit} />
+        <LoginForm message={account.authenticated?.message} login={login} changeLogin={changeLogin} submit={submit} />
         <LoginCharacter login={login}/>
       </div>
     </GenderContext.Provider>

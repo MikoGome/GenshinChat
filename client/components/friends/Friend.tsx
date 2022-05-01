@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 function Friend({account, accountId, friendId, name, handleRemoveFriend, gender, main, roomId, online, index, socket}): JSX.Element {
   const friend:React.MutableRefObject<HTMLDivElement> = useRef();
-  const {picture, backupPicture} = iconBig(main, gender);
+  const picture = iconBig(main, gender);
 
   console.log('socket', socket);
 
@@ -41,7 +41,6 @@ function Friend({account, accountId, friendId, name, handleRemoveFriend, gender,
       <div className="left">
         <img 
           src={picture} 
-          onError={e => e.target.src=backupPicture}
         />
         <h1>{name}</h1>
         <h4 className={'status ' + (online && 'online')}>{online ? 'online' : 'offline'}</h4>
