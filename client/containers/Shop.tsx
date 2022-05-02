@@ -9,10 +9,10 @@ import Paimon from '../assets/paimon.png';
 import Mora from '../assets/mora.png';
 import Wish from '../assets/wish.png';
 import pictures from '../assets/preload';
-
+import { portrait } from '../utils/helperFunctions';
 import './stylesheets/Shop.scss';
 
-import {sfx, sounds} from '../assets/preload';
+import {sfx} from '../assets/preload';
 
 const mapStateToProps = (state) => ({
   account: state.account,
@@ -95,7 +95,7 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
   const handlePrizeClick = closureClick(2000);
 
   function backup() {
-    prizeChar.current.src= pictures[prize]?.portrait;
+    prizeChar.current.src= portrait(prize, 'female');
   }
 
   return (
