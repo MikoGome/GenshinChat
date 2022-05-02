@@ -17,6 +17,6 @@ Jest
 React Testing Library
 Sass
 Material-UI
-NoSQL (Mongoose)
+NoSQL (MongoDB)
 SQL (PostgreSQL)
 ```
