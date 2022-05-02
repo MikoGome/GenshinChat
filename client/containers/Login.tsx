@@ -30,6 +30,9 @@ function Login({account, logIn}): JSX.Element {
     if(account.authenticated === true) {
       sfx(9);
       navigate('/');
+    } else if(account.authenticated === 'signedUp') {
+      sfx(9);
+      changeLogin(true);
     } else {
       sfx(4);
     }
@@ -58,6 +61,8 @@ function Login({account, logIn}): JSX.Element {
     if(!validate(login, accountInfo)) return;
 
     logIn(endPoint, accountInfo);
+    e.target.username.value = '';
+    e.target.password.value = '';
   }
 
   return (

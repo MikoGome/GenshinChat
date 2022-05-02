@@ -8,7 +8,7 @@ import {sfx} from '../../assets/preload';
 function LoginForm({message, login, changeLogin, submit}) {
   const {changeGender} = useContext(GenderContext);
   const error = useRef<HTMLElement>();
-  
+
   return(
     <div className="login-form appearBottom">
       <img className="genshin-logo" src={GenshinLogo} />

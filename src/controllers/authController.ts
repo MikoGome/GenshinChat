@@ -32,7 +32,7 @@ export const signup = async (req:Request, res:Response, next:NextFunction) => {
       return res.json({message: 'An Error Has Occured'});
     }
   }
-  res.locals.authenticated = authenticated;
+  res.locals.authenticated = 'signedUp';
   return next();
 }
 
