@@ -29,6 +29,7 @@ function LoginForm({message, login, changeLogin, submit}) {
           minLength={3} 
           pattern="[\w]+" 
           title="Must contain only letters/numbers/underscores"
+          autoComplete="off"
         />
       </label>
       <label>Password:
