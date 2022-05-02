@@ -49,6 +49,8 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, friends, talk, leaveT
   useEffect(() => {
     if(account.authenticated === false) {
       navigate('/login');
+    } else if(account.authenticated === 'exists') {
+      navigate('/exists');
     }
   }, [account.authenticated]);
 
@@ -99,9 +101,7 @@ const Talk: React.FC<TalkProps> = ({account, authenticate, friends, talk, leaveT
   const participantsLength = useRef<number>(participants.length);
 
   useEffect(() => {
-    console.log(participantsLength.current, participants.length);
     if(participantsLength.current !== participants.length) {
-      console.log('sound');
       sfx(8);
     }
   }, [participants.length]);

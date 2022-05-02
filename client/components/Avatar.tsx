@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {connect} from 'react-redux';
 
 import './stylesheets/Avatar.scss';
@@ -12,7 +12,12 @@ const mapStateToProps = state => ({
 function Avatar({account}) {
  const avatarPortrait =  portrait(account.main, account.gender);
 
+ const avatar = useRef<HTMLImageElement>();
+
  function appear(e: React.SyntheticEvent<HTMLImageElement>): void {
+  if(account.main === 'ayaka') {
+    avatar.current.style.top = '-15%';
+  }
   (e.target as HTMLImageElement).classList.add('avatar-appear'); 
  }
  
@@ -21,6 +26,7 @@ function Avatar({account}) {
       <img
          src={account.main && avatarPortrait} 
          onLoad={appear}
+         ref={avatar}
       />
     </div>
   )

@@ -19,9 +19,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 function Friends({account, authenticate, friends, online, removeFriend}): JSX.Element {
 
-  console.log('online', online);
-  console.log('friends', friends);
-
   const onlineUsers = {};
   for(const socket in online) {
     const name = online[socket].name;
@@ -63,19 +60,25 @@ function Friends({account, authenticate, friends, online, removeFriend}): JSX.El
     friendsList.push(friend);
     counter++;
   }
-
-  return (
-    <div className="friends">
-      <NavBar current="friends"/>
-      <main>
-        {friendsList.length ? friendsList : (
-          <div className="no-friends">
-            <h1>You Currently Do Not Have Any Friends</h1>
-          </div>
-        )}
-      </main>
-    </div>
-  )
+  if(friendsList.length) {
+    return (
+      <div className="friends">
+        <NavBar current="friends"/>
+        <main>
+          {friendsList}
+        </main>
+      </div>
+    )
+  } else {
+    return (
+      <div className="no-friends">
+        <NavBar current="friends"/>
+        <main>
+          <h1>You Do Not Have Any Friends</h1>
+        </main>
+      </div>
+    )
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Friends);

@@ -56,6 +56,8 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
   useEffect(() => {
     if(account.authenticated === false) {
       navigate('/login');
+    } else if(account.authenticated === 'exists') {
+      navigate('/exists');
     }
   }, [account.authenticated]);
 
@@ -92,6 +94,10 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
 
   const handlePrizeClick = closureClick(2000);
 
+  function backup() {
+    prizeChar.current.src= pictures[prize]?.portrait;
+  }
+
   return (
     <div className="shop">
       <NavBar current="shop"/>
@@ -117,7 +123,7 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
         </div>
         {prize && (
           <div className="prize" onClick={handlePrizeClick}>
-            <img src={pictures[prize]?.gachaSplash} className="prize-animate" ref={prizeChar}/>
+            <img src={pictures[prize]?.gachaSplash} onError={backup} className="prize-animate" ref={prizeChar}/>
           </div>
         )}
       </main>

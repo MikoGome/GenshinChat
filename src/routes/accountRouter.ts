@@ -15,8 +15,4 @@ router.patch('/main', updateMain, (req: Request, res: Response) => {
   return res.json(res.locals.main);
 });
 
-router.patch('/status', (req: Request, res: Response) => {
-  console.log('testing');
-});
-
 export default router;

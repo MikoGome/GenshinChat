@@ -13,6 +13,9 @@ const MyAvatar:React.FC<talkStateShape["focus"] & ({typer: ({[name:string]: bool
 
 
   useEffect(() => {
+    if(main === 'razor') {
+      me.current.style.left = '-50%';
+    }
     me.current.classList.remove('hide-me');
   }, [])
 

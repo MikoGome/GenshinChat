@@ -19,8 +19,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 function Home({account, page, authenticate}): JSX.Element {
 
-  console.log('account', account);
-
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -28,8 +26,11 @@ function Home({account, page, authenticate}): JSX.Element {
   }, []);
 
   useEffect(() => {
+    console.log('authenticated', account.authenticated)
     if(account.authenticated === false) {
       navigate('/login');
+    } else if(account.authenticated === 'exists') {
+      navigate('/exists');
     }
   }, [account.authenticated]);
 

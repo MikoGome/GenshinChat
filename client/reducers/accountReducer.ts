@@ -57,7 +57,7 @@ export interface account {
   wishes: {amount: number, progress: number},
   socket: Socket,
   initialized: boolean,
-  authenticated: boolean
+  authenticated: boolean|string
 }
 
 interface actionObject {

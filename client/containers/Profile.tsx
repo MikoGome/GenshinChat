@@ -31,6 +31,8 @@ function Profile({account, amount, authenticate, spotlight}): JSX.Element {
   useEffect(() => {
     if(account.authenticated === false) {
       navigate('/login');
+    } else if(account.authenticated === 'exists') {
+      navigate('/exists');
     }
   }, [account.authenticated]);
 

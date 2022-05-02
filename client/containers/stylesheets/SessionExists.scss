@@ -1,0 +1,17 @@
+@import '../../components/stylesheets/variables';
+
+.session-exists {
+  background-image: url('../../assets/genshin-impact-comment-trouver-un-nombre-maximum-de-boites.jpg');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.753);
+    font-size: 3rem;
+    padding: 1rem;
+  }
+}

@@ -15,6 +15,11 @@ const Partner: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({n
 
   useEffect(() => {
     if(focus.name === name) {
+      if(main === 'razor') {
+        you.current.style.left='-25%';
+      } else {
+        you.current.style.left='0%';
+      }
       you.current.classList.remove('hide-partner');
     } else {
       you.current.classList.add('hide-partner');

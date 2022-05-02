@@ -25,8 +25,6 @@ function OnlineBar({friends, users, socket}):JSX.Element {
     )
   }
 
-  console.log(users);
-
   return (
     <ul className='online-bar'>
       <h1>Online: {onlineUsers.length}</h1>

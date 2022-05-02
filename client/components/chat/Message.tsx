@@ -20,7 +20,6 @@ class Message extends Component {
     super(props);
     const picture = iconBig(this.props.entry.main, this.props.entry.gender);
     this.picture = picture;
-    console.log('test');
   }
 
   render() {

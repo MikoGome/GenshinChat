@@ -40,14 +40,14 @@
 
     .character-box-hold {
       display: grid;
-      grid-template-rows: 35vh auto;
-      gap: 1rem;
+      grid-template-rows: 35vh 50vh;
 
       .characters-box {
         position: relative;
         display: grid;
         background-color: $chat-color;
         color: white;
+        margin-top: 2vh;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         grid-template-rows: repeat(auto-fit, 45%);
         overflow-y: auto;
@@ -79,9 +79,10 @@
       display: flex;
       justify-self: flex-end;
       align-self: flex-start;
-      padding: 0.25rem;
+      padding: 0 1rem 0.25rem 1rem;
       background-color: $chat-color;
       color: white;
+      margin-top: 2vh;
     }
   }
 }

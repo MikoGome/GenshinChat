@@ -23,12 +23,20 @@ export const logIn = (url, account) => async (dispatch) => {
 export const authenticate = () => async (dispatch, getState) => {
   try {
     const {data} = await axios.get('/api/authenticate');
+    console.log('data', data);
     if(data.authenticated) {
       if(getState().account.initialized) {
         dispatch(getFriends(getState().account.id));
         return;
       }
-      else dispatch(getAccount(data));
+      else {
+        if(data.authenticated === 'exists') {
+          dispatch(actions.initialize({authenticated: 'exists'}));
+        } else {
+          console.log(data.authenticated);
+          dispatch(getAccount(data));
+        }
+      }
     } else {
       dispatch(actions.initialize({authenticated: data.authenticated}));
     }
@@ -82,7 +90,7 @@ export const clearSession = () => async (dispatch, getState) => {
     getState().account.socket.disconnect();
     dispatch(actions.logOut());
   } catch(e) {
-    console.log(e)
+    console.log(e);
   }
 }
 
@@ -111,7 +119,6 @@ export const wishing = (account) => async(dispatch) => {
 export const getInfo = () => async (dispatch) => {
   try {
     const {data} = await axios.get('/api/character/info');
-    console.log('info data', data);
     dispatch(actions.updateInfo(data));
   } catch(e) {
     console.log(e);

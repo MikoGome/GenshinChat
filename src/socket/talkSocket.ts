@@ -23,7 +23,7 @@ function talkSocket(socket: any, io: any) {
 
   socket.on('joinTalkRoom', (roomId:string) => {
     socket.join(roomId);
-    if(!socket.room) {
+    if(!socket.room && onlineUsers[socket.id]) {
       socket.room = roomId;
       const {name, main, gender} = onlineUsers[socket.id];
       talkRooms[roomId][name] = {main, gender};

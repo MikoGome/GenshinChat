@@ -7,6 +7,7 @@ import Shop from './containers/Shop';
 import Friends from './containers/Friends';
 import Talk from './containers/Talk';
 import Profile from './containers/Profile';
+import SessionExists from './containers/SessionExists';
 import NotFound from './containers/NotFound';
 
 import FriendRequest from './components/FriendRequest';
@@ -24,6 +25,7 @@ function App():JSX.Element {
         <Route path='/friends' element={<Friends />}></Route>
         <Route path='/talk' element={<Talk />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/exists' element={<SessionExists />}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
       <FriendRequest />

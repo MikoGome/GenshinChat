@@ -4,6 +4,8 @@ import { onlineUsers } from './socket';
 
 import {talkRooms} from './talkSocket';
 
+import { activeSessions } from '../controllers/sessionController';
+
 const inactive:{[name:string]: true} = {};
 
 function authSocket (socket: any, io: any) {
@@ -47,6 +49,7 @@ function authSocket (socket: any, io: any) {
   socket.on('disconnect', () => {
     try {
       const username = onlineUsers[socket.id].name;
+      delete activeSessions[username];
       const queryEntry: string = `
         UPDATE users
         SET online = false

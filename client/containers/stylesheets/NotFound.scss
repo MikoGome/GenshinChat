@@ -1,0 +1,21 @@
+@import '../../components/stylesheets/variables';
+
+.not-found {
+  display: grid;
+  grid-template-rows: $nav-bar-height auto;
+  gap: $gap;
+  height: 100vh;
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      color: white;
+      background-color: $chat-color;
+      font-size: 3rem;
+      padding: 1rem;
+    }
+  }
+}
