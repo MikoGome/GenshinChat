@@ -23,7 +23,6 @@ export const logIn = (url, account) => async (dispatch) => {
 export const authenticate = () => async (dispatch, getState) => {
   try {
     const {data} = await axios.get('/api/authenticate');
-    console.log('data', data);
     if(data.authenticated) {
       if(getState().account.initialized) {
         dispatch(getFriends(getState().account.id));
@@ -33,7 +32,6 @@ export const authenticate = () => async (dispatch, getState) => {
         if(data.authenticated === 'exists') {
           dispatch(actions.initialize({authenticated: 'exists'}));
         } else {
-          console.log(data.authenticated);
           dispatch(getAccount(data));
         }
       }
@@ -98,7 +96,6 @@ export const wish = (account) => async (dispatch) => {
   try {
     const {data} = await axios.patch('/api/wish', account);
     const {pool, prize} = data;
-    console.log('prize', prize);
     dispatch(actions.updateCharPool(pool));
     dispatch(actions.prize(prize));
     dispatch(actions.updateSpotlight(prize));
