@@ -11,6 +11,7 @@ const Partner: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({n
   const partnerPortrait = portrait(main, gender);
 
   const partner:React.MutableRefObject<HTMLDivElement> = useRef();
+  const nameTag: React.MutableRefObject<HTMLDivElement> = useRef();
   const you:React.MutableRefObject<HTMLImageElement> = useRef();
 
   useEffect(() => {
@@ -21,8 +22,10 @@ const Partner: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({n
         you.current.style.left='0%';
       }
       you.current.classList.remove('hide-partner');
+      nameTag.current.classList.remove('hide-partner');
     } else {
       you.current.classList.add('hide-partner');
+      nameTag.current.classList.remove('hide-partner');
     }
   }, [focus]);
 
@@ -50,7 +53,7 @@ const Partner: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({n
         className="breathing hide-partner"
         ref={you}
       />
-      <div className="name-tag">{name}</div>
+      <div className="name-tag hide-partner" ref={nameTag}>{name}</div>
     </div>
   )
 }
