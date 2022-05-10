@@ -25,7 +25,7 @@ const Partner: React.FC<talkStateShape["focus"] & talkStateShapeExtension> = ({n
       nameTag.current.classList.remove('hide-partner');
     } else {
       you.current.classList.add('hide-partner');
-      nameTag.current.classList.remove('hide-partner');
+      nameTag.current.classList.add('hide-partner');
     }
   }, [focus]);
 
