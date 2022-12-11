@@ -98,6 +98,10 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
     prizeChar.current.src= portrait(prize, 'female');
   }
 
+  function appear() {
+    prizeChar.current.classList.add('prize-animate');
+  }
+
   return (
     <div className="shop">
       <NavBar current="shop"/>
@@ -123,7 +127,7 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
         </div>
         {prize && (
           <div className="prize" onClick={handlePrizeClick}>
-            <img src={pictures[prize]?.gachaSplash} onError={backup} className="prize-animate" ref={prizeChar}/>
+            <img src={pictures[prize]?.gachaSplash} onError={backup} onLoad={appear} ref={prizeChar}/>
           </div>
         )}
       </main>
