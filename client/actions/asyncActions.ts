@@ -5,7 +5,7 @@ import socketAttachListeners from '../socket/socketListeners';
 
 let wishInterval = null;
 
-let socket = null;
+export let socket = null;
 let name = null;
 let gender = null;
 let main = null;

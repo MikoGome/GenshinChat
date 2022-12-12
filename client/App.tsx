@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from './containers/Home';
@@ -14,8 +14,17 @@ import FriendRequest from './components/FriendRequest';
 import TalkRequest  from './components/TalkRequest';
 import './assets/preload';
 
+import { socket } from "./actions/asyncActions";
+
 function App():JSX.Element {
   
+  useEffect(() => {
+    document.body.onbeforeunload = () => {
+      if(socket === null) return;
+      socket.disconnect();
+    }
+  }, [])
+
   return(
     <BrowserRouter>
       <Routes>
