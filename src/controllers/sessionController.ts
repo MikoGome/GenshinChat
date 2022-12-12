@@ -26,6 +26,7 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
   try {
     res.locals.account = await jwt.verify(req.cookies.GCToken, JWT_SECRET);
     const name:string = res.locals.account.name;
+    console.log('activeSessions', activeSessions);
     if(name in activeSessions) {
       authenticated = 'exists'
     } else {
