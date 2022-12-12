@@ -48,8 +48,8 @@ function authSocket (socket: any, io: any) {
 
   socket.on('disconnect', () => {
     console.log('socket disconnected');
-    const username = onlineUsers[socket.id].name;
     try {
+      const username = onlineUsers[socket.id].name;
       const queryEntry: string = `
       UPDATE users
       SET online = false
@@ -68,8 +68,10 @@ function authSocket (socket: any, io: any) {
       socket.leave(socket.room);
       delete socket.room;
     }
-    console.log('deleting active session', username);
-    delete activeSessions[username];
+    console.log('socket.id', socket.id);
+    console.log('onlineUsers', onlineUsers);
+    console.log('activeSessions', activeSessions);
+    delete activeSessions[onlineUsers[socket.id].name];
     delete onlineUsers[socket.id];
     io.emit('updateOnlineUsers', onlineUsers);
   });
