@@ -65,7 +65,6 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
     const {possession, characters_owned, wishes} = account;
 
     if(wishes.amount - 1 >= 0 && amount - account.characters_owned.length > 0) {
-      sfx(10);
       wish({possession, characters_owned, wishes});
     }
     else {
@@ -100,6 +99,7 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
 
   function appear() {
     prizeChar.current.classList.add('prize-animate');
+    sfx(10);
   }
 
   return (
