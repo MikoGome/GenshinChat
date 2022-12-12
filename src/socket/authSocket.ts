@@ -47,19 +47,19 @@ function authSocket (socket: any, io: any) {
   });
 
   socket.on('disconnect', () => {
+    console.log('socket disconnected');
+    const username = onlineUsers[socket.id].name;
     try {
-      const username = onlineUsers[socket.id].name;
-      delete activeSessions[username];
       const queryEntry: string = `
-        UPDATE users
-        SET online = false
-        WHERE username = $1
+      UPDATE users
+      SET online = false
+      WHERE username = $1
       `
       query(queryEntry, [username]);
     } catch (e) {
-      
+      console.log('e', e);
     }
-
+    
     if(talkRooms[socket.room]) {
       const {name} = onlineUsers[socket.id];
       delete talkRooms[socket.room][name];
@@ -68,6 +68,8 @@ function authSocket (socket: any, io: any) {
       socket.leave(socket.room);
       delete socket.room;
     }
+    console.log('deleting active session', username);
+    delete activeSessions[username];
     delete onlineUsers[socket.id];
     io.emit('updateOnlineUsers', onlineUsers);
   });
