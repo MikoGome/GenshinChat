@@ -28,7 +28,7 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
     const name:string = res.locals.account.name;
     console.log('activeSessions wait', activeSessions);
     if(name in activeSessions) {
-      authenticated = 'exists'
+      authenticated = 'exists';
     } else {
       activeSessions[name] = true;
       authenticated = true;

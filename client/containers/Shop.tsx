@@ -94,7 +94,12 @@ function Shop({account, amount, authenticate, prize, updatePrize, wish}):JSX.Ele
   const handlePrizeClick = closureClick(2000);
 
   function backup() {
-    prizeChar.current.src= portrait(prize, 'female');
+    const backupURL = portrait(prize, 'female'); 
+    if(prizeChar.current.src === backupURL) {
+      prizeChar.current.src = 'https://constructivo.com/images/not-found.png';
+      return; 
+    } 
+    prizeChar.current.src =  backupURL;
   }
 
   function appear() {
