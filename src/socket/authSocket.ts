@@ -13,6 +13,7 @@ function authSocket (socket: any, io: any) {
     onlineUsers[socket.id] = account;
     try {
       const username = onlineUsers[socket.id].name;
+      socket.username = username;
       const queryEntry:string = `
         UPDATE users
         SET online = true
@@ -48,7 +49,7 @@ function authSocket (socket: any, io: any) {
 
   socket.on('disconnect', () => {
     console.log('socket disconnected');
-    const username = onlineUsers[socket.id]?.name;
+    const username = socket.username;
     try {
       const queryEntry: string = `
       UPDATE users
