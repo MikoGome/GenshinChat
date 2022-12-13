@@ -34,7 +34,7 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
           FROM users
           WHERE online = true
         `
-        const result = await query(queryEntry);
+        const result:any = await query(queryEntry);
         const exists = Boolean(result.rows.find((el:{username:string}) => el.username === name));
         if(exists) authenticated = 'exists';
         else {
