@@ -71,7 +71,6 @@ function authSocket (socket: any, io: any) {
     }
     console.log('socket.id', socket.id);
     console.log('onlineUsers', onlineUsers);
-    console.log('activeSessions', activeSessions);
    
     delete onlineUsers[socket.id];
     io.emit('updateOnlineUsers', onlineUsers);
