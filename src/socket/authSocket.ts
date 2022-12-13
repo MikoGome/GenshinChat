@@ -4,8 +4,6 @@ import { onlineUsers } from './socket';
 
 import {talkRooms} from './talkSocket';
 
-import { activeSessions } from '../controllers/sessionController';
-
 const inactive:{[name:string]: true} = {};
 
 function authSocket (socket: any, io: any) {

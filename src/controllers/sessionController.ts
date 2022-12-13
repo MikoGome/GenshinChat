@@ -30,11 +30,11 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
     if(name in activeSessions) {
       try {
         const queryEntry:string = `
-        SELECT username
-        FROM users
-        WHERE online = $1
+          SELECT username
+          FROM users
+          WHERE online = true
         `
-        const result = await query(queryEntry, [true]);
+        const result = await query(queryEntry);
         const exists = Boolean(result.rows.find((el:{username:string}) => el.username === name));
         if(exists) authenticated = 'exists';
         else {
@@ -43,6 +43,12 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
             acc[curr.username] = true;
             return acc;
           }, {});
+          const queryEntry:string = `
+            UPDATE users
+            SET online = true
+            WHERE username = $1
+          `
+          query(queryEntry, [name]);
         }
       } catch(e) {
         console.log('e', e);
