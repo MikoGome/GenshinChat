@@ -27,7 +27,6 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
   try {
     res.locals.account = await jwt.verify(req.cookies.GCToken, JWT_SECRET);
     const name:string = res.locals.account.name;
-    console.log('activeSessions wait', activeSessions);
     if(name in activeSessions) {
       try {
         const queryEntry:string = `
@@ -36,7 +35,6 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
         WHERE online = $1
         `
         const result = await query(queryEntry, [true]);
-        console.log('result.rowos', result.rows);
         const exists = Boolean(result.rows.find((el:{username:string}) => el.username === name));
         if(exists) authenticated = 'exists';
         else {
@@ -44,8 +42,7 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
           activeSessions = result.rows.reduce((acc:{[name:string]:boolean}, curr:{username:string}) => {
             acc[curr.username] = true;
             return acc;
-          }, {})
-          console.log('new Activesessions', activeSessions);
+          }, {});
         }
       } catch(e) {
         console.log('e', e);
