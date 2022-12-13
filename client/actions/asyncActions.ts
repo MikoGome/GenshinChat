@@ -46,7 +46,7 @@ export const authenticate = () => async (dispatch, getState) => {
 export const getAccount = ({account}) => async (dispatch) => {
   try {
     const { data: possession } = await axios.get('/api/account/initialize');
-    socket = io();
+    socket = io({transports: ['websocket'], upgrade: false});
     socketAttachListeners(socket, dispatch);
     name = account.name;
     gender = account.gender;

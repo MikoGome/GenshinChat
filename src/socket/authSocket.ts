@@ -50,6 +50,7 @@ function authSocket (socket: any, io: any) {
   socket.on('disconnect', () => {
     console.log('socket disconnected');
     const username = socket.username;
+    console.log('username', username);
     try {
       const queryEntry: string = `
       UPDATE users
