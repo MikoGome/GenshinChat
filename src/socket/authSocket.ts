@@ -51,6 +51,23 @@ function authSocket (socket: any, io: any) {
     console.log('socket disconnected');
     const username = socket.username;
     console.log('username', username);
+
+    if(username !== undefined) {
+      delete activeSessions[username];
+    } else {
+      try {
+        const queryEntry:string = `
+        SELECT username
+        FROM users
+        WHERE online = $1
+        `
+        const result = await query(queryEntry, [true]);
+        console.log(result.rows);
+      } catch(e) {
+        console.log('e', e);
+      }
+    }
+
     try {
       const queryEntry: string = `
       UPDATE users
@@ -73,17 +90,7 @@ function authSocket (socket: any, io: any) {
     console.log('socket.id', socket.id);
     console.log('onlineUsers', onlineUsers);
     console.log('activeSessions', activeSessions);
-    if(username !== undefined) {
-      delete activeSessions[username];
-    } else {
-      const queryEntry:string = `
-      SELECT username
-      FROM users
-      WHERE online = $1
-      `
-      const result = await query(queryEntry, [true]);
-      console.log(result.rows);
-    }
+   
     delete onlineUsers[socket.id];
     io.emit('updateOnlineUsers', onlineUsers);
   });
