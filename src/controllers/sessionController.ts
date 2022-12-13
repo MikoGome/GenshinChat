@@ -37,12 +37,12 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
         `
         const result = await query(queryEntry, [true]);
         console.log('result.rowos', result.rows);
-        const exists = Boolean(result.rows.find((el:string) => el === name));
+        const exists = Boolean(result.rows.find((el:{username:string}) => el.username === name));
         if(exists) authenticated = 'exists';
         else {
           authenticated = true;
-          activeSessions = result.rows.reduce((acc:{[name:string]:boolean}, curr:string) => {
-            acc[curr] = true;
+          activeSessions = result.rows.reduce((acc:{[name:string]:boolean}, curr:{username:string}) => {
+            acc[curr.username] = true;
             return acc;
           }, {})
           console.log('new Activesessions', activeSessions);
