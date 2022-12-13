@@ -46,9 +46,7 @@ function authSocket (socket: any, io: any) {
   });
 
   socket.on('disconnect', async () => {
-    console.log('socket disconnected');
     const username = socket.username;
-    console.log('username', username);
 
     try {
       const queryEntry: string = `
@@ -69,8 +67,6 @@ function authSocket (socket: any, io: any) {
       socket.leave(socket.room);
       delete socket.room;
     }
-    console.log('socket.id', socket.id);
-    console.log('onlineUsers', onlineUsers);
    
     delete onlineUsers[socket.id];
     io.emit('updateOnlineUsers', onlineUsers);
