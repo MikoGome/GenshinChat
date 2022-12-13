@@ -52,22 +52,6 @@ function authSocket (socket: any, io: any) {
     const username = socket.username;
     console.log('username', username);
 
-    if(username !== undefined) {
-      delete activeSessions[username];
-    } else {
-      try {
-        const queryEntry:string = `
-        SELECT username
-        FROM users
-        WHERE online = $1
-        `
-        const result = await query(queryEntry, [true]);
-        console.log(result.rows);
-      } catch(e) {
-        console.log('e', e);
-      }
-    }
-
     try {
       const queryEntry: string = `
       UPDATE users

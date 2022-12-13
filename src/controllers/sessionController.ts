@@ -1,11 +1,12 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
+import query from '../models/Users';
 dotenv.config();
 
 const JWT_SECRET:string = <string>process.env.JWT_SECRET;
 
-export const activeSessions: {[name: string]: boolean} = {};
+export let activeSessions: {[name: string]: boolean} = {};
 
 export const genSession = (req:Request, res:Response, next:NextFunction) => {
   const payload = {
@@ -28,7 +29,27 @@ export const verifySession = async (req:Request, res:Response, next:NextFunction
     const name:string = res.locals.account.name;
     console.log('activeSessions wait', activeSessions);
     if(name in activeSessions) {
-      authenticated = 'exists';
+      try {
+        const queryEntry:string = `
+        SELECT username
+        FROM users
+        WHERE online = $1
+        `
+        const result = await query(queryEntry, [true]);
+        console.log('result.rowos', result.rows);
+        const exists = Boolean(result.rows.find((el:string) => el === name));
+        if(exists) authenticated = 'exists';
+        else {
+          authenticated = true;
+          activeSessions = result.rows.reduce((acc:{[name:string]:boolean}, curr:string) => {
+            acc[curr] = true;
+            return acc;
+          }, {})
+          console.log('new Activesessions', activeSessions);
+        }
+      } catch(e) {
+        console.log('e', e);
+      }
     } else {
       activeSessions[name] = true;
       authenticated = true;
