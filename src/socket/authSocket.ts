@@ -47,7 +47,7 @@ function authSocket (socket: any, io: any) {
     }
   });
 
-  socket.on('disconnect', () => {
+  socket.on('disconnect', async () => {
     console.log('socket disconnected');
     const username = socket.username;
     console.log('username', username);
@@ -73,7 +73,17 @@ function authSocket (socket: any, io: any) {
     console.log('socket.id', socket.id);
     console.log('onlineUsers', onlineUsers);
     console.log('activeSessions', activeSessions);
-    delete activeSessions[username];
+    if(username !== undefined) {
+      delete activeSessions[username];
+    } else {
+      const queryEntry:string = `
+      SELECT username
+      FROM users
+      WHERE online = $1
+      `
+      const result = await query(queryEntry, [true]);
+      console.log(result.rows);
+    }
     delete onlineUsers[socket.id];
     io.emit('updateOnlineUsers', onlineUsers);
   });
