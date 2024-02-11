@@ -15,7 +15,7 @@ function LoginCharacter({login}):JSX.Element {
     fetch(characterEndpoint)
       .then(res => res.json())
       .then(data => {
-        let url:string = `https://api.genshin.dev/characters/${data}/portrait`;
+        let url:string = `https://genshin.jmp.blue/characters/${data}/portrait`;
         if(!login && gender === 'male') url += 'm';
         else if(!login && gender === 'female') url += 'f';
         setCharacterUrl(url);
