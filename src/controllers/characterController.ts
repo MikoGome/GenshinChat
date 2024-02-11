@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Possession } from '../models/AccountAssets';
 import {Request, Response, NextFunction} from 'express';
-const genshinCharacterUrl:string = 'https://api.genshin.dev/characters';
+const genshinCharacterUrl:string = 'https://genshin.jmp.blue/characters';
 
 const characterCache:string[] = [];
 const travelerCache:[string] = ['traveler-anemo'];
