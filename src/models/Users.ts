@@ -10,7 +10,7 @@ const config = {
   database: process.env.PG_DATABASE,
   ssl: {
     rejectUnauthorized: true,
-    ca: fs.readFileSync("./ca.pem").toString(),
+    ca: process.env.PG_CA,
   },
 };
 
